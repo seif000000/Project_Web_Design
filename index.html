@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudIQ</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Swiper CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <!-- FontAwesome for Icons -->
+  <script src="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.2/js/all.min.js"></script>
+
+  <link rel="stylesheet" href="src/components/navbar/navbar.css">
+
+
+  <!-- Custom Styles -->
+  <style>
+    .sora-font { font-family: 'Sora', sans-serif; }
+    .chakrapetch-font { font-family: 'Chakra Petch', sans-serif; }
+    .custom-btn:hover { background-color: #000 !important; }
+    .feature-item:hover { background-color: #006dca; }
+    .feature-item:hover .feature-info h4, .feature-item:hover .feature-info p { color: #fff; }
+    .articles-item:hover h4 { color: #006dca; }
+    .group:hover img { transform: scale(1.1); }
+    .active-category { background-color: #2563eb; color: #fff; }
+  </style>
+</head>
+<body class="bg-white">
+  <div id="navbar-placeholder"></div>
+
+
+
+  
+
+
+  <!-- Hero Section -->
+  <div class="hero flex justify-between items-center gap-10 px-[2%] lg:px-[12%] sm:px-[8%] py-[50px] lg:py-[90px] h-screen relative" >
+    <div class="hero-content text-center mx-auto w-full flex flex-col items-center relative z-10">
+      <span class="text-[#076dcb] font-semibold chakrapetch-font">
+        <i class="bi bi-book pe-2" data-i18n="hero.title"></i> Your Future, Achieve Success
+      </span>
+      <h2 class="text-[#222e48] text-3xl sm:text-5xl lg:text-7xl leading-tight lg:leading-[5rem] font-bold sora-font py-2 w-full xl:w-[75%]">
+        Find Your <span class="text-[#18a54a]">Ideal</span> Course, Build <span class="text-[#e58209]">Skills</span>
+      </h2>
+      <p class="text-[#576070] w-full lg:w-[60%] pb-4 text-sm sm:text-base">
+        We are dedicated to nurturing young minds, empowering them with knowledge, skills, and confidence to excel.
+      </p>
+      <div class="flex gap-3 flex-wrap">
+        <button class="bg-[#076dcb] hover:bg-black text-white px-5 py-3 rounded-full text-sm cursor-pointer transition-colors duration-300 custom-btn">
+          Get Start Today <i class="bi bi-arrow-up-right ps-2"></i>
+        </button>
+        <button class="text-[#076dcb] border border-[#076dcb] hover:bg-[#076dcb] hover:text-white px-5 py-3 rounded-full text-sm cursor-pointer transition-colors duration-300 custom-btn">
+          Find Courses <i class="bi bi-arrow-up-right ps-2"></i>
+        </button>
+      </div>
+    </div>
+    <img src="src\public\Images\element-01.png" alt="shape-image" class="absolute left-30 top-30 object-contain hidden md:block">
+    <img src="src\public/Images/element-02.png" alt="shape-image" class="absolute left-20 top-60 object-contain hidden md:block">
+    <img src="src\public/Images/element-03.png" alt="shape-image" class="absolute right-96 bottom-10 z-2 object-contain hidden lg:block">
+    <img src="src\public/Images/element-04.png" alt="shape-image" class="absolute right-40 bottom-50 z-2 object-contain hidden lg:block">
+    <img src="src\public/Images/element-05.png" alt="shape-image" class="absolute right-30 top-70 w-[20px] h-[20px] hidden sm:flex">
+    <img src="src\public/Images/element-05.png" alt="shape-image" class="absolute left-10 bottom-50 w-[25px] h-[25px] hidden sm:flex">
+    <img src="src\public/Images/element-06.png" alt="shape-image" class="absolute right-50 top-20 w-[25px] hidden lg:flex">
+  </div>
+
+  <!-- About Section -->
+  <div class="about flex lg:flex-row flex-col justify-between items-center gap-10 px-[2%] lg:px-[12%] sm:px-[8%] py-[50px] lg:py-[90px] relative">
+    <div class="about-content flex flex-col lg:w-1/2 w-full">
+      <span class="text-[#076dcb] font-semibold sora-font pb-1">
+        <i class="bi bi-book pe-2"></i> About StudIQ
+      </span>
+      <h2 class="text-[#222e48] text-3xl md:text-5xl md:leading-[3.25rem] sora-font font-semibold">
+        The Place Where You Can Achieve
+      </h2>
+      <p class="text-[#576070] pt-3 pb-8 text-sm sm:text-base">
+        Welcome to StudIQ, where learning knows no bounds. Whether you're a student, professional, or lifelong learner...
+      </p>
+      <ul class="flex flex-col gap-6 pb-10">
+        <li class="flex gap-3 sm:flex-nowrap flex-wrap">
+          <div class="bg-[#f3f9ff] rounded-full min-w-[70px] min-h-[60px] flex justify-center p-4">
+            <img src="src\public/Images/about-img1.png" alt="about-image" class="object-contain">
+          </div>
+          <div>
+            <h4 class="text-[#222e48] font-semibold text-xl sora-font">Our Mission</h4>
+            <p class="text-neutral-500 text-sm lg:text-base">
+              Driven by a team of dedicated educators, technologists, and visionaries, we strive to create a supportive
+            </p>
+          </div>
+        </li>
+        <li class="flex gap-3 sm:flex-nowrap flex-wrap">
+          <div class="bg-[#f3f9ff] rounded-full min-w-[70px] min-h-[60px] flex justify-center p-4">
+            <img src="src\public/Images/about-img2.png" alt="about-image" class="object-contain">
+          </div>
+          <div>
+            <h4 class="text-[#222e48] font-semibold text-xl sora-font">Our Vision</h4>
+            <p class="text-neutral-500 text-sm lg:text-base">
+              A Professional seeking to upskill, or a lifelong learner exploring new horizons, we're here to accompany you every step of the way.
+            </p>
+          </div>
+        </li>
+      </ul>
+      <div class="border-t-2 border-dotted border-[#c1c4cc] pt-5 flex items-center gap-8">
+        <button class="bg-[#076dcd] hover:bg-black text-white px-5 py-3 rounded-full w-fit text-sm cursor-pointer transition-colors duration-300 custom-btn">
+          Read More <i class="bi bi-arrow-up-right ps-2"></i>
+        </button>
+        <div class="about-user flex">
+          <img src="src\public/Images/user.png" class="w-10 h-10" alt="user-image">
+          <div class="ps-2">
+            <span class="sora-font text-sm">MD Amdad Islam</span>
+            <p class="text-[#576070] text-xs">CEO Of Company</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="about-image w-full lg:w-1/2 h-[550px] overflow-hidden rounded-lg z-2 group">
+      <img src="src\public/Images/about-image.jpg" alt="about-user" class="h-full w-full object-cover transition-transform duration-500">
+    </div>
+    <img src="src\public/Images/element-01.png" alt="shape-image" class="absolute left-10 top-30 object-contain sm:block hidden">
+    <img src="src\public/Images/element-06.png" alt="shape-image" class="absolute right-10 bottom-10 object-contain lg:block hidden">
+    <img src="src\public/Images/element-05.png" alt="shape-image" class="absolute left-10 bottom-50 w-[25px] h-[25px] sm:block hidden">
+    <img src="src\public/Images/element-05.png" alt="shape-image" class="absolute right-30 top-70 w-[20px] h-[20px] sm:block hidden">
+  </div>
+
+  <!-- Features Section -->
+  <div class="feature flex justify-center items-center flex-col gap-10 px-[2%] lg:px-[12%] sm:px-[8%] py-[90px] lg:py-[120px] relative">
+    <div class="feature-content z-2 flex flex-col text-center w-full lg:w-[60%] xl:w-[50%]">
+      <h2 class="text-[#222e48] text-2xl sm:text-3xl md:text-4xl md:leading-10 sora-font font-semibold">
+        Explore 5,000+ Free Online Courses For Students
+      </h2>
+      <p class="text-[#576070] pt-3 pb-8 text-sm sm:text-base">
+        Welcome to our diverse and dynamic course catalog. We're dedicated to providing you with access to high-quality education.
+      </p>
+    </div>
+    <div class="swiper feature-wrapper w-full">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <div class="feature-item flex justify-center items-start flex-col bg-white shadow-xl rounded-xl py-10 px-5 transition-all duration-300">
+            <div class="feature-icon w-fit bg-white rounded-full p-5">
+              <img src="src\public/Images/feature-icon1.png" alt="feature-icon">
+            </div>
+            <div class="feature-info pt-8">
+              <h4 class="text-[#222e48] sora-font pb-2 text-xl font-semibold">Language Learning</h4>
+              <p class="text-[#576070] text-sm">
+                Courses teaching languages such as English, Spanish, Bangla etc.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-item flex justify-center items-start flex-col bg-white shadow-xl rounded-xl py-10 px-5 transition-all duration-300">
+            <div class="feature-icon w-fit bg-white rounded-full p-5">
+              <img src="src\public/Images/feature-icon2.png" alt="feature-icon">
+            </div>
+            <div class="feature-info pt-8">
+              <h4 class="text-[#222e48] sora-font pb-2 text-xl font-semibold">Creative Arts & Design</h4>
+              <p class="text-[#576070] text-sm">
+                Courses on graphic design, digital art, photography, video, audio etc...
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-item flex justify-center items-start flex-col bg-white shadow-xl rounded-xl py-10 px-5 transition-all duration-300">
+            <div class="feature-icon w-fit bg-white rounded-full p-5">
+              <img src="src\public/Images/feature-icon3.png" alt="feature-icon">
+            </div>
+            <div class="feature-info pt-8">
+              <h4 class="text-[#222e48] sora-font pb-2 text-xl font-semibold">Health & Fitness</h4>
+              <p class="text-[#576070] text-sm">
+                Courses on nutrition, fitness, training, yoga, meditation...
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="swiper-slide">
+          <div class="feature-item flex justify-center items-start flex-col bg-white shadow-xl rounded-xl py-10 px-5 transition-all duration-300">
+            <div class="feature-icon w-fit bg-white rounded-full p-5">
+              <img src="src\public/Images/feature-icon3.png" alt="feature-icon">
+            </div>
+            <div class="feature-info pt-8">
+              <h4 class="text-[#222e48] sora-font pb-2 text-xl font-semibold">Health & Fitness</h4>
+              <p class="text-[#576070] text-sm">
+                Courses on nutrition, fitness, training, yoga, meditation...
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img src="src\public/Images/element-03.png" alt="shape" class="absolute right-96 bottom-10 z-2 object-contain hidden lg:block">
+    <img src="src\public/Images/element-05.png" alt="shape" class="absolute right-30 top-70 w-[20px] h-[20px] object-contain hidden sm:flex">
+    <img src="src\public/Images/element-05.png" alt="shape" class="absolute left-10 bottom-50 w-[25px] h-[25px] object-contain hidden sm:flex">
+    <img src="src\public/Images/element-06.png" alt="shape" class="absolute right-70 top-20 object-contain hidden lg:flex">
+  </div>
+
+  <!-- Achievements Section -->
+  <div class="our-achievements grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 xl:gap-8 px-[2%] lg:px-[12%] sm:px-[8%] py-[90px] lg:py-[120px] relative">
+    <div class="achievements-item h-[250px] flex justify-center items-center flex-col p-5 text-center w-full bg-[#fdf6f3] border border-[#ebecef] rounded-2xl">
+      <div class="achievements-icon text-[#f37739] bg-white w-[70px] min-h-[70px] flex justify-center items-center rounded-full mx-auto text-3xl p-1 mb-8 shadow-lg">
+        <i class="bi bi-people"></i>
+      </div>
+      <div class="achievements-info">
+        <h2 class="text-[#222e48] text-3xl font-bold sora-font uppercase">1.4K</h2>
+        <span class="text-[#404a60] text-sm lg:text-base">Successfully Trained</span>
+      </div>
+    </div>
+    <div class="achievements-item h-[250px] flex justify-center items-center flex-col p-5 text-center w-full bg-[#f1f6fd] border border-[#ebecef] rounded-2xl">
+      <div class="achievements-icon text-[#006dca] bg-white w-[70px] min-h-[70px] flex justify-center items-center rounded-full mx-auto text-3xl p-1 mb-8 shadow-lg">
+        <i class="bi bi-camera-video"></i>
+      </div>
+      <div class="achievements-info">
+        <h2 class="text-[#222e48] text-3xl font-bold sora-font uppercase">2K</h2>
+        <span class="text-[#404a60] text-sm lg:text-base">Courses Completed</span>
+      </div>
+    </div>
+    <div class="achievements-item h-[250px] flex justify-center items-center flex-col p-5 text-center w-full bg-[#fdf6f3] border border-[#ebecef] rounded-2xl">
+      <div class="achievements-icon text-[#f37739] bg-white w-[70px] min-h-[70px] flex justify-center items-center rounded-full mx-auto text-3xl p-1 mb-8 shadow-lg">
+        <i class="bi bi-hand-thumbs-up"></i>
+      </div>
+      <div class="achievements-info">
+        <h2 class="text-[#222e48] text-3xl font-bold sora-font uppercase">2.5K</h2>
+        <span class="text-[#404a60] text-sm lg:text-base">Satisfaction Completed</span>
+      </div>
+    </div>
+    <div class="achievements-item h-[250px] flex justify-center items-center flex-col p-5 text-center w-full bg-[#f1f6fd] border border-[#ebecef] rounded-2xl">
+      <div class="achievements-icon text-[#006dca] bg-white w-[70px] min-h-[70px] flex justify-center items-center rounded-full mx-auto text-3xl p-1 mb-8 shadow-lg">
+        <i class="bi bi-person"></i>
+      </div>
+      <div class="achievements-info">
+        <h2 class="text-[#222e48] text-3xl font-bold sora-font uppercase">5K</h2>
+        <span class="text-[#404a60] text-sm lg:text-base">Students Community</span>
+      </div>
+    </div>
+    <img src="src\public/Images/element-05.png" alt="shape-image" class="absolute right-30 top-70 w-[20px] h-[20px] hidden sm:flex">
+  </div>
+
+  <!-- Courses Section -->
+  <div class="courses px-[2%] lg:px-[12%] sm:px-[8%] py-[90px] lg:py-[150px] bg-[#f3f9ff] relative">
+    <div class="flex justify-between items-center flex-col lg:flex-row w-full gap-3">
+      <h2 class="text-[#222e48] text-2xl sm:text-3xl md:text-4xl font-medium lg:w-1/2">
+        Explore 4,000+ Free Online Courses For Students
+      </h2>
+      <div class="lg:w-1/2 w-full">
+        <p class="text-[#576070] text-sm pb-2">
+          Welcome to our diverse and dynamic course catalog...
+        </p>
+        <a href="/Courses">
+          <button class="bg-[#076dcd] hover:bg-black text-white px-5 py-3 rounded-full text-sm transition-colors duration-300 custom-btn">
+            See All Courses <i class="bi bi-arrow-up-right ps-2"></i>
+          </button>
+        </a>
+      </div>
+    </div>
+    <div class="flex flex-wrap gap-3 my-8 bg-white p-5 rounded-xl shadow-xl" id="category-filter">
+      <!-- Categories will be populated by JavaScript -->
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="courses-grid">
+      <!-- Courses will be populated by JavaScript -->
+    </div>
+    <img src="src\public/Images/element-01.png" alt="shape-image" class="absolute left-30 top-30 object-contain hidden lg:block">
+    <img src="src\public/Images/element-02.png" alt="shape-image" class="absolute left-20 top-60 object-contain hidden lg:block">
+    <img src="src\public/Images/element-03.png" alt="shape-image" class="absolute right-96 bottom-10 z-2 object-contain hidden lg:block">
+    <img src="src\public/Images/element-04.png" alt="shape-image" class="absolute right-40 bottom-50 z-2 object-contain hidden lg:block">
+    <img src="src\public/Images/element-05.png" alt="shape-image" class="absolute right-30 top-70 w-[25px] h-[25px] object-contain hidden sm:flex">
+    <img src="src\public/Images/element-05.png" alt="shape-image" class="absolute left-10 bottom-50 w-[25px] h-[25px] object-contain hidden sm:flex">
+    <img src="src\public/Images/element-06.png" alt="shape-image" class="absolute right-50 top-20 hidden lg:flex">
+  </div>
+
+  <!-- Why Choose Us Section -->
+  <div class="why-choose-us flex lg:flex-row flex-col justify-between items-center gap-10 px-[2%] lg:px-[12%] sm:px-[8%] py-[50px] lg:py-[90px] relative">
+    <div class="why-choose-us-image w-full lg:w-1/2 h-[500px] overflow-hidden group rounded-lg">
+      <img src="src\public/Images/why-choose-us-image.jpg" alt="why-choose-us" class="h-full w-full object-cover transition-all duration-500">
+    </div>
+    <div class="flex flex-col lg:w-1/2 w-full">
+      <span class="text-[#076dcb] font-semibold sora-font pb-1">
+        <i class="bi bi-book pe-2"></i> Why Choose Us
+      </span>
+      <h2 class="text-[#222e48] text-3xl md:text-4xl md:leading-[3.25rem] sora-font font-semibold">
+        Our Commitment to Excellence, Learn, Grow & Success.
+      </h2>
+      <p class="text-[#576070] pt-3 pb-8 text-sm">
+        We are passionate about transforming lives through education. Founded with a vision to make learning accessible to all, we believe in the power of knowledge to...
+      </p>
+      <ul class="flex flex-col gap-6 pb-6">
+        <li class="flex items-center gap-2 text-sm text-[#222e48]">
+          <i class="fas fa-check-double size-7 text-[#076dcd]"></i> 9/10 Average Satisfaction Rate
+        </li>
+        <li class="flex items-center gap-2 text-sm text-[#222e48]">
+          <i class="fas fa-check-double size-7 text-[#076dcd]"></i> 96% Completion Rate
+        </li>
+        <li class="flex items-center gap-2 text-sm text-[#222e48]">
+          <i class="fas fa-check-double size-7 text-[#076dcd]"></i> Friendly Environment & Expert Teacher
+        </li>
+      </ul>
+      <div class="border-t-2 border-dotted border-[#c1c4cc] pt-5 flex items-center gap-8">
+        <button class="bg-[#076dcd] hover:bg-black text-white px-5 py-3 rounded-full w-fit text-sm cursor-pointer transition-colors duration-300 custom-btn">
+          Read More <i class="bi bi-arrow-up-right ps-2"></i>
+        </button>
+      </div>
+    </div>
+    <img src="src\public/Images/element-02.png" alt="shape-image" class="absolute left-20 top-60 object-contain md:block hidden">
+    <img src="src\public/Images/element-05.png" alt="shape-image" class="absolute right-30 top-70 w-[20px] h-[20px] sm:flex hidden">
+    <img src="src\public/Images/element-05.png" alt="shape-image" class="absolute left-10 bottom-50 w-[25px] h-[25px] sm:flex hidden">
+    <img src="src\public/Images/element-06.png" alt="shape-image" class="absolute right-50 top-20 lg:flex hidden">
+  </div>
+
+  <!-- Articles Section -->
+  <div class="articles bg-[#f3f9ff] px-[2%] lg:px-[12%] sm:px-[8%] py-[50px] lg:py-[90px] relative gap-10 flex flex-col">
+    <div class="articles-content flex flex-col lg:w-1/2 w-full mx-auto text-center z-2">
+      <span class="text-[#076dcb] font-semibold sora-font pb-1">
+        <i class="bi bi-book pe-2"></i> Articles
+      </span>
+      <h2 class="text-[#222e48] text-3xl md:text-3xl md:leading-10 sora-font font-semibold">Recent Articles</h2>
+      <p class="text-[#576070] pt-3 pb-5 text-sm sm:text-base">
+        Consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua enim ad...
+      </p>
+    </div>
+    <div class="articles-wrapper grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-5 xl:gap-8 z-2">
+      <div class="articles-item bg-white p-5 pb-3 rounded-xl group shadow-lg">
+        <div class="articles-image w-full rounded-xl overflow-hidden">
+          <img src="src\public/Images/articles-01.jpg" alt="articles-image" class="w-full h-full object-cover transition-all duration-500">
+        </div>
+        <div class="articles-content py-5">
+          <span class="bg-[#f37638] text-white rounded-sm px-2 chakrapetch-font font-semibold py-1">Student life</span>
+          <h4 class="my-3 sora-font font-semibold text-md sm:text-xl text-[#222e48]">The Importance of Diversity in Higher Education</h4>
+          <div class="flex flex-wrap gap-3">
+            <div class="text-[#404a60] text-md font-medium">
+              <i class="far fa-user-circle pe-1"></i> <span>Pradip</span>
+            </div>
+            <div class="text-[#404a60] text-md font-medium">
+              <i class="far fa-calendar pe-1"></i> <span>10 July, 25</span>
+            </div>
+            <div class="text-[#404a60] text-md font-medium">
+              <i class="far fa-message pe-1"></i> <span>25</span>
+            </div>
+          </div>
+          <p class="text-sm py-2 text-[#404a60] pb-5">
+            Unlock the secrets to effective time management in the digital learning space...
+          </p>
+          <div class="border-t-2 border-dotted border-[#c1c4cc] pt-5">
+            <a href="/blog">
+              <button class="text-[#076dcd] font-medium rounded-full w-fit text-sm cursor-pointer custom-btn">Read More <i class="bi bi-arrow-up-right ps-2"></i></button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="articles-item bg-white p-5 pb-3 rounded-xl group shadow-lg">
+        <div class="articles-image w-full rounded-xl overflow-hidden">
+          <img src="src\public/Images/articles-02.jpg" alt="articles-image" class="w-full h-full object-cover transition-all duration-500">
+        </div>
+        <div class="articles-content py-5">
+          <span class="bg-[#16a34a] text-white rounded-sm px-2 chakrapetch-font font-semibold py-1">Freedom</span>
+          <h4 class="my-3 sora-font font-semibold text-md sm:text-xl text-[#222e48]">The Importance of Diversity in Higher Education</h4>
+          <div class="flex flex-wrap gap-3">
+            <div class="text-[#404a60] text-md font-medium">
+              <i class="far fa-user-circle pe-1"></i> <span>Megha</span>
+            </div>
+            <div class="text-[#404a60] text-md font-medium">
+              <i class="far fa-calendar pe-1"></i> <span>12 July, 25</span>
+            </div>
+            <div class="text-[#404a60] text-md font-medium">
+              <i class="far fa-message pe-1"></i> <span>25</span>
+            </div>
+          </div>
+          <p class="text-sm py-2 text-[#404a60] pb-5">
+            Unlock the secrets to effective time management in the digital learning space...
+          </p>
+          <div class="border-t-2 border-dotted border-[#c1c4cc] pt-5">
+            <a href="/blog">
+              <button class="text-[#076dcd] font-medium rounded-full w-fit text-sm cursor-pointer custom-btn">Read More <i class="bi bi-arrow-up-right ps-2"></i></button>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="articles-item bg-white p-5 pb-3 rounded-xl group shadow-lg">
+        <div class="articles-image w-full rounded-xl overflow-hidden">
+          <img src="src\public/Images/articles-03.jpg" alt="articles-image" class="w-full h-full object-cover transition-all duration-500">
+        </div>
+        <div class="articles-content py-5">
+          <span class="bg-[#17bbe4] text-white rounded-sm px-2 chakrapetch-font font-semibold py-1">Online</span>
+          <h4 class="my-3 sora-font font-semibold text-md sm:text-xl text-[#222e48]">The Importance of Diversity in Higher Education</h4>
+          <div class="flex flex-wrap gap-3">
+            <div class="text-[#404a60] text-md font-medium">
+              <i class="far fa-user-circle pe-1"></i> <span>Mihir</span>
+            </div>
+            <div class="text-[#404a60] text-md font-medium">
+              <i class="far fa-calendar pe-1"></i> <span>18 July, 25</span>
+            </div>
+            <div class="text-[#404a60] text-md font-medium">
+              <i class="far fa-message pe-1"></i> <span>26</span>
+            </div>
+          </div>
+          <p class="text-sm py-2 text-[#404a60] pb-5">
+            Unlock the secrets to effective time management in the digital learning space...
+          </p>
+          <div class="border-t-2 border-dotted border-[#c1c4cc] pt-5">
+            <a href="/blog">
+              <button class="text-[#076dcd] font-medium rounded-full w-fit text-sm cursor-pointer custom-btn">Read More <i class="bi bi-arrow-up-right ps-2"></i></button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <img src="src\public/Images/element-01.png" alt="shape-image" class="absolute left-30 top-30 object-contain hidden md:block">
+    <img src="src\public/Images/element-02.png" alt="shape-image" class="absolute left-20 top-60 object-contain hidden md:block">
+    <img src="src\public/Images/element-03.png" alt="shape-image" class="absolute right-96 bottom-10 z-1 object-contain hidden lg:block">
+    <img src="src\public/Images/element-04.png" alt="shape-image" class="absolute right-40 bottom-50 z-0 object-contain hidden lg:block">
+    <img src="src\public/Images/element-05.png" alt="shape-image" class="absolute right-30 top-70 w-[20px] h-[20px] hidden sm:flex">
+    <img src="src\public/Images/element-05.png" alt="shape-image" class="absolute left-10 bottom-50 w-[25px] h-[25px] hidden sm:flex">
+    <img src="src\public/Images/element-06.png" alt="shape-image" class="absolute right-50 top-20 z-2 hidden lg:flex">
+  </div>
+
+  <!-- Swiper JS and Custom JS -->
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script src="index.js"></script>
+  <script src="lang-switcher.js"></script>
+  <script>
+  fetch('src\\components\\navbar\\navbar.html')
+    .then(response => response.text())
+    .then(data => {
+      document.getElementById('navbar-placeholder').innerHTML = data;
+    });
+  </script>
+
+</body>
+</html>

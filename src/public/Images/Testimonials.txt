@@ -1,0 +1,13 @@
+    const testimonials = [
+        {
+            rating: 4.5,
+            text: `"I've taken several courses through, and each one has exceeded my expectations. I've gained valuable skills that have helped me advance in my career. Highly recommend!"`,
+            author: "John D.",
+            role: "Graphic Designer",
+            img: TestiImg01,
+        },
+        {
+            rating: 4.5,
+            text: `"I was initially skeptical about online learning, but changed my perspective completely. The courses are well-designed, and the flexibility to learn at my own pace is invaluable."`,
+            author: "Sarah L.",
+           

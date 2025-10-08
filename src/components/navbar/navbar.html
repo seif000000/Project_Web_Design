@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Navbar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--  Tailwind & Font Awesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+
+  <!--  Custom CSS -->
+  <link rel="stylesheet" href="navbar.css" />
+</head>
+
+<body class="relative">
+
+  <!--  Navbar -->
+  <nav
+    id="main-navbar"
+    class="nav w-full flex justify-between items-center px-[2%] lg:px-[12%] sm:px-[8%] h-[90px] fixed top-0 left-0 right-0 z-50 border border-[#045eb014] transition-all duration-300 bg-transparent"
+  >
+    <!-- Left -->
+    <div class="nav-left flex items-center">
+      <a href="/" class="nav-logo">
+        <h1 class="text-3xl font-semibold unbounded-font">
+          Stud <span class="text-[#006dca]">IQ</span>
+        </h1>
+      </a>
+
+      <ul class="hidden xl:flex gap-8 items-center ms-20 nav-menu">
+        <li><a href="/index.html" class="nav-link">Home</a></li>
+        <li><a href="/about.html" class="nav-link">About</a></li>
+        <li><a href="/courses.html" class="nav-link">Courses</a></li>
+        <li><a href="/blog.html" class="nav-link">Blog</a></li>
+        <li><a href="/contact.html" class="nav-link">Contact</a></li>
+      </ul>
+    </div>
+
+    <!-- Right -->
+    <div class="nav-right flex gap-2 items-center">
+      <a href="/signin.html" class="nav-icon-btn">
+        <i class="fa-regular fa-circle-user"></i>
+      </a>
+      <button id="openSidebar" class="nav-icon-btn xl:hidden">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+    </div>
+    <div>
+      <button class="lang-switch px-2" data-lang="en">EN</button>
+      <button class="lang-switch px-2" data-lang="ar">AR</button>
+    </div>
+  </nav>
+
+  <!--  Custom JS -->
+  <script src="navbar.js"></script>
+</body>
+</html>
