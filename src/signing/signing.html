@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudIQ | Sign In / Sign Up</title>
+
+  <!-- Tailwind & Font Awesome -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="signing.css" />
+</head>
+<body class="bg-gray-50 font-sans">
+
+  <!-- Navbar -->
+  <nav class="w-full flex justify-between items-center px-10 py-5 bg-white shadow-md fixed top-0 left-0 right-0 z-50">
+    <div class="flex items-center gap-2">
+      <h1 class="text-3xl font-semibold">
+        Stud<span class="text-[#006dca]">IQ</span>
+      </h1>
+      <ul class="hidden md:flex gap-8 ml-10">
+        <li><a href="../../index.html" class="text-gray-700 hover:text-[#006dca] transition">Home</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-[#006dca] transition">About</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-[#006dca] transition">Courses</a></li>
+        <li><a href="#" class="text-gray-700 hover:text-[#006dca] transition">Contact</a></li>
+      </ul>
+    </div>
+    <div class="flex items-center gap-4">
+      <a href="#" class="text-gray-700 text-2xl hover:text-[#006dca] transition">
+        <i class="fa-regular fa-circle-user"></i>
+      </a>
+      <div class="flex gap-2">
+        <button class="lang-switch px-2 py-1 border rounded text-sm" data-lang="en">EN</button>
+        <button class="lang-switch px-2 py-1 border rounded text-sm" data-lang="ar">AR</button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Auth Container -->
+  <div class="flex justify-center items-center min-h-screen pt-32 px-4">
+    <div class="card bg-white shadow-lg rounded-xl p-8 w-full max-w-md animate-pop text-center">
+      <h2 id="form-title" class="text-2xl font-bold mb-6">Sign In</h2>
+
+      <!-- Sign In Form -->
+      <form id="signin-form" class="flex flex-col gap-4">
+        <input type="text" id="signin-id" placeholder="Student ID" class="input" required>
+        <input type="email" id="signin-email" placeholder="Email Address" class="input" required>
+        <input type="password" id="signin-password" placeholder="Password" class="input" required>
+        <button type="submit" class="btn-glow">Sign In</button>
+      </form>
+
+      <!-- Sign Up Form -->
+      <form id="signup-form" class="flex flex-col gap-4 hidden">
+        <input type="text" id="signup-name" placeholder="Full Name" class="input" required>
+        <input type="text" id="signup-id" placeholder="Student ID" class="input" required>
+        <input type="email" id="signup-email" placeholder="Email Address" class="input" required>
+        <input type="password" id="signup-password" placeholder="Password" class="input" required>
+        <input type="password" id="signup-confirm" placeholder="Confirm Password" class="input" required>
+        <button type="submit" class="btn-glow">Sign Up</button>
+      </form>
+
+      <p id="switch-mode" class="mt-4 text-sm text-gray-600">
+        Don’t have an account? 
+        <span id="toggle-form" class="text-[#006dca] cursor-pointer font-semibold">Sign Up</span>
+      </p>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="hidden fixed top-5 right-5 bg-[#006dca] text-white px-5 py-3 rounded-md shadow-lg text-sm"></div>
+
+  <!-- Scripts -->
+  <script src="signing.js"></script>
+  <script src="lang.js"></script>
+</body>
+</html>

@@ -1,0 +1,98 @@
+@keyframes pop {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-pop {
+  animation: pop 0.5s ease forwards;
+}
+
+.input {
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  outline: none;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.input:focus {
+  border-color: #006dca;
+  box-shadow: 0 0 5px rgba(0, 109, 202, 0.3);
+}
+
+.btn-glow {
+  background-color: #006dca;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 0px #006dca;
+  width: 100%;
+}
+
+.btn-glow:hover {
+  box-shadow: 0 0 15px #006dca;
+  transform: translateY(-2px);
+}
+
+#toast.show {
+  display: block;
+  animation: fadeInOut 3s ease;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-20px); }
+  15% { opacity: 1; transform: translateY(0); }
+  85% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+/* Remove browser's default validation outline */
+input:invalid {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Style invalid fields with soft glow and border */
+input:invalid:focus {
+  border-color: #ff4b4b;
+  box-shadow: 0 0 6px rgba(255, 75, 75, 0.6);
+}
+
+/* Customize placeholder color on invalid focus */
+input:invalid:focus::placeholder {
+  color: #ff4b4b;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Optional: make input shake gently if invalid */
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-5px); }
+  40%, 80% { transform: translateX(5px); }
+}
+
+input:invalid:focus {
+  animation: shake 0.3s ease-in-out;
+}
+
+/* Disable browser’s default tooltip */
+input:required:invalid {
+  box-shadow: none;
+}
+input:focus:invalid {
+  outline: none;
+}
+
+body {
+  overflow-x: hidden;
+}
