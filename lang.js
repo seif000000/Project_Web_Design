@@ -1,41 +1,33 @@
-let translations = {};
-let currentLang = 'ar'; // اللغة الافتراضية
+let currentLang = localStorage.getItem("lang") || "ar";
+window.langData = {}; 
 
-// تحميل الترجمات من JSON
-export async function loadTranslations() {
-    try {
-        const response = await fetch('translation.json');
-        translations = await response.json();
-        updateLanguage(); // بعد التحميل نطبق اللغة الافتراضية
-    } catch (err) {
-        console.error("خطأ في تحميل الترجمات:", err);
-    }
-}
+function loadLanguage() {
+  fetch("lang.json")
+    .then(res => res.json())
+    .then(data => {
+      window.langData = data; 
+      const t = data[currentLang];
 
-// تبديل اللغة
-export function toggleLanguage() {
-    currentLang = currentLang === 'ar' ? 'en' : 'ar';
-    const html = document.documentElement;
+      document.getElementById("page-title").textContent = t.books;
+      document.getElementById("books-title").textContent = t.books;
+      document.getElementById("prevBtn").textContent = t.prev;
+      document.getElementById("nextBtn").textContent = t.next;
+      document.getElementById("langBtn").textContent = t.language;
 
-    if (currentLang === 'ar') {
-        html.setAttribute('lang', 'ar');
-        html.setAttribute('dir', 'rtl');
-        document.querySelector('.lang-btn').textContent = 'EN';
-    } else {
-        html.setAttribute('lang', 'en');
-        html.setAttribute('dir', 'ltr');
-        document.querySelector('.lang-btn').textContent = 'AR';
-    }
+      document.documentElement.lang = currentLang;
+      document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
 
-    updateLanguage();
-}
-
-// تحديث النصوص
-export function updateLanguage() {
-    document.querySelectorAll('[data-lang]').forEach(el => {
-        const key = el.getAttribute('data-lang');
-        if (translations[currentLang] && translations[currentLang][key]) {
-            el.textContent = translations[currentLang][key];
-        }
+      if (typeof window.updateBooksLang === "function") {
+        window.updateBooksLang(currentLang);
+      }
     });
 }
+
+document.getElementById("langBtn").addEventListener("click", () => {
+  currentLang = currentLang === "ar" ? "en" : "ar";
+  localStorage.setItem("lang", currentLang);
+  loadLanguage();
+});
+
+loadLanguage();
+

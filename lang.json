@@ -1,0 +1,30 @@
+{
+  "en": {
+    "books": "Books",
+    "prev": "Prev",
+    "next": "Next",
+    "page": "page",
+    "preview": "Preview",
+    "details": "Details",
+    "author": "Author",
+    "category": "Category",
+    "search_placeholder": "Search books or authors...",
+    "no_results": "No results found",
+    "language": "🌐عربي",
+    "all": "All"
+  },
+  "ar": {
+    "books": "الكتب",
+    "prev": "السابق",
+    "next": "التالي",
+    "page": "صفحه",
+    "preview": "معاينة",
+    "details": "التفاصيل",
+    "author": "المؤلف",
+    "category": "التصنيف",
+    "search_placeholder": "ابحث عن كتاب أو مؤلف...",
+    "no_results": "لا توجد نتائج",
+    "language": "English🌐",
+    "all": "الكل"
+  }
+}
