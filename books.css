@@ -168,147 +168,75 @@ body {
 /********************************* Ahmyd css in here  **********************************/
 /********************************* ****************** **********************************/
   
+/* ========== Search Boxo ========== */
 
 #search-container {
-    display: flex;
-    flex-direction: column;  /* stack vertically */
-    align-items: center;     /* center horizontally */
-    gap: 1rem;               /* space between search and text */
-    position: relative;      /* allows positioning child elements relatively */
-  }
-
-  #search-block {
-    text-align: center;      /* centers inner elements */
-    margin: 20px auto;       /* centers the whole div if it has a width */
-    width: fit-content;      /* optional: shrink to fit content */
-    display: flex;
-    gap: 0.5rem;
-  }
-
-  #get-books{
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    width: clamp(200px, 40vw, 400px); /* responsive width */
-    
-    /* glowing the input field  */
-    outline: none;  /* removing the blue default outline  */
-
-  }
-
-  /* both on mouse hover and focus make the inpiut books glowing  wiht the brown tone*/
-  #get-books:hover,  
-  #get-books:focus{
-      border-color: #5c4033; /* setting my  brown tone */
-    box-shadow: 0 0 4px #8f5941;  /* soft glow */
+  display: flex;
+  flex-direction: column;  /* stack vertically */
+  align-items: center;     /* center horizontally */
+  gap: 1rem;               /* space between search and text */
+  position: relative;      /* allows positioning child elements relatively */
 }
 
-  #search-button {
-    padding: 0.6rem 1rem;
-    border-radius: 8px;
-    border: none;
-    background-color: #5c4033;
-    color: white;
-    cursor: pointer;
-    transition: background 0.2s;
-  }
-
-  #search-button:hover {
-    background-color: #8f5941;
-  }
-
-  #under-text {
-    font-size: 0.9rem;
-    color: #555;
-  }
-  
-  #search-block {
+#search-block {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
   flex-wrap: wrap;
+  margin: 20px auto; /* Keep the margin to center the whole block */
 }
 
-#get-books,
-#search-mode,
-#search-button {
+#get-books {
   padding: 0.6rem 1rem;
   border-radius: 8px;
   border: 1px solid #ccc;
-  font-size: 1rem;
-  transition: all 0.2s ease;
+  width: clamp(200px, 40vw, 500px); /* Responsive width, max 500px now */
+  font-size: 1rem; /* Ensure font size is set */
+  transition: all 0.2s ease; /* Include transition for smooth glow */
+
+  /* glowing the input field  */
+  outline: none;  /* removing the blue default outline  */
 }
 
-#search-mode {
-  background-color: #fff;
-  cursor: pointer;
+/* both on mouse hover and focus make the input books glowing with the brown tone*/
+#get-books:hover,
+#get-books:focus {
+    border-color: #5c4033; /* setting my  brown tone */
+    box-shadow: 0 0 4px #8f5941;  /* soft glow */
 }
 
-#search-mode:hover {
-  border-color: #8f5941;
-  box-shadow: 0 0 3px #8f5941;
-}
-#category-filter {
-  padding: 0.6rem;
+#search-button {
+  padding: 0.6rem 1rem;
   border-radius: 8px;
-  border: 1px solid #ccc;
-  background: white;
-  font-size: 0.95rem;
-  cursor: pointer;
-  transition: border-color 0.2s, box-shadow 0.2s;
-}
-
-#category-filter:hover,
-#category-filter:focus {
-  border-color: #5c4033;
-  box-shadow: 0 0 4px #8f5941;
-}
-
-
-
-
-
-/*========== Category Dropdown Styling ============*/
-#category-filter {
-  background-color: #5c4033; /* main brown color */
-  color: #fff;
   border: none;
-  border-radius: 8px;
-  padding: 8px 12px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.25s ease;
-  outline: none;
-  appearance: none; /* removes default OS arrow */
-}
-
-/* Optional custom arrow (for consistent style) */
-#category-filter::-ms-expand {
-  display: none; /* hide arrow in old browsers */
-}
-#category-filter {
-  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='14' viewBox='0 0 24 24' width='14' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
-  background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 14px;
-}
-
-/* Hover and focus — slightly lighter brown */
-#category-filter:hover,
-#category-filter:focus {
-  background-color: #8f5941; /* lighter highlight */
-}
-
-/* Dropdown options */
-#category-filter option {
   background-color: #5c4033;
-  color: #fff;
+  color: white;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 1rem; /* Ensure font size matches input */
 }
 
-/* Selected or hovered option */
-#category-filter option:checked,
-#category-filter option:hover {
+#search-button:hover {
   background-color: #8f5941;
-  color: #fff;
+}
+
+#under-text {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+
+
+
+/* ========== Responsive Adjustments ========== */
+@media (max-width: 520px) {
+  .card .cover { height: 200px; }
+  .card h3 { font-size: 1.2em; }
+
+  
+  #get-books {
+    width: clamp(180px, 50vw, 400px); /* Slightly wider relative width on small screens */
+  /* clamp takes ( min , preferred , max )  and The browser calculates the preferred value, but then ensures the final result is at least the minimum and at most the maximum. */
+  }
 }

@@ -17,17 +17,18 @@
     <div id="categories" class="categories"></div>
     <h1 id="books-title" class="page-title">الكتب</h1>
     
-    <!-- Ahmyd search bar -->
-  <div id="search-block">
-    <button id="search-button" onclick="getBook()">Search</button>
-    <input type="search" id="get-books" placeholder="Searching for a book ?">
-    <select id="category-filter">
-      <option value="all">All Categories</option>
-    </select>
-    
-    
-  </div>
+<!-- Ahmyd search bar -->
 
+<div id="search-block">
+  <button id="search-button" onclick="getBook()">Search</button>
+  <input type="search" id="get-books" placeholder="Use: category:Fantasy, author:Tolkien, writer:Austen ">
+  <!--  currently abundend i will be usign the regex instead  with dorking 
+  <select id="category-filter">
+    <option value="all">All Categories</option>
+  </select> -->
+
+ 
+</div>
 
 
     <div id="cards-container" class="cards-grid"></div>

@@ -8,10 +8,11 @@
     "details": "Details",
     "author": "Author",
     "category": "Category",
-    "search_placeholder": "Search books or authors...",
+    "search_placeholder": "Use: category:Fantasy, author:Tolkien, writer:Austen ",
     "no_results": "No results found",
     "language": "🌐عربي",
-    "all": "All"
+    "all": "All",
+    "search_button": "Search"
   },
   "ar": {
     "books": "الكتب",
@@ -22,9 +23,10 @@
     "details": "التفاصيل",
     "author": "المؤلف",
     "category": "التصنيف",
-    "search_placeholder": "ابحث عن كتاب أو مؤلف...",
+    "search_placeholder": "    استخدم: category:فنتازيا، author:تولكين، writer:أوستن",
     "no_results": "لا توجد نتائج",
     "language": "English🌐",
-    "all": "الكل"
+    "all": "الكل",
+    "search_button": "بحث"
   }
 }
