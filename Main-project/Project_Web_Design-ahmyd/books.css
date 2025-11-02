@@ -11,6 +11,10 @@
   --page-title-color: #090909;/* لون العنوان */
   --pagination-disabled-bg: #d5c3b2;
   --pagination-disabled-color: #888;
+
+  /*Ahmyd solving >_<  */
+  --category-text-color: #4b2e1f;            /* dark coffee brown */
+  --category-hover-text-color: #fff;         /* white when hovered */
 }
 
 body { 
@@ -35,6 +39,8 @@ body {
 
 /* ===== فئات التصنيف ===== */
 .categories {
+  
+
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -49,14 +55,19 @@ body {
   border-radius: 25px;                     
   cursor: pointer;
   font-weight: bold;
-  color: var(--text-color);                 
-  transition: all 0.3s ease;
+  
+  transition: all 0.3s ease; 
+  
+  /*Ahmyd solving some problems >_< */
+  color: var(--category-text-color);
+  
 }
 
 .cat-btn.active,
 .cat-btn:hover {
   background: var(--accent); 
-  color: #fff;               
+  /*Ahmyd solving some problems >_< */
+  color: var(--category-hover-text-color);
   transform: scale(1.05);    
 }
 
@@ -255,7 +266,14 @@ body {
   --page-title-color: #e8d8c3; /* لون العنوان الداكن */
   --pagination-disabled-bg: #4a352d;
   --pagination-disabled-color: #cfc1b0;
+  
+  
+  
+  /*Ahmyd solving >_<  */
+  --category-text-color: #4a352d;           
+  --category-hover-text-color: #2a1d18;  
 }
+
 
 /* ===== زر تبديل الثيم ===== */
 #theme-toggle {
