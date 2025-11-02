@@ -65,6 +65,8 @@ document.getElementById("langBtn").addEventListener("click", () => {
   currentLang = currentLang === "ar" ? "en" : "ar";
   localStorage.setItem("lang", currentLang);
   loadLanguage();
+  // ahmyd solving problem > _ < 
+    location.reload();
 });
 
 // تحميل اللغة عند بدء الصفحة
