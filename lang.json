@@ -4,7 +4,6 @@
     "prev": "Prev",
     "next": "Next",
     "page": "page",
-    "preview": "Preview",
     "details": "Details",
     "author": "Author",
     "category": "Category",
@@ -12,14 +11,16 @@
     "no_results": "No results found",
     "language": "🌐عربي",
     "all": "All",
-    "search_button": "Search"
+    "search_button": "Search",
+    "dark_mode": "🌙 Dark Mode",
+    "light_mode": "☀️ Light Mode"
+    
   },
   "ar": {
     "books": "الكتب",
     "prev": "السابق",
     "next": "التالي",
     "page": "صفحه",
-    "preview": "معاينة",
     "details": "التفاصيل",
     "author": "المؤلف",
     "category": "التصنيف",
@@ -27,6 +28,8 @@
     "no_results": "لا توجد نتائج",
     "language": "English🌐",
     "all": "الكل",
-    "search_button": "بحث"
+    "search_button": "بحث",
+    "dark_mode": "🌙 الوضع الليلي",
+    "light_mode": "☀️ الوضع النهاري"
   }
 }

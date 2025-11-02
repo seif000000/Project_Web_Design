@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title id="page-title">Books</title>
+    <link rel="stylesheet" href="books.css" />
+    <!-- ahmyd css file -->
+</head>
+
+<body>
+    <div id="include-navbar"></div>
+    <button id="theme-toggle">🌙 الوضع الليلي</button>
+    <div class="input-carrier">
+        <img src="image/book_image.jpg" alt="Book Image">
+        <br><br><br>
+        <form id="login-form">
+
+            <label for="email">البريد الالكتروني</label>
+            <input type="email" id="email" name="email" placeholder="البريد الالكتروني" required />
+
+
+
+            <label for="password">كلمة المرور</label>
+            <input type="password" id="password" name="password" placeholder="••••••••" required />
+
+            <button type="submit">تسجيل الدخول</button>
+
+        </form>
+    </div>
+</body>
+<script>
+document.getElementById("login-form").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value.trim();
+
+  // Store in localStorage
+  localStorage.setItem("email", email);
+  localStorage.setItem("username", email.split('@')[0]); 
+  // Redirect
+  window.location.href = "profile.html"; 
+});
+
+
+</script>
+
+
+</html>

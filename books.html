@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title id="page-title">Books</title>
   <link rel="stylesheet" href="books.css" />
-  <!-- ahmyd css file -->
+  
 </head>
 <body>
   <div id="include-navbar"></div>
-
+  <button id="theme-toggle">🌙 الوضع الليلي</button>
   <main class="container">
     <div class="lang-toggle">
       <button id="langBtn">English</button>
@@ -27,6 +27,7 @@
     <option value="all">All Categories</option>
   </select> -->
 
+  
  
 </div>
 
@@ -38,6 +39,8 @@
       <span id="pageInfo"></span>
       <button id="nextBtn" class="btn">التالي</button>
     </div>
+
+    
   </main>
 
   <div id="include-footer"></div>
@@ -47,5 +50,10 @@
   <!-- import ahmyd js  -->
   <script src="ahmyd.js"></script>
   <script src="lang.js"></script>
+  <script>
+  function openDetails(id) {
+  window.location.href = `../Project_Web_Design-raneem-branch/index${id}.html`;
+}
+</script>
 </body>
 </html>
