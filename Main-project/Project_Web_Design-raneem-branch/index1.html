@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read Book</title>
+  <style>
+    /* ---------- Colors & Theme ---------- */
+    :root {
+      --accent: #b08968;
+      --accent-hover: #d4a373;
+      --text-color: #2c1f1a;
+    }
+
+    /* ---------- Page Style ---------- */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5e6d3;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ---------- Book Info Card ---------- */
+    .book-info {
+      display: flex;
+      flex-wrap: wrap;
+      background: #d4a373;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      margin-bottom: 25px;
+      transition: transform 0.3s;
+      color: var(--text-color);
+    }
+
+    .book-info:hover {
+      transform: scale(1.02);
+    }
+
+    /* ---------- Book Cover ---------- */
+    .cover {
+      flex: 1 1 350px;
+      text-align: center;
+    }
+
+    .cover img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    /* ---------- Book Details ---------- */
+    .details {
+      flex: 2 1 500px;
+      padding: 0 25px;
+    }
+
+    .details h2 {
+      margin: 0 0 15px;
+      font-size: 28px;
+      color: #3b1f0b;
+    }
+
+    .details p {
+      margin: 8px 0;
+      line-height: 1.6;
+      font-size: 18px;
+      color: var(--text-color);
+    }
+
+    /* ---------- Button Style ---------- */
+    .cat-btn {
+      background: #fff;                        
+      border: 2px solid var(--accent);         
+      padding: 8px 18px;                       
+      border-radius: 25px;                     
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--text-color);                 
+      transition: all 0.3s ease;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    .cat-btn:hover,
+    .cat-btn.active {
+      background: var(--accent); 
+      color: #fff;               
+      transform: scale(1.05);    
+    }
+
+    /* ---------- Flipbook Frame ---------- */
+    iframe {
+      width: 100%;
+      max-width: 1000px;
+      height: 650px;
+      border: none;
+      display: none;
+      margin-top: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    /* ---------- Responsive Design ---------- */
+    @media (max-width: 768px) {
+      .book-info {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .details {
+        padding: 20px 0 0 0;
+      }
+
+      iframe {
+        height: 450px;
+      }
+
+      .cat-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="book-info">
+      <div class="cover">
+        <!-- Book Cover Image -->
+        <img src="image/Art of iron man.webp" alt="Book Cover">
+      </div>
+      <div class="details">
+        <!-- Book Details Section -->
+        <h2>Book Title: Art of iron man</h2>
+        <p><strong>Author:</strong> John Rhett Thomas</p>
+        <p><strong>Publication Year:</strong> 2008</p>
+        <p><strong>Pages:</strong> 208</p>
+        <p><strong>Description:</strong> This official Marvel art book takes readers behind the scenes of the Iron Man movie, showcasing the evolution of Tony Stark’s armor, concept artwork, storyboards, and visual effects designs used to bring the character to life on screen.</p>
+        <button id="readBtn" class="cat-btn">Read Book</button>
+      </div>
+    </div>
+
+    <!-- Flipbook Display Area -->
+    <iframe id="flipbook" src=""></iframe>
+    <button id="closeBtn" class="cat-btn" style="display:none;">Close Book</button>
+  </div>
+
+  <script>
+    // ---------- Select DOM elements ----------
+    const readBtn = document.getElementById('readBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const iframe = document.getElementById('flipbook');
+
+    // ---------- Flipbook URL ----------
+    const flipbookLink = 'https://heyzine.com/flip-book/a37d599d47.html';
+
+    // ---------- Show flipbook ----------
+    readBtn.addEventListener('click', () => {
+      iframe.src = flipbookLink; // Load flipbook URL
+      iframe.style.display = 'block'; // Make iframe visible
+      readBtn.style.display = 'none'; // Hide Read button
+      closeBtn.style.display = 'inline-block'; // Show Close button
+      window.scrollTo({ top: iframe.offsetTop, behavior: 'smooth' }); // Scroll to flipbook
+    });
+
+    // ---------- Close flipbook ----------
+    closeBtn.addEventListener('click', () => {
+      iframe.style.display = 'none'; // Hide iframe
+      iframe.src = ''; // Clear iframe source
+      readBtn.style.display = 'inline-block'; // Show Read button again
+      closeBtn.style.display = 'none'; // Hide Close button
+      window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll back to top
+    });
+  </script>
+
+</body>
+</html>

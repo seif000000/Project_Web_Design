@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read Book</title>
+  <style>
+    /* ---------- Root Color Variables ---------- */
+    :root {
+      --accent: #b08968;
+      --accent-hover: #d4a373;
+      --text-color: #2c1f1a;
+    }
+
+    /* ---------- Page Base Styling ---------- */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5e6d3;
+      padding: 20px;
+    }
+
+    /* ---------- Main Container ---------- */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ---------- Book Info Card ---------- */
+    .book-info {
+      display: flex;
+      flex-wrap: wrap;
+      background: #d4a373;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      margin-bottom: 25px;
+      transition: transform 0.3s;
+      color: var(--text-color);
+    }
+
+    /* ---------- Hover Effect ---------- */
+    .book-info:hover {
+      transform: scale(1.02);
+    }
+
+    /* ---------- Book Cover Section ---------- */
+    .cover {
+      flex: 1 1 350px;
+      text-align: center;
+    }
+
+    .cover img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    /* ---------- Book Details Section ---------- */
+    .details {
+      flex: 2 1 500px;
+      padding: 0 25px;
+    }
+
+    .details h2 {
+      margin: 0 0 15px;
+      font-size: 28px;
+      color: #3b1f0b;
+    }
+
+    .details p {
+      margin: 8px 0;
+      line-height: 1.6;
+      font-size: 18px;
+      color: var(--text-color);
+    }
+
+    /* ---------- Button Style ---------- */
+    .cat-btn {
+      background: #fff;
+      border: 2px solid var(--accent);
+      padding: 8px 18px;
+      border-radius: 25px;
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--text-color);
+      transition: all 0.3s ease;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    /* ---------- Button Hover & Active Effect ---------- */
+    .cat-btn:hover,
+    .cat-btn.active {
+      background: var(--accent);
+      color: #fff;
+      transform: scale(1.05);
+    }
+
+    /* ---------- Flipbook Frame Styling ---------- */
+    iframe {
+      width: 100%;
+      max-width: 1000px;
+      height: 650px;
+      border: none;
+      display: none;
+      margin-top: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    /* ---------- Responsive Design for Mobile ---------- */
+    @media (max-width: 768px) {
+      .book-info {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .details {
+        padding: 20px 0 0 0;
+      }
+
+      iframe {
+        height: 450px;
+      }
+
+      .cat-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="book-info">
+      <div class="cover">
+        <!-- Book Cover Image -->
+        <img src="image/Dune.png" alt="Book Cover">
+      </div>
+
+      <div class="details">
+        <!-- Book Details Section -->
+        <h2>Book Title: Dune</h2>
+        <p><strong>Author:</strong> Frank Herbert</p>
+        <p><strong>Publication Year:</strong> 1965</p>
+        <p><strong>Pages:</strong> 412</p>
+        <p><strong>Description:</strong> A science fiction masterpiece set on the desert planet Arrakis, Dune follows Paul Atreides, heir to a noble family entrusted with the planet’s valuable spice trade. As political betrayal and rebellion erupt, Paul must embrace his destiny as the prophesied leader who will change the fate of humanity. The novel explores themes of power, religion, ecology, and survival, and is widely regarded as one of the greatest sci-fi novels ever written.</p>
+
+        <!-- Read Book Button -->
+        <button id="readBtn" class="cat-btn">Read Book</button>
+      </div>
+    </div>
+
+    <!-- Flipbook Frame (Hidden by Default) -->
+    <iframe id="flipbook" src=""></iframe>
+
+    <!-- Close Book Button (Hidden by Default) -->
+    <button id="closeBtn" class="cat-btn" style="display:none;">Close Book</button>
+  </div>
+
+  <script>
+    // ---------- Select DOM Elements ----------
+    const readBtn = document.getElementById('readBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const iframe = document.getElementById('flipbook');
+
+    // ---------- Flipbook Link (Change this per book) ----------
+    const flipbookLink = 'https://heyzine.com/flip-book/bcf91020eb.html';
+
+    // ---------- Open Book on Click ----------
+    readBtn.addEventListener('click', () => {
+      iframe.src = flipbookLink; // Load flipbook link
+      iframe.style.display = 'block'; // Show iframe
+      readBtn.style.display = 'none'; // Hide "Read Book" button
+      closeBtn.style.display = 'inline-block'; // Show "Close Book" button
+      window.scrollTo({ top: iframe.offsetTop, behavior: 'smooth' }); // Scroll to book
+    });
+
+    // ---------- Close Book on Click ----------
+    closeBtn.addEventListener('click', () => {
+      iframe.style.display = 'none'; // Hide iframe
+      iframe.src = ''; // Clear iframe source
+      readBtn.style.display = 'inline-block'; // Show "Read Book" button again
+      closeBtn.style.display = 'none'; // Hide "Close Book" button
+      window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll to top
+    });
+  </script>
+
+</body>
+</html>

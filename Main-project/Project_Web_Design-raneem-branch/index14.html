@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read Book</title>
+  <style>
+    /* ---------- Color Variables ---------- */
+    :root {
+      --accent: #b08968;
+      --accent-hover: #d4a373;
+      --text-color: #2c1f1a;
+    }
+
+    /* ---------- General Body Styling ---------- */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5e6d3;
+      padding: 20px;
+    }
+
+    /* ---------- Main Container ---------- */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ---------- Book Info Card ---------- */
+    .book-info {
+      display: flex;
+      flex-wrap: wrap;
+      background: #d4a373;
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      margin-bottom: 25px;
+      transition: transform 0.3s;
+      color: var(--text-color);
+    }
+
+    /* ---------- Hover Effect for the Book Card ---------- */
+    .book-info:hover {
+      transform: scale(1.02);
+    }
+
+    /* ---------- Book Cover Section ---------- */
+    .cover {
+      flex: 1 1 350px;
+      text-align: center;
+    }
+
+    .cover img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    /* ---------- Book Details Section ---------- */
+    .details {
+      flex: 2 1 500px;
+      padding: 0 25px;
+    }
+
+    .details h2 {
+      margin: 0 0 15px;
+      font-size: 28px;
+      color: #3b1f0b;
+    }
+
+    .details p {
+      margin: 8px 0;
+      line-height: 1.6;
+      font-size: 18px;
+      color: var(--text-color);
+    }
+
+    /* ---------- Button Styling ---------- */
+    .cat-btn {
+      background: #fff;                        
+      border: 2px solid var(--accent);         
+      padding: 8px 18px;                       
+      border-radius: 25px;                     
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--text-color);                 
+      transition: all 0.3s ease;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    /* ---------- Button Hover and Active Effects ---------- */
+    .cat-btn:hover,
+    .cat-btn.active {
+      background: var(--accent); 
+      color: #fff;               
+      transform: scale(1.05);    
+    }
+
+    /* ---------- Flipbook Frame ---------- */
+    iframe {
+      width: 100%;
+      max-width: 1000px;
+      height: 650px;
+      border: none;
+      display: none;
+      margin-top: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    /* ---------- Responsive Design (For Mobile) ---------- */
+    @media (max-width: 768px) {
+      .book-info {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .details {
+        padding: 20px 0 0 0;
+      }
+
+      iframe {
+        height: 450px;
+      }
+
+      .cat-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="book-info">
+      <div class="cover">
+        <!-- Book Cover -->
+        <img src="image/Harry Potter and the Order of the Phoenix.png" alt="Book Cover">
+      </div>
+      <div class="details">
+        <!-- Book Details -->
+        <h2>Book Title: Harry Potter and the Order of the Phoenix</h2>
+        <p><strong>Author:</strong> J.K. Rowling</p>
+        <p><strong>Publication Year:</strong> 2003</p>
+        <p><strong>Pages:</strong> 870</p>
+        <p><strong>Description:</strong> The fifth book in the Harry Potter series sees Harry returning to Hogwarts amid growing denial of Voldemort’s return. As the Ministry of Magic interferes with the school through the cruel Dolores Umbridge, Harry forms “Dumbledore’s Army” to teach his friends defensive spells. The story explores themes of rebellion, leadership, and loss as Harry faces visions connected to Voldemort and the prophecy that binds their fates.</p>
+        <button id="readBtn" class="cat-btn">Read Book</button>
+      </div>
+    </div>
+
+    <!-- Flipbook Frame (hidden by default) -->
+    <iframe id="flipbook" src=""></iframe>
+
+    <!-- Close Button (hidden by default) -->
+    <button id="closeBtn" class="cat-btn" style="display:none;">Close Book</button>
+  </div>
+
+  <script>
+    // Get elements by their IDs
+    const readBtn = document.getElementById('readBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const iframe = document.getElementById('flipbook');
+
+    // Flipbook link (replace with your own)
+    const flipbookLink = 'https://heyzine.com/flip-book/8f81d9a95e.html';
+
+    // When "Read Book" button is clicked
+    readBtn.addEventListener('click', () => {
+      iframe.src = flipbookLink;              // Load the flipbook
+      iframe.style.display = 'block';         // Show the flipbook frame
+      readBtn.style.display = 'none';         // Hide the "Read" button
+      closeBtn.style.display = 'inline-block';// Show the "Close" button
+      window.scrollTo({ top: iframe.offsetTop, behavior: 'smooth' }); // Scroll to the flipbook
+    });
+
+    // When "Close Book" button is clicked
+    closeBtn.addEventListener('click', () => {
+      iframe.style.display = 'none';          // Hide the flipbook
+      iframe.src = '';                        // Clear the flipbook source
+      readBtn.style.display = 'inline-block'; // Show the "Read" button again
+      closeBtn.style.display = 'none';        // Hide the "Close" button
+      window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll back to top
+    });
+  </script>
+
+</body>
+</html>

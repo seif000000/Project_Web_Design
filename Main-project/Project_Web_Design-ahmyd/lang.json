@@ -1,0 +1,35 @@
+{
+  "en": {
+    "books": "Books",
+    "prev": "Prev",
+    "next": "Next",
+    "page": "page",
+    "details": "Details",
+    "author": "Author",
+    "category": "Category",
+    "search_placeholder": "Use: category:Fantasy, author:Tolkien, writer:Austen ",
+    "no_results": "No results found",
+    "language": "🌐عربي",
+    "all": "All",
+    "search_button": "Search",
+    "dark_mode": "🌙 Dark Mode",
+    "light_mode": "☀️ Light Mode"
+    
+  },
+  "ar": {
+    "books": "الكتب",
+    "prev": "السابق",
+    "next": "التالي",
+    "page": "صفحه",
+    "details": "التفاصيل",
+    "author": "المؤلف",
+    "category": "التصنيف",
+    "search_placeholder": "    استخدم: category:فنتازيا، author:تولكين، writer:أوستن",
+    "no_results": "لا توجد نتائج",
+    "language": "English🌐",
+    "all": "الكل",
+    "search_button": "بحث",
+    "dark_mode": "🌙 الوضع الليلي",
+    "light_mode": "☀️ الوضع النهاري"
+  }
+}

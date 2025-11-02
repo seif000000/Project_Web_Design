@@ -1,0 +1,292 @@
+:root { 
+  /* ===== ألوان الوضع العادي ===== */
+  --bg-color: #f8f1e4;        /* خلفية الموقع */
+  --card-bg: #5c4033;         /* خلفية الكروت */
+  --text-color: #3b2f2f;      /* النصوص الرئيسية */
+  --muted: #d8c3a5;           /* نصوص فرعية */
+  --accent: #b08968;          /* اللون الأساسي للأزرار والفئات */
+  --accent-hover: #d4a373;    /* اللون عند المرور */
+  --search-border: #ccc;      /* لون إطار البحث */
+  --search-glow: #8f5941;     /* توهج البحث */
+  --page-title-color: #090909;/* لون العنوان */
+  --pagination-disabled-bg: #d5c3b2;
+  --pagination-disabled-color: #888;
+}
+
+body { 
+  font-family: "Poppins", system-ui, sans-serif;
+  background: var(--bg-color);
+  margin: 0;
+  color: var(--text-color);
+}
+
+.container { 
+  max-width: 1200px; 
+  margin: 40px auto; 
+  padding: 0 16px; 
+}
+
+.page-title { 
+  text-align: center; 
+  margin-bottom: 25px; 
+  color: var(--page-title-color);
+  text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+}
+
+/* ===== فئات التصنيف ===== */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.cat-btn {
+  background: #fff;                        
+  border: 2px solid var(--accent);         
+  padding: 8px 18px;                       
+  border-radius: 25px;                     
+  cursor: pointer;
+  font-weight: bold;
+  color: var(--text-color);                 
+  transition: all 0.3s ease;
+}
+
+.cat-btn.active,
+.cat-btn:hover {
+  background: var(--accent); 
+  color: #fff;               
+  transform: scale(1.05);    
+}
+
+/* ===== شبكة الكروت ===== */
+.cards-grid { 
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); 
+  gap: 24px;
+  justify-items: center;
+}
+
+.card { 
+  width: 100%;
+  max-width: 340px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1.2px solid #ddd;
+  box-shadow: 0px 10px 15px rgba(0,0,0,0.5),
+              -5px -5px 10px rgba(0,0,0,0.2);
+  transform: translateY(8px);
+  opacity: 0;
+  transition: transform 0.6s ease-in-out, opacity 0.6s ease-in-out, background 0.3s, color 0.3s;
+}
+
+.card.show { 
+  transform: none; 
+  opacity: 1;
+}
+
+.card:hover {
+  transform: scale(1.05) rotate(1.5deg);
+}
+
+.card .cover {
+  width: 100%;
+  height: 250px;
+  object-fit: fill;
+  display: block;
+}
+
+.card .body {
+  padding: 20px;
+  text-align: center;
+}
+
+.card h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: var(--accent);
+}
+
+.card p {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: 1em;
+}
+
+.card .actions {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  margin-top: 15px;
+}
+
+.card .actions .btn {
+  width: 100%;
+}
+
+.card .actions .btn:first-child {
+  display: none !important;
+}
+
+/* ===== أزرار عامة ===== */
+.btn {
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: var(--accent);     
+  color: #fff;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+  background: var(--accent-hover); 
+  transform: scale(1.1);
+}
+
+/* ===== Pagination ===== */
+.pagination {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.pagination button {
+  background: var(--accent);     
+  border: none;
+  color: #fff;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination button:hover {
+  background: var(--accent-hover); 
+  transform: translateY(-2px);     
+}
+
+.pagination button:disabled {
+  background: var(--pagination-disabled-bg); 
+  color: var(--pagination-disabled-color);
+  cursor: not-allowed;
+}
+
+/* ===== Responsive Adjustments ===== */
+@media (max-width: 520px) { 
+  .card .cover { height: 200px; }
+  .card h3 { font-size: 1.2em; }
+
+  #get-books {
+    width: clamp(180px, 50vw, 400px);
+  }
+}
+
+/* ===== Search Box ===== */
+#search-container {
+  display: flex;
+  flex-direction: column;  
+  align-items: center;     
+  gap: 1rem;              
+  position: relative;      
+}
+
+#search-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin: 20px auto; 
+}
+
+#get-books {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: 1px solid var(--search-border);
+  width: clamp(200px, 40vw, 500px); 
+  font-size: 1rem; 
+  transition: all 0.2s ease; 
+  outline: none;  
+}
+
+#get-books:hover,
+#get-books:focus {
+    border-color: var(--accent); 
+    box-shadow: 0 0 4px var(--search-glow);  
+}
+
+#search-button {
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--accent);
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 1rem; 
+}
+
+#search-button:hover {
+  background-color: var(--accent-hover);
+}
+
+#under-text {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+/* ===== Dark Mode Theme (Chocolate Dark – محسّن) ===== */
+:root.dark-mode { 
+  --bg-color: #3b2a25;         /* خلفية الموقع الداكنة هادئة */
+  --card-bg: #4a352d;          /* خلفية الكروت داكنة لطيفة */
+  --text-color: #e8d8c3;       /* النصوص الرئيسية فاتحة ومريحة */
+  --muted: #cfc1b0;            /* النصوص الفرعية أقل تشبع */
+  --accent: #b08968;           /* اللون الأساسي للأزرار متناسق */
+  --accent-hover: #d4a373;     /* اللون عند المرور */
+  --search-border: #7b4f3a;    /* إطار البحث الداكن */
+  --search-glow: #b8936f;      /* توهج البحث الداكن */
+  --page-title-color: #e8d8c3; /* لون العنوان الداكن */
+  --pagination-disabled-bg: #4a352d;
+  --pagination-disabled-color: #cfc1b0;
+}
+
+/* ===== زر تبديل الثيم ===== */
+#theme-toggle {
+  padding: 10px 16px;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.3s, transform 0.3s;
+  background: var(--accent);
+  color: #fff;
+  margin: 0 auto 20px auto;  /* مركزي فوق العنوان */
+  display: block;
+}
+
+#theme-toggle:hover {
+  background: var(--accent-hover);
+  transform: scale(1.05);
+}
+
+
+
+
+/* ========== Responsive Adjustments ========== */
+@media (max-width: 520px) {
+  .card .cover { height: 200px; }
+  .card h3 { font-size: 1.2em; }
+
+  
+  #get-books {
+    width: clamp(180px, 50vw, 400px); /* Slightly wider relative width on small screens */
+  /* clamp takes ( min , preferred , max )  and The browser calculates the preferred value, but then ensures the final result is at least the minimum and at most the maximum. */
+  }
+}
