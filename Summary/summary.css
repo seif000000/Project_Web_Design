@@ -1,0 +1,178 @@
+/* ========= Reset ========= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* ========= Body ========= */
+body {
+  background: linear-gradient(to bottom, #f8f1e4, #e7d8c9);
+  color: #3b2f2f;
+  line-height: 1.7;
+  transition: background 0.4s, color 0.4s;
+  padding: 20px;
+}
+
+/* ========= Dark Mode ========= */
+body.dark {
+  background: linear-gradient(to bottom, #3b2f2f, #5c4033);
+  color: #f8f1e4;
+}
+
+/* ========= Container ========= */
+.container {
+  max-width: 950px;
+  margin: 50px auto;
+  background: #fff8f0;
+  padding: 40px;
+  border-radius: 25px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  transition: background 0.4s, color 0.4s, box-shadow 0.4s;
+}
+
+body.dark .container {
+  background: #5c4033;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+}
+
+/* ========= Cover Image ========= */
+.cover {
+  width: 100%;          
+  max-width: 400px;    
+  height: auto;         
+  display: block;
+  margin: 20px auto;    
+  object-fit: contain;  
+  border-radius: 10px;  
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2); 
+}
+
+
+.cover:hover {
+  transform: scale(1.04);
+  box-shadow: 0 18px 40px rgba(0,0,0,0.4);
+}
+
+/* ========= Headings ========= */
+h1 {
+  font-size: 2.6rem;
+  text-align: center;
+  margin-bottom: 15px;
+  color: #8b5e3c;
+  transition: color 0.3s;
+}
+
+body.dark h1 {
+  color: #f5e9dc;
+}
+
+strong {
+  color: #b08968;
+}
+
+/* ========= Short Summary ========= */
+.short-summary {
+  font-size: 1.15rem;
+  margin: 20px 0;
+  font-weight: 500;
+  padding-left: 15px;
+  border-left: 5px solid #b08968;
+  transition: border-color 0.3s;
+}
+
+body.dark .short-summary {
+  border-color: #d8c3a5;
+}
+
+/* ========= Full Summary (Expandable) ========= */
+.full-summary {
+  font-size: 1rem;
+  margin: 25px 0;
+  padding-left: 15px;
+  border-left: 4px solid #b08968;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.full-summary.show {
+  max-height: 1000px; /* يكفي لطول النص */
+  opacity: 1;
+}
+
+
+.short-summary p, .full-summary p {
+  color: inherit; /* يرث اللون من الجسم (body) */
+  line-height: 1.7;
+  margin-bottom: 12px;
+}
+
+
+/* ========= Buttons ========= */
+button {
+  padding: 14px 28px;
+  margin: 12px 8px 0 0;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #b08968;
+  color: #fff;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.25);
+}
+
+button:hover {
+  background: #8b5e3c;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.35);
+}
+
+body.dark button {
+  background: #d8c3a5;
+  color: #3b2f2f;
+}
+
+body.dark button:hover {
+  background: #f5f0eb;
+}
+
+/* ========= Theme Toggle ========= */
+#themeToggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 100;
+  font-size: 1.1rem;
+}
+
+/* ========= Animations ========= */
+.container, .cover, .short-summary, .full-summary {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(10px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ========= Responsive ========= */
+@media (max-width: 768px) {
+  .container {
+    padding: 25px;
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  .short-summary, .full-summary {
+    font-size: 0.95rem;
+  }
+  button {
+    padding: 12px 20px;
+    font-size: 0.95rem;
+  }
+}

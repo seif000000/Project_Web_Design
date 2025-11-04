@@ -1,12 +1,14 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title id="page-title">Books</title>
   <link rel="stylesheet" href="books.css" />
-  
+
 </head>
+
 <body>
   <div id="include-navbar"></div>
   <button id="theme-toggle">🌙 الوضع الليلي</button>
@@ -16,20 +18,20 @@
     </div>
     <div id="categories" class="categories"></div>
     <h1 id="books-title" class="page-title">الكتب</h1>
-    
-<!-- Ahmyd search bar -->
 
-<div id="search-block">
-  <button id="search-button" onclick="getBook()">Search</button>
-  <input type="search" id="get-books" placeholder="Use: category:Fantasy, author:Tolkien, writer:Austen ">
-  <!--  currently abundend i will be usign the regex instead  with dorking 
+    <!-- Ahmyd search bar -->
+
+    <div id="search-block">
+      <button id="search-button" onclick="getBook()">Search</button>
+      <input type="search" id="get-books" placeholder="Use: category:Fantasy, author:Tolkien, writer:Austen ">
+      <!--  currently abundend i will be usign the regex instead  with dorking 
   <select id="category-filter">
     <option value="all">All Categories</option>
   </select> -->
 
-  
- 
-</div>
+
+
+    </div>
 
 
     <div id="cards-container" class="cards-grid"></div>
@@ -40,7 +42,7 @@
       <button id="nextBtn" class="btn">التالي</button>
     </div>
 
-    
+
   </main>
 
   <div id="include-footer"></div>
@@ -51,9 +53,24 @@
   <script src="ahmyd.js"></script>
   <script src="lang.js"></script>
   <script>
-  function openDetails(id) {
-  window.location.href = `../Project_Web_Design-raneem-branch/index${id}.html`;
-}
-</script>
+    function openDetails(id) {
+      window.location.href = `../Project_Web_Design-raneem-branch/index${id}.html`;
+    }
+  </script>
+  <!--- dont forget to modify the path of the files  ( ahmyd saidthat  :) )   -->
+  <script>
+
+
+
+    function openPreview(id) {
+      window.location.href = `./Summary/summary.html?id=${id}`;
+    }
+
+    function openDetails(id) {
+      window.location.href = `../Project_Web_Design-raneem-branch/index${id}.html`;
+    }
+  </script>
+
 </body>
+
 </html>
