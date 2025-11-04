@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title id="page-title">Books</title>
+  <link rel="stylesheet" href="books.css" />
+  <!-- ahmyd css file -->
+</head>
+<body>
+  <div id="include-navbar"></div>
+  <button id="theme-toggle">🌙 الوضع الليلي</button>
+  <main class="container">
+    <div class="lang-toggle">
+      <button id="langBtn">English</button>
+    </div>
+    <div id="categories" class="categories"></div>
+    <h1 id="books-title" class="page-title">الكتب</h1>
+    
+
+ 
+</div>
+
+
+    <div id="cards-container" class="cards-grid"></div>
+
+    <div class="pagination" id="pagination">
+      <button id="prevBtn" class="btn">السابق</button>
+      <span id="pageInfo"></span>
+      <button id="nextBtn" class="btn">التالي</button>
+    </div>
+
+    
+  </main>
+
+
+  <script src="booksData.js"></script>
+  <script src="books.js"></script>
+  <script src="lang.js"></script>
+
+  <script>
+
+
+function openPreview(id) {
+  window.location.href = `../Summary/summary.html?id=${id}`;
+}
+
+  function openDetails(id) {
+  window.location.href = `../Project_Web_Design-raneem-branch/index${id}.html`;
+}
+</script>
+</body>
+</html>
