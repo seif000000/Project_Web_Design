@@ -1,15 +1,12 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title id="page-title">Books</title>
-  <link rel="stylesheet" href="books.css"/>
-  <link rel="stylesheet" href="../homepage/style.css" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من نحن - فريقنا</title>
+    <link rel="stylesheet" href="about.css">
+    <link rel="stylesheet" href="../homepage/style.css">
 </head>
-
 <body>
     <!-- Navbar -->
     <nav class="navbar">
@@ -17,95 +14,59 @@
             <div class="logo">
                 <!-- <div class="logo-icon">📚</div> -->
                 <a href="../homepage/index.html" class="logo-icon">📚</a>
-                <span data-lang="siteName">Book Worms</span>
+                <span id="logoText">مكتبتنا</span>
             </div>
-            
-            <ul class="nav-links">
-                <li><a href="../books.html" data-lang="navAllBooks">جميع الكتب</a></li>
-                <li><a href="#" data-lang="navNewArrival">وصل حديثاً</a></li>
-                <li><a href="#" data-lang="navBestSeller">الأكثر مبيعاً</a></li>
-                <li><a href="#" data-lang="navEditorsPick">اختيار المحررين</a></li>
-                <li><a href="../about/about-us.html" data-lang="navAbout">من نحن</a></li>
-                <li><a href="#" data-lang="navContact">اتصل بنا</a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <button class="lang-btn" onclick="toggleLanguage()">EN</button>
-                <div class="cart-icon">
-                    🛒
-                    <span class="cart-badge">3</span>
-                </div>
-                <!-- <div class="user-icon" a="../personal/login" >👤</div> -->
-                <a href="../personal/register.html" class="user-icon">👤</a>
-            </div>
+            <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
         </div>
     </nav>
 
-  <div id="include-navbar"></div>
-  <button id="theme-toggle">🌙 الوضع الليلي</button>
-  <main class="container">
-    <div class="lang-toggle">
-      <button id="langBtn">English</button>
-    </div>
-    <div id="categories" class="categories"></div>
-    <h1 id="books-title" class="page-title">الكتب</h1>
+    <!-- Hero About -->
+    <section class="hero-about">
+        <div class="hero-about-content">
+            <h1 id="heroTitle">من نحن</h1>
+            <p id="heroDesc">فريق متميز من المحترفين المتحمسين لتقديم أفضل الخدمات والحلول المبتكرة</p>
+        </div>
+    </section>
 
-  
-    
-    <!-- Ahmyd search bar -->
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="story-container">
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="فريق العمل">
+            </div>
+            <div class="story-content">
+                <h2 id="storyTitle">قصتنا</h2>
+                <p id="storyP1">بدأت رحلتنا من شغف مشترك بتقديم أفضل الخدمات لعملائنا.</p>
+                <p id="storyP2">نؤمن بأن التميز يأتي من التعاون والابتكار المستمر.</p>
+                <p id="storyP3">نسعى دائماً لتجاوز توقعات عملائنا.</p>
+            </div>
+        </div>
+    </section>
 
-    <div id="search-block">
-      <button id="search-button" onclick="getBook()">Search</button>
-      <input type="search" id="get-books" placeholder="Use: category:Fantasy, author:Tolkien, writer:Austen ">
-      <!--  currently abundend i will be usign the regex instead  with dorking 
-  <select id="category-filter">
-    <option value="all">All Categories</option>
-  </select> -->
+    <!-- Team Section -->
+    <section class="team-section">
+        <h2 class="section-title" id="teamTitle">تعرف على فريقنا</h2>
+        <p class="section-subtitle" id="teamSubtitle">مجموعة من المحترفين الموهوبين</p>
+        
+        <div class="team-grid" id="teamGrid">
+            <!-- Team members will be loaded from JSON -->
+        </div>  
+    </section>
 
-
-
-    </div>
-
-
-    <div id="cards-container" class="cards-grid"></div>
-
-    <div class="pagination" id="pagination">
-      <button id="prevBtn" class="btn">السابق</button>
-      <span id="pageInfo"></span>
-      <button id="nextBtn" class="btn">التالي</button>
-    </div>
-
-
-  </main>
-
-  <div id="include-footer"></div>
-
-  <script src="booksData.js"></script>
-  <script src="books.js"></script>
-  <!-- import ahmyd js  -->
-  <script src="ahmyd.js"></script>
-  <script src="lang.js"></script>
-  <script>
-    function openDetails(id) {
-      window.location.href = `../Project_Web_Design-raneem-branch/index${id}.html`;
-    }
-  </script>
-  <!--- dont forget to modify the path of the files  ( ahmyd saidthat  :) )   -->
-  <script>
-
-
-
-    function openPreview(id) {
-      window.location.href = `../Summary/summary.html?id=${id}`;
-    }
-
-    function openDetails(id) {
-      window.location.href = `../Project_Web_Design-raneem-branch/index${id}.html`;
-    }
-  </script>
+    <!-- Values Section -->
+    <section class="values-section">
+        <h2 class="section-title" id="valuesTitle">قيمنا الأساسية</h2>
+        <div class="values-grid" id="valuesGrid">
+            <!-- Values will be loaded from JSON -->
+        </div>
+    </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <!-- Footer -->
+     
+     
+
+    <footer id="footerText">
         <div class="footer-container">
             <div class="footer-column">
                 <div class="footer-logo">
@@ -166,6 +127,6 @@
         </div>
     </footer>
 
+    <script src="about.js"></script>
 </body>
-
 </html>

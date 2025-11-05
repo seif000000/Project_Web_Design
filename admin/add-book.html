@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Worms - Add Book</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <script src="admin-lang.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo" onclick="goToHome()">
+                <div class="logo-icon">📚</div>
+                <span data-lang="addPageName">Book Worms - إضافة كتاب</span>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="lang-btn" onclick="toggleLanguage()">EN</button>
+                <div class="user-icon" onclick="goToAdmin()" data-lang-title="adminTooltip" title="لوحة التحكم">👤</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="form-container">
+            <h1 class="form-title" data-lang="addBookTitle">إضافة كتاب جديد</h1>
+            
+            <form id="addBookForm">
+                <div class="form-group">
+                    <label class="form-label" for="bookTitle" data-lang="bookTitle">عنوان الكتاب</label>
+                    <input type="text" id="bookTitle" class="form-input" required data-lang="bookTitlePlaceholder" placeholder="أدخل عنوان الكتاب">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookAuthor" data-lang="bookAuthor">اسم المؤلف</label>
+                    <input type="text" id="bookAuthor" class="form-input" required data-lang="bookAuthorPlaceholder" placeholder="أدخل اسم المؤلف">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookCategory" data-lang="bookCategory">الفئة</label>
+                    <input type="text" id="bookCategory" class="form-input" required data-lang="bookCategoryPlaceholder" placeholder="مثال: رواية، خيال علمي، تاريخ">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookDescription" data-lang="bookDescription">وصف الكتاب</label>
+                    <textarea id="bookDescription" class="form-input" rows="4" required data-lang="bookDescPlaceholder" placeholder="أدخل وصفاً مختصراً للكتاب"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookPrice" data-lang="bookPrice">السعر (بالجنيه)</label>
+                    <input type="number" id="bookPrice" class="form-input" required data-lang="bookPricePlaceholder" placeholder="أدخل سعر الكتاب" min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" data-lang="bookCover">صورة غلاف الكتاب</label>
+                    <div class="file-input-wrapper">
+                        <label class="file-input-btn" for="bookCover" data-lang="chooseCover">
+                            📷 اختر صورة الغلاف
+                        </label>
+                        <input type="file" id="bookCover" accept="image/*" required>
+                    </div>
+                    <div class="file-name" id="coverFileName" data-lang="noFile">لم يتم اختيار ملف</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" data-lang="bookPDF">ملف PDF للكتاب</label>
+                    <div class="file-input-wrapper">
+                        <label class="file-input-btn" for="bookPDF" data-lang="choosePDF">
+                            📄 اختر ملف PDF
+                        </label>
+                        <input type="file" id="bookPDF" accept=".pdf" required>
+                    </div>
+                    <div class="file-name" id="pdfFileName" data-lang="noFile">لم يتم اختيار ملف</div>
+                </div>
+
+                <button type="submit" class="submit-btn" data-lang="submitBtn">إضافة الكتاب ✨</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">✅</div>
+            <h2 class="modal-title" data-lang="successTitle">شكراً لإضافة هذه القطعة الفنية!</h2>
+            <p class="modal-text" data-lang="successText">سيقوم فريقنا بمراجعة الكتاب وسيتم رفعه خلال 24 ساعة كحد أقصى</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p data-lang="copyright">حقوق النشر © 2025 Book Worms | لوحة التحكم</p>
+        </div>
+    </footer>
+
+    <script src="add-book-script.js"></script>
+</body>
+</html>

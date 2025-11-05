@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // language texts
   const texts = {
-    ar: { profile: "الملف الشخصي", favorites: "كتبي المفضلة", logout: "تسجيل الخروج", username: "اسم المستخدم", email: "البريد الإلكتروني", view: "عرض", toggle: "English" },
-    en: { profile: "Profile", favorites: "My Favorite Books", logout: "Logout", username: "Username", email: "Email", view: "View", toggle: "العربية" }
+    ar: { profile: "الملف الشخصي", favorites: "كتبي المفضلة", logout: "تسجيل الخروج", add: "اضافه كتاب", username: "اسم المستخدم", email: "البريد الإلكتروني", view: "عرض", toggle: "English" },
+    en: { profile: "Profile", favorites: "My Favorite Books", logout: "Logout", add: "Add Book", username: "Username", email: "Email", view: "View", toggle: "العربية" }
   };
 
   // render books

@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title id="page-title">Books</title>
-    <link rel="stylesheet" href="books.css" />
+    <link rel="stylesheet" href="../books.css" />
     <!-- ahmyd css file -->
 </head>
 
@@ -13,7 +13,7 @@
     <div id="include-navbar"></div>
     <button id="theme-toggle">🌙 الوضع الليلي</button>
     <div class="input-carrier">
-        <img src="image/book_image.jpg" alt="Book Image">
+        <img src="../image/book_image.jpg" alt="Book Image">
         <br><br><br>
         <form id="login-form">
 
@@ -41,7 +41,7 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
   localStorage.setItem("email", email);
   localStorage.setItem("username", email.split('@')[0]); 
   // Redirect
-  window.location.href = "profile.html"; 
+  window.location.href = "../homepage/index.html"; 
 });
 
 

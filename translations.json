@@ -48,7 +48,67 @@
     "footerDelivery": "التوصيل والإرجاع",
     "footerFAQ": "الأسئلة الشائعة",
     "footerCommunity": "المجتمع",
-    "footerCopyright": "حقوق النشر © 2025 Book Worms | تم التطوير بواسطة Book Worms"
+    "footerCopyright": "حقوق النشر © 2025 Book Worms | تم التطوير بواسطة Book Worms",
+    "logoText": "مكتبتنا",
+    "langBtn": "English",
+    "heroDesc": "فريق متميز من المحترفين المتحمسين لتقديم أفضل الخدمات والحلول المبتكرة",
+    "storyTitle": "قصتنا",
+    "storyP1": "بدأت رحلتنا من شغف مشترك بتقديم أفضل الخدمات لعملائنا. نحن فريق من الخبراء المتخصصين في مجالاتنا، نعمل معاً لتحقيق رؤية واحدة.",
+    "storyP2": "نؤمن بأن التميز يأتي من التعاون والابتكار المستمر. كل عضو في فريقنا يساهم بخبرته الفريدة لنصل إلى أهدافنا المشتركة.",
+    "storyP3": "نسعى دائماً لتجاوز توقعات عملائنا من خلال الجودة العالية والاحترافية في كل ما نقوم به.",
+    "teamTitle": "تعرف على فريقنا",
+    "teamSubtitle": "مجموعة من المحترفين الموهوبين المتفانين في تقديم أفضل الخدمات",
+    "team": [
+      {
+        "name": "سيف نادي",
+        "role": "المدير التنفيذي",
+        "desc": "يقود الفريق برؤية استراتيجية واضحة وخبرة تزيد عن 15 عاماً في إدارة الأعمال والتطوير.",
+        "image": "https://media.licdn.com/dms/image/v2/D4D03AQHdt2tnsPkRDQ/profile-displayphoto-shrink_400_400/B4DZSZG8jAHYAg-/0/1737735524313?e=1764201600&v=beta&t=JQuf8DdUAxNWre88GQ9QQl6tL0F8RfyRqvM8RFI072Q"
+      },
+      {
+        "name": "رنيم سمير",
+        "role": "مديرة التسويق",
+        "desc": "خبيرة في استراتيجيات التسويق الرقمي وإدارة العلامات التجارية بشغف لتحقيق النمو المستدام.",
+        "image": "https://media.licdn.com/dms/image/v2/D5603AQFrS6XzXwORdg/profile-displayphoto-shrink_400_400/B56ZVXikDEHEAk-/0/1740930436023?e=1764201600&v=beta&t=WbkskPuBwereTR6RaS5E7f2gMIleO_gNkaolIo6EALs"
+      },
+      {
+        "name": "احمد ياسر",
+        "role": "مدير التقنية",
+        "desc": "مهندس برمجيات موهوب مع شغف بالتكنولوجيا الحديثة والحلول المبتكرة التي تحدث فرقاً حقيقياً.",
+        "image": "https://media.licdn.com/dms/image/v2/D4E03AQHecXiEVm4dkA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1726566161674?e=1764201600&v=beta&t=ActqU_H5rmPQwaN1gPxCYpkhR1P_7GMXUZWlTGkr9CQ"
+      },
+      {
+        "name": "حسين محمد",
+        "role": "مدير خدمة العملاء",
+        "desc": "متخصص في بناء علاقات قوية مع العملاء وضمان رضاهم التام من خلال خدمة استثنائية.",
+        "image": "https://media.licdn.com/dms/image/v2/D4D03AQEui49tF3Wljw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1731985519092?e=1764201600&v=beta&t=r5zhkqZJB4swzs7E9zxvdP54vymwyGYEPRU7kT70L6s"
+      },
+      {
+        "name": "ماريا",
+        "role": "مديرة العمليات",
+        "desc": "خبير في تحسين العمليات وإدارة المشاريع لضمان تنفيذ سلس وفعال لجميع المهام.",
+        "image": ""
+      }
+    ],
+    "valuesTitle": "قيمنا الأساسية",
+    "values": [
+      {
+        "icon": "🎯",
+        "title": "التميز",
+        "desc": "نسعى دائماً لتقديم أفضل جودة في كل ما نقوم به، مع الاهتمام بأدق التفاصيل."
+      },
+      {
+        "icon": "🤝",
+        "title": "الأمانة",
+        "desc": "نبني الثقة من خلال الشفافية والصدق في جميع تعاملاتنا مع عملائنا وشركائنا."
+      },
+      {
+        "icon": "💡",
+        "title": "الابتكار",
+        "desc": "نشجع التفكير الإبداعي والحلول المبتكرة لمواكبة التطورات وتلبية احتياجات العصر."
+      }
+    ],
+    "footerText": "© 2024 جميع الحقوق محفوظة | تصميم بكل ❤️"
   },
   "en": {
     "siteName": "Book Worms",
@@ -99,6 +159,66 @@
     "footerDelivery": "Delivery & Returns",
     "footerFAQ": "FAQs",
     "footerCommunity": "Community",
-    "footerCopyright": "Copyright © 2025 Book Worms | Powered by Book Worms"
+    "footerCopyright": "Copyright © 2025 Book Worms | Powered by Book Worms",
+    "logoText": "Our Library",
+    "langBtn": "العربية",
+    "heroDesc": "A distinguished team of passionate professionals dedicated to providing the best services and innovative solutions",
+    "storyTitle": "Our Story",
+    "storyP1": "Our journey began with a shared passion for delivering the best services to our clients. We are a team of experts specialized in our fields, working together to achieve a unified vision.",
+    "storyP2": "We believe that excellence comes from collaboration and continuous innovation. Each member of our team contributes their unique expertise to reach our shared goals.",
+    "storyP3": "We always strive to exceed our clients' expectations through high quality and professionalism in everything we do.",
+    "teamTitle": "Meet Our Team",
+    "teamSubtitle": "A group of talented professionals dedicated to providing the best services",
+    "team": [
+      {
+        "name": "Seif Nady",
+        "role": "Chief Executive Officer",
+        "desc": "Leads the team with a clear strategic vision and over 15 years of experience in business management and development.",
+        "image": "https://media.licdn.com/dms/image/v2/D4D03AQHdt2tnsPkRDQ/profile-displayphoto-shrink_400_400/B4DZSZG8jAHYAg-/0/1737735524313?e=1764201600&v=beta&t=JQuf8DdUAxNWre88GQ9QQl6tL0F8RfyRqvM8RFI072Q"
+      },
+      {
+        "name": "Raneem Sameer",
+        "role": "Marketing Manager",
+        "desc": "Expert in digital marketing strategies and brand management with a passion for achieving sustainable growth.",
+        "image": "https://media.licdn.com/dms/image/v2/D5603AQFrS6XzXwORdg/profile-displayphoto-shrink_400_400/B56ZVXikDEHEAk-/0/1740930436023?e=1764201600&v=beta&t=WbkskPuBwereTR6RaS5E7f2gMIleO_gNkaolIo6EALs"
+      },
+      {
+        "name": "Ahmed Yasser",
+        "role": "Chief Technology Officer",
+        "desc": "Talented software engineer with a passion for modern technology and innovative solutions that make a real difference.",
+        "image": "https://media.licdn.com/dms/image/v2/D4E03AQHecXiEVm4dkA/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1726566161674?e=1764201600&v=beta&t=ActqU_H5rmPQwaN1gPxCYpkhR1P_7GMXUZWlTGkr9CQ"
+      },
+      {
+        "name": "Hussein Mohamed",
+        "role": "Customer Service Manager",
+        "desc": "Specialized in building strong relationships with customers and ensuring their complete satisfaction through exceptional service.",
+        "image": "https://media.licdn.com/dms/image/v2/D4D03AQEui49tF3Wljw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1731985519092?e=1764201600&v=beta&t=r5zhkqZJB4swzs7E9zxvdP54vymwyGYEPRU7kT70L6s"
+      },
+      {
+        "name": "Marya",
+        "role": "Operations Manager",
+        "desc": "Expert in process improvement and project management to ensure smooth and effective execution of all tasks.",
+        "image": ""
+      }
+    ],
+    "valuesTitle": "Our Core Values",
+    "values": [
+      {
+        "icon": "🎯",
+        "title": "Excellence",
+        "desc": "We always strive to deliver the best quality in everything we do, with attention to the finest details."
+      },
+      {
+        "icon": "🤝",
+        "title": "Integrity",
+        "desc": "We build trust through transparency and honesty in all our dealings with clients and partners."
+      },
+      {
+        "icon": "💡",
+        "title": "Innovation",
+        "desc": "We encourage creative thinking and innovative solutions to keep pace with developments and meet modern needs."
+      }
+    ],
+    "footerText": "© 2024 All Rights Reserved | Designed with ❤️"
   }
 }

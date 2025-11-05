@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Worms - Admin Panel</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo" onclick="goToHome()">
+                <!-- <span data-lang="siteName">Book Worms - لوحة التحكم</span> -->
+                <a href="../homepage/index.html" class="logo-icon">📚</a>
+
+            </div>
+
+            <div class="nav-actions">
+                <button class="lang-btn" onclick="toggleLanguage()">EN</button>
+                <div class="user-icon" data-lang-title="adminTooltip" title="لوحة التحكم">👤</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Hero Section -->
+    <section class="admin-hero">
+        <div class="admin-container">
+            <h1 class="admin-title" data-lang="adminWelcome">مرحباً بك في لوحة التحكم</h1>
+            <p class="admin-subtitle" data-lang="adminSubtitle">إدارة الكتب والمحتوى بسهولة</p>
+
+            <div class="admin-actions">
+                <div class="admin-card" onclick="navigateToAddBook()">
+                    <div class="card-icon">➕</div>
+                    <h2 data-lang="addBook">إضافة كتاب</h2>
+                    <p data-lang="addBookDesc">أضف كتاباً جديداً إلى المكتبة</p>
+                    <div class="card-glow"></div>
+                </div>
+
+                <div class="admin-card" onclick="navigateToRemoveBook()">
+                    <div class="card-icon">➖</div>
+                    <h2 data-lang="removeBook">حذف كتاب</h2>
+                    <p data-lang="removeBookDesc">إزالة كتاب من المكتبة</p>
+                    <div class="card-glow"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p data-lang="copyright">حقوق النشر © 2025 Book Worms | لوحة التحكم</p>
+        </div>
+    </footer>
+
+    <!-- Local scripts (loaded after DOM) -->
+    <script src="admin-lang.js"></script>
+    <script src="admin-script.js"></script>
+</body>
+</html>

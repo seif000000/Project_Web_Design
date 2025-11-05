@@ -136,11 +136,6 @@ body {
 .card .actions .btn {
   width: 100%;
 }
-
-.card .actions .btn:first-child {
-  display: none !important;
-}
-
 /* ===== أزرار عامة ===== */
 .btn {
   padding: 8px 14px;

@@ -4,7 +4,7 @@ const booksData = [
     category: { en: "Novels & Stories", ar: "الروايات والقصص" },
     title: { en: "Pride and Prejudice", ar: "كبرياء وهوى" },
     author: { en: "Jane Austen", ar: "جين أوستن" },
-    cover: "image/Pride and Prejudice.webp "
+    cover: "image/Pride and Prejudice.webp"
   },
   {
     id: 2,
