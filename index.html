@@ -10,30 +10,30 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="navbar-container">
-            <div class="logo">
-                <div class="logo-icon">📚</div>
-                <span data-lang="siteName">Book Worms</span>
-            </div>
-            
-            <ul class="nav-links">
-                <li><a href="#" data-lang="navAllBooks">جميع الكتب</a></li>
-                <li><a href="#" data-lang="navNewArrival">وصل حديثاً</a></li>
-                <li><a href="#" data-lang="navBestSeller">الأكثر مبيعاً</a></li>
-                <li><a href="#" data-lang="navEditorsPick">اختيار المحررين</a></li>
-                <li><a href="#" data-lang="navAbout">من نحن</a></li>
-                <li><a href="#" data-lang="navContact">اتصل بنا</a></li>
-            </ul>
-
-            <div class="nav-actions">
-                <button class="lang-btn" onclick="toggleLanguage()">EN</button>
-                <div class="cart-icon">
-                    🛒
-                    <span class="cart-badge">3</span>
-                </div>
-                <div class="user-icon">👤</div>
-            </div>
+    <div class="navbar-container">
+        <div class="logo" onclick="window.location.href='index.html'">
+            <div class="logo-icon">📚</div>
+            <span data-lang="siteName">Book Worms</span>
         </div>
+        
+        <ul class="nav-links">
+            <li><a href="#" data-lang="navAllBooks">جميع الكتب</a></li>
+            <li><a href="#" data-lang="navNewArrival">وصل حديثاً</a></li>
+            <li><a href="#" data-lang="navBestSeller">الأكثر مبيعاً</a></li>
+            <li><a href="#" data-lang="navEditorsPick">اختيار المحررين</a></li>
+            <li><a href="#" data-lang="navAbout">من نحن</a></li>
+            <li><a href="#" data-lang="navContact">اتصل بنا</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="lang-btn" onclick="toggleLanguage()">EN</button>
+            <div class="cart-icon">
+                🛒
+                <span class="cart-badge">3</span>
+            </div>
+            <div class="user-icon" onclick="window.location.href='admin-page.html'" title="لوحة التحكم">👤</div>
+        </div>
+    </div>
     </nav>
 
     <!-- Hero Section -->
