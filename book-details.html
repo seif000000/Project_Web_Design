@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read Book</title>
+  <link rel="stylesheet" href="css/book-style.css">
+</head>
+<body>
+
+  <div class="container">
+    <div class="book-info">
+      <div class="cover">
+        <!-- Book cover image -->
+        <img id="bookCover" src="" alt="Book Cover">
+      </div>
+      <div class="details">
+        <!-- Book details section -->
+        <h2 id="bookTitle"></h2>
+        <p><strong>Author:</strong> <span id="bookAuthor"></span></p>
+        <p><strong>Publication Year:</strong> <span id="bookYear"></span></p>
+        <p><strong>Pages:</strong> <span id="bookPages"></span></p>
+        <p><strong>Description:</strong> <span id="bookDescription"></span></p>
+        <button id="readBtn" class="cat-btn">Read Book</button>
+      </div>
+    </div>
+
+    <!-- Iframe to show the flipbook -->
+    <iframe id="flipbook" src=""></iframe>
+
+    <!-- Close button to hide the flipbook -->
+    <button id="closeBtn" class="cat-btn" style="display:none;">Close Book</button>
+  </div>
+
+  <script src="js/book-script.js"></script>
+
+</body>
+</html>
