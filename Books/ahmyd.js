@@ -100,8 +100,8 @@ document.addEventListener("DOMContentLoaded", () => {
       // If neither [2] nor [3] matched (i.e., just command: was typed), both will be undefined.
       // We assign the captured value (quoted or unquoted) or default to an empty string if neither existed.
       // Since (\S+) requires at least one char, typing 'category:N' will not match [3] until 'N' is followed by space/end (which it isn't during typing).
-      // The regex (\S+) inside the optional group means it must match *something* if it's going to match.
-      // The original /(\w+):\s*("([^"]+)"|(\S+))/g required *something* after the colon.
+      // The regex (\S+) inside the optional group means it must match something if it's going to match.
+      // The original /(\w+):\s*("([^"]+)"|(\S+))/g required something after the colon.
       // To allow empty after colon, we use /(\w+):\s*(?:"([^"]*)"|(\S+))?/g
       // Now, "([^"]*)" can match an empty quoted string "", and (\S+) matches non-empty unquoted.
       // If neither part matches (just 'command:'), match[2] and match[3] are undefined.
@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (slice.length === 0) {
       // Show "no results" message
-      cardsContainer.innerHTML = `<p style="text-align:center;color:#777;">${t.no_results}</p>`;
+      cardsContainer.innerHTML = <p style="text-align:center;color:#777;">${t.no_results}</p>;
       pageInfo.textContent = ""; // Clear page info
       nextBtn.disabled = true; // Disable buttons
       prevBtn.disabled = true;

@@ -1,74 +1,41 @@
-// ===== 1️⃣ جلب زر Dark/Light Mode =====
-const themeToggle = document.getElementById("theme-toggle");
+let translations = {};
+let currentLang = 'ar'; // اللغة الافتراضية
 
-// ===== 2️⃣ دالة تحديث نص الزر =====
-function updateToggleText() {
-  if (!themeToggle) return; // تأكد أن الزر موجود
-  const lang = document.documentElement.lang || "ar";
-  if (!window.langData[lang]) return;
-
-  const t = window.langData[lang];
-  if (document.documentElement.classList.contains("dark-mode")) {
-    themeToggle.textContent = t.light_mode || "☀️ Light Mode";
-  } else {
-    themeToggle.textContent = t.dark_mode || "🌙 Dark Mode";
-  }
+// تحميل الترجمات من JSON
+export async function loadTranslations() {
+    try {
+        const response = await fetch('translations.json');
+        translations = await response.json();
+        updateLanguage(); // بعد التحميل نطبق اللغة الافتراضية
+    } catch (err) {
+        console.error("خطأ في تحميل الترجمات:", err);
+    }
 }
 
-// ===== 3️⃣ إعداد Dark/Light Mode =====
-themeToggle.addEventListener("click", () => {
-  document.documentElement.classList.toggle("dark-mode");
-  localStorage.setItem(
-    "theme",
-    document.documentElement.classList.contains("dark-mode") ? "dark" : "light"
-  );
-  updateToggleText();
-});
+// تبديل اللغة
+export function toggleLanguage() {
+    currentLang = currentLang === 'ar' ? 'en' : 'ar';
+    const html = document.documentElement;
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (localStorage.getItem("theme") === "dark") {
-    document.documentElement.classList.add("dark-mode");
-  }
-  updateToggleText();
-});
+    if (currentLang === 'ar') {
+        html.setAttribute('lang', 'ar');
+        html.setAttribute('dir', 'rtl');
+        document.querySelector('.lang-btn').textContent = 'EN';
+    } else {
+        html.setAttribute('lang', 'en');
+        html.setAttribute('dir', 'ltr');
+        document.querySelector('.lang-btn').textContent = 'AR';
+    }
 
-// ===== 4️⃣ إعداد تغيير اللغة مع JSON =====
-let currentLang = localStorage.getItem("lang") || "ar";
-window.langData = {};
+    updateLanguage();
+}
 
-function loadLanguage() {
-  fetch("lang.json")
-    .then(res => res.json())
-    .then(data => {
-      window.langData = data;
-      const t = data[currentLang];
-
-      document.getElementById("page-title").textContent = t.books;
-      document.getElementById("books-title").textContent = t.books;
-      document.getElementById("prevBtn").textContent = t.prev;
-      document.getElementById("nextBtn").textContent = t.next;
-      document.getElementById("langBtn").textContent = t.language;
-
-      document.documentElement.lang = currentLang;
-      document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
-
-      // ✅ استدعاء بعد تحميل JSON والتأكد أن الزر موجود
-      updateToggleText();
-
-      if (typeof window.updateBooksLang === "function") {
-        window.updateBooksLang(currentLang);
-      }
+// تحديث النصوص
+export function updateLanguage() {
+    document.querySelectorAll('[data-lang]').forEach(el => {
+        const key = el.getAttribute('data-lang');
+        if (translations[currentLang] && translations[currentLang][key]) {
+            el.textContent = translations[currentLang][key];
+        }
     });
 }
-
-document.getElementById("langBtn").addEventListener("click", () => {
-  currentLang = currentLang === "ar" ? "en" : "ar";
-  localStorage.setItem("lang", currentLang);
-  loadLanguage();
-  // ahmyd solving problem > _ < 
-    location.reload();
-});
-
-// تحميل اللغة عند بدء الصفحة
-loadLanguage();
-

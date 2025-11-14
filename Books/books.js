@@ -48,6 +48,7 @@
   function renderPage(p){
     container.innerHTML = '';
     const t = window.langData ? window.langData[currentLang] : {
+      preview:"Preview",
       details: "Details",
       author: "Author",
       category: "Category"
@@ -88,17 +89,19 @@
         <p class="author">${t.author}: ${author}</p>
         <p class="category">${t.category}: ${category}</p>
         <div class="actions">
+          <button class="btn preview-btn">${t.preview}</button>
           <button class="btn details-btn">${t.details}</button>
         </div>
       </div>
     `;
 
+    el.querySelector('.preview-btn').addEventListener('click', ()=> openPreview(book.id));
     el.querySelector('.details-btn').addEventListener('click', ()=> openDetails(book.id));
     return el;
   }
 
   function openDetails(id) {
-    window.location.href = `../Project_Web_Design-raneem-branch/index${id}.html`;
+    window.location.href = '../Project_Web_Design-raneem-branch/index${id}.html';
   }
 
   prevBtn.addEventListener('click', ()=> {
