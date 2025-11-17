@@ -100,9 +100,7 @@
     return el;
   }
 
-  function openDetails(id) {
-    window.location.href = '../Project_Web_Design-raneem-branch/index${id}.html';
-  }
+
 
   prevBtn.addEventListener('click', ()=> {
     if(page <= 1) return;
