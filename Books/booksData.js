@@ -179,4 +179,3 @@ const booksData = [
     cover: "../image/The Art of The Avengers.webp"
   }
 ];
-];
