@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Read Book</title>
+  <style>
+    /* ================================
+       Color Variables
+    ================================= */
+    :root {
+      --accent: #b08968;          /* Main accent color (brownish tone) */
+      --accent-hover: #d4a373;    /* Hover accent color (lighter brown) */
+      --text-color: #2c1f1a;      /* Main text color (dark brown) */
+    }
+
+    /* ================================
+       General Page Styles
+    ================================= */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5e6d3;        /* Beige background */
+      padding: 20px;
+    }
+
+    /* Container for all content */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* ================================
+       Book Information Card
+    ================================= */
+    .book-info {
+      display: flex;
+      flex-wrap: wrap;
+      background: #d4a373;        /* Soft brown background */
+      border-radius: 15px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      width: 100%;
+      margin-bottom: 25px;
+      transition: transform 0.3s;
+      color: var(--text-color);
+    }
+
+    /* Slight zoom when hovering */
+    .book-info:hover {
+      transform: scale(1.02);
+    }
+
+    /* ================================
+       Book Cover
+    ================================= */
+    .cover {
+      flex: 1 1 350px;
+      text-align: center;
+    }
+
+    .cover img {
+      width: 100%;
+      max-width: 350px;
+      border-radius: 10px;
+      object-fit: cover;
+    }
+
+    /* ================================
+       Book Details Section
+    ================================= */
+    .details {
+      flex: 2 1 500px;
+      padding: 0 25px;
+    }
+
+    .details h2 {
+      margin: 0 0 15px;
+      font-size: 28px;
+      color: #3b1f0b;
+    }
+
+    .details p {
+      margin: 8px 0;
+      line-height: 1.6;
+      font-size: 18px;
+      color: var(--text-color);
+    }
+
+    /* ================================
+       Buttons (Read / Close)
+    ================================= */
+    .cat-btn {
+      background: #fff;                        
+      border: 2px solid var(--accent);         
+      padding: 8px 18px;                       
+      border-radius: 25px;                     
+      cursor: pointer;
+      font-weight: bold;
+      color: var(--text-color);                 
+      transition: all 0.3s ease;
+      font-size: 18px;
+      margin-top: 20px;
+    }
+
+    /* Button hover and active styles */
+    .cat-btn:hover,
+    .cat-btn.active {
+      background: var(--accent); 
+      color: #fff;               
+      transform: scale(1.05);    
+    }
+
+    /* ================================
+       Flipbook (iframe)
+    ================================= */
+    iframe {
+      width: 100%;
+      max-width: 1000px;
+      height: 650px;
+      border: none;
+      display: none;
+      margin-top: 25px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+
+    /* ================================
+       Responsive Design for Mobile
+    ================================= */
+    @media (max-width: 768px) {
+      .book-info {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+      }
+
+      .details {
+        padding: 20px 0 0 0;
+      }
+
+      iframe {
+        height: 450px;
+      }
+
+      .cat-btn {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="book-info">
+      <div class="cover">
+        <!-- Book Cover Image -->
+        <img src="image/Harry Potter and the Goblet of Fire.webp" alt="Book Cover">
+      </div>
+      <div class="details">
+        <!-- Book Details Section -->
+        <h2>Book Title: Harry Potter and the Goblet of Fire</h2>
+        <p><strong>Author:</strong> Thomas Robotham</p>
+        <p><strong>Publication Year:</strong> 2000</p>
+        <p><strong>Pages:</strong> 734</p>
+        <p><strong>Description:</strong> The fourth book in the Harry Potter series centers on the Triwizard Tournament, a magical competition between three wizarding schools. Harry is unexpectedly chosen as a fourth contestant and faces a series of dangerous tasks. As the challenges unfold, dark forces rise again, marking the return of Lord Voldemort and changing Harry’s world forever.</p>
+        
+        <!-- Button to open the flipbook -->
+        <button id="readBtn" class="cat-btn">Read Book</button>
+      </div>
+    </div>
+
+    <!-- Embedded Flipbook Viewer -->
+    <iframe id="flipbook" src=""></iframe>
+
+    <!-- Button to close the flipbook -->
+    <button id="closeBtn" class="cat-btn" style="display:none;">Close Book</button>
+  </div>
+
+  <script>
+    // Select elements by ID
+    const readBtn = document.getElementById('readBtn');
+    const closeBtn = document.getElementById('closeBtn');
+    const iframe = document.getElementById('flipbook');
+
+    // Flipbook link (replace this with your own link)
+    const flipbookLink = 'https://heyzine.com/flip-book/de701e4247.html';
+
+    // When user clicks "Read Book" button
+    readBtn.addEventListener('click', () => {
+      iframe.src = flipbookLink;            // Set flipbook link
+      iframe.style.display = 'block';       // Show flipbook
+      readBtn.style.display = 'none';       // Hide "Read" button
+      closeBtn.style.display = 'inline-block'; // Show "Close" button
+      window.scrollTo({ top: iframe.offsetTop, behavior: 'smooth' }); // Smooth scroll to the book
+    });
+
+    // When user clicks "Close Book" button
+    closeBtn.addEventListener('click', () => {
+      iframe.style.display = 'none';        // Hide flipbook
+      iframe.src = '';                      // Clear iframe content
+      readBtn.style.display = 'inline-block'; // Show "Read" button again
+      closeBtn.style.display = 'none';      // Hide "Close" button
+      window.scrollTo({ top: 0, behavior: 'smooth' }); // Scroll back to top
+    });
+  </script>
+
+</body>
+</html>
