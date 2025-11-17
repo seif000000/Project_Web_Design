@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>تسجيل مستخدم جديد</title>
+    <link rel="stylesheet" href="../Books/books.css" />
+    <!-- ahmyd css file -->
+  <link rel="stylesheet" href="Also-Ahmyd.css" />
+</head>
+<body>
+  <div class="input-carrier">
+    <h1>إنشاء حساب جديد</h1>
+    <form id="register-form">
+      <label for="username">اسم المستخدم</label>
+      <input type="text" id="username" name="username" placeholder="أدخل اسمك" required />
+
+      <label for="email">البريد الإلكتروني</label>
+      <input type="email" id="email" name="email" placeholder="أدخل بريدك" required />
+
+      <label for="password">كلمة المرور</label>
+      <input type="password" id="password" name="password" placeholder="••••••••" required />
+
+      <label for="confirm-password">تأكيد كلمة المرور</label>
+      <input type="password" id="confirm-password" name="confirm-password" placeholder="••••••••" required />
+
+      <button type="submit">إنشاء الحساب</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("register-form").addEventListener("submit", function(e) {
+      e.preventDefault(); 
+      window.location.href = "profile.html"; 
+    });
+  </script>
+</body>
+</html>

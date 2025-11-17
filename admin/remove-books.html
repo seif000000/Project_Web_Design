@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Worms - Remove Book</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <script src="admin-lang.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo" onclick="goToHome()">
+                <!-- <div class="logo-icon">📚</div> -->
+                <a href="../index.html" class="logo-icon">📚</a>
+                <span data-lang="removePageName">Book Worms - حذف كتاب</span>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="lang-btn" onclick="toggleLanguage()">EN</button>
+                <div class="user-icon" onclick="goToAdmin()" data-lang-title="adminTooltip" title="لوحة التحكم">👤</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Books Section -->
+    <section class="books-section">
+        <div class="books-container">
+            <h1 class="page-title" data-lang="removePageTitle">اختر الكتاب المراد حذفه</h1>
+            
+            <div class="books-grid" id="booksGrid">
+                <!-- Books will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p data-lang="copyright">حقوق النشر © 2025 Book Worms | لوحة التحكم</p>
+        </div>
+    </footer>
+
+    <script src="remove-books-script.js"></script>
+</body>
+</html>

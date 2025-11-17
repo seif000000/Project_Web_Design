@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Book Summary</title>
+  <link rel="stylesheet" href="summary.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <button id="themeToggle">🌙 Night Mode</button>
+
+  <div class="container">
+    <h1 id="book-title">Loading...</h1>
+    <p><strong>Author:</strong> <span id="book-author"></span></p>
+    <img id="book-image" src="" alt="Book Cover" class="cover">
+
+    <p id="short-summary" class="short-summary"></p>
+
+    <button id="toggle-summary">Read Full Summary</button>
+
+    <div id="full-summary" class="full-summary">
+      <p id="full-text"></p>
+    </div>
+
+    <button id="downloadBtn">Download PDF</button>
+  </div>
+
+  <script src="summary.js"></script>
+</body>
+</html>

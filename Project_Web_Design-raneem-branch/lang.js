@@ -4,7 +4,7 @@ let currentLang = 'ar'; // اللغة الافتراضية
 // تحميل الترجمات من JSON
 export async function loadTranslations() {
     try {
-        const response = await fetch('translations.json');
+        const response = await fetch('translation.json');
         translations = await response.json();
         updateLanguage(); // بعد التحميل نطبق اللغة الافتراضية
     } catch (err) {

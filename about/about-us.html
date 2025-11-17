@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>من نحن - فريقنا</title>
+    <link rel="stylesheet" href="about.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <!-- <div class="logo-icon">📚</div> -->
+                <a href="../index.html" class="logo-icon">📚</a>
+                <span id="logoText">مكتبتنا</span>
+            </div>
+            <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+        </div>
+    </nav>
+
+    <!-- Hero About -->
+    <section class="hero-about">
+        <div class="hero-about-content">
+            <h1 id="heroTitle">من نحن</h1>
+            <p id="heroDesc">فريق متميز من المحترفين المتحمسين لتقديم أفضل الخدمات والحلول المبتكرة</p>
+        </div>
+    </section>
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="story-container">
+            <div class="story-image">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=600&fit=crop" alt="فريق العمل">
+            </div>
+            <div class="story-content">
+                <h2 id="storyTitle">قصتنا</h2>
+                <p id="storyP1">بدأت رحلتنا من شغف مشترك بتقديم أفضل الخدمات لعملائنا.</p>
+                <p id="storyP2">نؤمن بأن التميز يأتي من التعاون والابتكار المستمر.</p>
+                <p id="storyP3">نسعى دائماً لتجاوز توقعات عملائنا.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <h2 class="section-title" id="teamTitle">تعرف على فريقنا</h2>
+        <p class="section-subtitle" id="teamSubtitle">مجموعة من المحترفين الموهوبين</p>
+        
+        <div class="team-grid" id="teamGrid">
+            <!-- Team members will be loaded from JSON -->
+        </div>  
+    </section>
+
+    <!-- Values Section -->
+    <section class="values-section">
+        <h2 class="section-title" id="valuesTitle">قيمنا الأساسية</h2>
+        <div class="values-grid" id="valuesGrid">
+            <!-- Values will be loaded from JSON -->
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon"></div>
+                    <span data-lang="siteName">Book Worms</span>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4 data-lang="footerQuickLinks">روابط سريعة</h4>
+                <ul>
+                    <li><a href="#" data-lang="footerHome">الرئيسية</a></li>
+                    <li><a href="#" data-lang="footerBooks">الكتب</a></li>
+                    <li><a href="#" data-lang="footerDeals">العروض</a></li>
+                    <li><a href="../about/about-us.html" data-lang="footerAbout">من نحن</a></li>
+                    <li><a href="#" data-lang="footerContact">اتصل بنا</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 data-lang="footerExplore">استكشف</h4>
+                <ul>
+                    <li><a href="#" data-lang="footerBestsellers">الأكثر مبيعاً</a></li>
+                    <li><a href="#" data-lang="footerOnSale">التخفيضات</a></li>
+                    <li><a href="#" data-lang="footerEditorsPick">اختيار المحررين</a></li>
+                    <li><a href="#" data-lang="footerBest2022">الأفضل 2022</a></li>
+                    <li><a href="#" data-lang="footerFeatured">المميزة</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 data-lang="footerHelp">المساعدة</h4>
+                <ul>
+                    <li><a href="#" data-lang="footerTrackOrder">تتبع الطلب</a></li>
+                    <li><a href="#" data-lang="footerDelivery">التوصيل والإرجاع</a></li>
+                    <li><a href="#" data-lang="footerFAQ">الأسئلة الشائعة</a></li>
+                    <li><a href="#" data-lang="footerCommunity">المجتمع</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>
+                <p data-lang="footerCopyright">حقوق النشر © 2025 Book Worms | تم التطوير بواسطة Book Worms</p>
+            </div>
+            <div class="payment-icons">
+                <div class="payment-icon">VISA</div>
+                <div class="payment-icon">MC</div>
+                <div class="payment-icon">AMEX</div>
+                <div class="payment-icon">🍎Pay</div>
+                <div class="payment-icon">G Pay</div>
+            </div>
+            <div class="social-icons">
+                <div class="social-icon">f</div>
+                <div class="social-icon">🐦</div>
+                <div class="social-icon">📷</div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="about.js"></script>
+</body>
+</html>
