@@ -1,6 +1,4 @@
-/* lang-and-theme.js - ضعي هذا بعد تحميل navbar أو في أسفل body */
 
-/* ===== Theme toggle (يدعم زر داخل navbar حتى لو رُفع لاحقًا) ===== */
 function initThemeToggle() {
   const themeToggle = document.getElementById("theme-toggle");
   if (!themeToggle) return;
@@ -28,7 +26,7 @@ function updateToggleText() {
   const t = window.langData?.[lang];
   if (!t) return;
   themeToggle.textContent = document.documentElement.classList.contains("dark-mode")
-    ? t.light_mode || "☀ Light Mode"
+    ? t.light_mode || "☀️ Light Mode"
     : t.dark_mode || "🌙 Dark Mode";
 }
 
@@ -107,3 +105,4 @@ function initNavbarLang() {
 loadLanguage();
 initNavbarLang();
 initThemeToggle();
+
