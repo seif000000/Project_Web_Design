@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title id="page-title">Books</title>
+  <link rel="stylesheet" href="books.css"/>
+  <link rel="stylesheet" href="../homepage/style.css" />
+  
+  <!-- <link rel="stylesheet" href="Also-Ahmyd.css" /> -->
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo">
+                <!-- <div class="logo-icon">📚</div> -->
+                <a href="../homepage/index.html" class="logo-icon">📚</a>
+                <span data-lang="siteName">Book Worms</span>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="../books.html" data-lang="navAllBooks">جميع الكتب</a></li>
+                <li><a href="#" data-lang="navNewArrival">وصل حديثاً</a></li>
+                <li><a href="#" data-lang="navBestSeller">الأكثر مبيعاً</a></li>
+                <li><a href="#" data-lang="navEditorsPick">اختيار المحررين</a></li>
+                <li><a href="../about/about-us.html" data-lang="navAbout">من نحن</a></li>
+                <li><a href="#" data-lang="navContact">اتصل بنا</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <button class="lang-btn" onclick="toggleLanguage()">EN</button>
+                <div class="cart-icon">
+                    🛒
+                    <span class="cart-badge">3</span>
+                </div>
+                <!-- <div class="user-icon" a="../personal/login" >👤</div> -->
+                <a href="../personal/register.html" class="user-icon">👤</a>
+            </div>
+        </div>
+    </nav>
+
+  <div id="include-navbar"></div>
+  <button id="theme-toggle">🌙 الوضع الليلي</button>
+  <main class="container">
+    <div class="lang-toggle">
+      <button id="langBtn">English</button>
+    </div>
+    <div id="categories" class="categories"></div>
+    <h1 id="books-title" class="page-title">الكتب</h1>
+
+  
+    
+    <!-- Ahmyd search bar -->
+
+    <div id="search-block">
+      <button id="search-button" onclick="getBook()">Search</button>
+      <input type="search" id="get-books" placeholder="Use: category:Fantasy, author:Tolkien, writer:Austen ">
+      <!--  currently abundend i will be usign the regex instead  with dorking 
+  <select id="category-filter">
+    <option value="all">All Categories</option>
+  </select> -->
+
+
+
+    </div>
+
+
+    <div id="cards-container" class="cards-grid"></div>
+
+    <div class="pagination" id="pagination">
+      <button id="prevBtn" class="btn">السابق</button>
+      <span id="pageInfo"></span>
+      <button id="nextBtn" class="btn">التالي</button>
+    </div>
+
+
+  </main>
+
+  <div id="include-footer"></div>
+
+  <script src="booksData.js"></script>
+  <script src="books.js"></script>
+  <!-- import ahmyd js  -->
+  <script src="ahmyd.js"></script>
+  <script src="lang.js"></script>
+  <script>
+    function openDetails(id) {
+      window.location.href = `../Project_Web_Design-raneem-branch/index${id}.html`;
+    }
+  </script>
+  <!--- dont forget to modify the path of the files  ( ahmyd saidthat  :) )   -->
+  <script>
+
+
+
+    function openPreview(id) {
+      window.location.href = `../Summary/summary.html?id=${id}`;
+    }
+
+    function openDetails(id) {
+      window.location.href = `../Project_Web_Design-raneem-branch/index${id}.html`;
+    }
+  </script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon"></div>
+                    <span data-lang="siteName">Book Worms</span>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4 data-lang="footerQuickLinks">روابط سريعة</h4>
+                <ul>
+                    <li><a href="#" data-lang="footerHome">الرئيسية</a></li>
+                    <li><a href="#" data-lang="footerBooks">الكتب</a></li>
+                    <li><a href="#" data-lang="footerDeals">العروض</a></li>
+                    <li><a href="../about/about-us.html" data-lang="footerAbout">من نحن</a></li>
+                    <li><a href="#" data-lang="footerContact">اتصل بنا</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 data-lang="footerExplore">استكشف</h4>
+                <ul>
+                    <li><a href="#" data-lang="footerBestsellers">الأكثر مبيعاً</a></li>
+                    <li><a href="#" data-lang="footerOnSale">التخفيضات</a></li>
+                    <li><a href="#" data-lang="footerEditorsPick">اختيار المحررين</a></li>
+                    <li><a href="#" data-lang="footerBest2022">الأفضل 2022</a></li>
+                    <li><a href="#" data-lang="footerFeatured">المميزة</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 data-lang="footerHelp">المساعدة</h4>
+                <ul>
+                    <li><a href="#" data-lang="footerTrackOrder">تتبع الطلب</a></li>
+                    <li><a href="#" data-lang="footerDelivery">التوصيل والإرجاع</a></li>
+                    <li><a href="#" data-lang="footerFAQ">الأسئلة الشائعة</a></li>
+                    <li><a href="#" data-lang="footerCommunity">المجتمع</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>
+                <p data-lang="footerCopyright">حقوق النشر © 2025 Book Worms | تم التطوير بواسطة Book Worms</p>
+            </div>
+            <div class="payment-icons">
+                <div class="payment-icon">VISA</div>
+                <div class="payment-icon">MC</div>
+                <div class="payment-icon">AMEX</div>
+                <div class="payment-icon">🍎Pay</div>
+                <div class="payment-icon">G Pay</div>
+            </div>
+            <div class="social-icons">
+                <div class="social-icon">f</div>
+                <div class="social-icon">🐦</div>
+                <div class="social-icon">📷</div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+
+</html>
