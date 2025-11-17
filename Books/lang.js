@@ -26,8 +26,8 @@ function updateToggleText() {
   const t = window.langData?.[lang];
   if (!t) return;
   themeToggle.textContent = document.documentElement.classList.contains("dark-mode")
-    ? t.light_mode || "☀️ Light Mode"
-    : t.dark_mode || "🌙 Dark Mode";
+    ? t.light_mode || "☀️"
+    : t.dark_mode || "🌙 ";
 }
 
 /* محاولة تحميل الوضع المحفوظ */

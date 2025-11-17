@@ -59,7 +59,7 @@
     "id": 8,
     "title": "Harry Potter and the Sorcerer’s Stone",
     "author": "J.K. Rowling",
-    "cover": "../image/Harry Potter and the Sorcerers Stone.png",
+    "cover": "../image/Harry Potter and the Sorcerer’s Stone.png",
     "shortSummary": "The beginning of Harry’s magical journey at Hogwarts.",
     "fullSummary": "Harry discovers he is a wizard and attends Hogwarts, meeting friends, uncovering mysteries, and confronting dark forces. Themes of courage, friendship, and self-discovery drive his first year adventures."
   },

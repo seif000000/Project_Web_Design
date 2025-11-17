@@ -12,8 +12,8 @@
     "no_results": "No results found",
     "all": "All",
     "search_button": "Search",
-    "dark_mode": "🌙 Dark Mode",
-    "light_mode": "☀️ Light Mode"
+    "dark_mode": "🌙 ",
+    "light_mode": "☀️"
     
   },
   "ar": {
@@ -29,7 +29,7 @@
     "no_results": "لا توجد نتائج",
     "all": "الكل",
     "search_button": "بحث",
-    "dark_mode": "🌙 الوضع الليلي",
-    "light_mode": "☀️ الوضع النهاري"
+    "dark_mode": "🌙",
+    "light_mode": "☀️"
   }
 }

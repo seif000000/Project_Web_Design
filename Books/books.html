@@ -14,10 +14,16 @@
     <!-- Navbar -->
     <nav class="navbar">
         <div class="navbar-container">
+        <div class="left-to-logo">
+          <button class="lang-btn" id="theme-toggle">🌙 </button>
+        </div>
+        <div>
+          <h1 id="books-title" class="page-title">الكتب</h1>
+        </div>
             <div class="logo">
                 <!-- <div class="logo-icon">📚</div> -->
                 <a href="../index.html" class="logo-icon">📚</a>
-                <span data-lang="siteName">Book Worms</span>
+                <span data-lang="siteName" onclick="homepage()" onmouseover="this.style.cursor='pointer'">Book Worms</span>
             </div>
             
             <ul class="nav-links">
@@ -44,11 +50,10 @@
 
   
   <div id="include-navbar"></div>
-  <button id="theme-toggle">🌙 الوضع الليلي</button>
   <main class="container">
 
     <div id="categories" class="categories"></div>
-    <h1 id="books-title" class="page-title">الكتب</h1>
+    <!-- <h1 id="books-title" class="page-title">الكتب</h1> -->
 
   
     
@@ -85,6 +90,8 @@
   <script src="ahmyd.js"></script>
   <script src="lang.js"></script>
   <script>
+
+    // go to the details
    function openDetails(id) {
     window.location.href = `../Project_Web_Design-raneem-branch/index.html?id=${id}`;
 }
@@ -92,7 +99,9 @@
     function openPreview(id) {
       window.location.href = `../Summary/summary.html?id=${id}`;
     }
-
+function homepage() {
+        window.location.href = "../index.html"; // I'm using example but you can use google.
+    }
   </script>
   <!--- dont forget to modify the path of the files  ( ahmyd saidthat  :) )   -->
   <script>
