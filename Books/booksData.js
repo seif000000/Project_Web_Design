@@ -55,7 +55,7 @@ const booksData = [
     category: { en: "Fantasy & Sci-Fi", ar: "الخيال والعلوم الغامضة" },
     title: { en: "Harry Potter and the Sorcerer's Stone", ar: "هاري بوتر وحجر الفيلسوف" },
     author: { en: "J.K. Rowling", ar: "ج. ك. رولينغ" },
-    cover: "../image/Harry Potter and the Sorcerer's Stone.png"
+    cover: "../image/Harry Potter and the Sorcerer’s Stone.png"
   },
   {
     id: 9,
@@ -178,4 +178,5 @@ const booksData = [
     author: { en: "John Rhett Thomas", ar: "جون ريت توماس" },
     cover: "../image/The Art of The Avengers.webp"
   }
+];
 ];
