@@ -29,8 +29,9 @@
                 <li><a href="#" data-lang="navContact">اتصل بنا</a></li>
             </ul>
 
-            <div class="nav-actions">
-                <button class="lang-btn" onclick="toggleLanguage()">EN</button>
+             <div class="nav-actions">
+                <button class="lang-btn" id="navbarLangBtn">EN</button>
+
                 <div class="cart-icon">
                     🛒
                     <span class="cart-badge">3</span>
@@ -41,12 +42,11 @@
         </div>
     </nav>
 
+  
   <div id="include-navbar"></div>
   <button id="theme-toggle">🌙 الوضع الليلي</button>
   <main class="container">
-    <div class="lang-toggle">
-      <button id="langBtn">English</button>
-    </div>
+
     <div id="categories" class="categories"></div>
     <h1 id="books-title" class="page-title">الكتب</h1>
 
@@ -75,7 +75,6 @@
       <button id="nextBtn" class="btn">التالي</button>
     </div>
 
-
   </main>
 
   <div id="include-footer"></div>
@@ -86,22 +85,21 @@
   <script src="ahmyd.js"></script>
   <script src="lang.js"></script>
   <script>
-    function openDetails(id) {
-      window.location.href = `../Project_Web_Design-raneem-branch/index${id}.html`;
+   function openDetails(id) {
+    window.location.href = `../Project_Web_Design-raneem-branch/index.html?id=${id}`;
+}
+
+    function openPreview(id) {
+      window.location.href = `../Summary/summary.html?id=${id}`;
     }
+
   </script>
   <!--- dont forget to modify the path of the files  ( ahmyd saidthat  :) )   -->
   <script>
 
 
 
-    function openPreview(id) {
-      window.location.href = `../Summary/summary.html?id=${id}`;
-    }
 
-    function openDetails(id) {
-      window.location.href = `../Project_Web_Design-raneem-branch/index${id}.html`;
-    }
   </script>
 
     <!-- Footer -->
@@ -169,3 +167,4 @@
 </body>
 
 </html>
+
