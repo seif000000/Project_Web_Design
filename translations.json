@@ -1,3 +1,4 @@
+
 {
   "ar": {
     "siteName": "Book Worms",
@@ -108,8 +109,26 @@
         "desc": "نشجع التفكير الإبداعي والحلول المبتكرة لمواكبة التطورات وتلبية احتياجات العصر."
       }
     ],
-    "footerText": "© 2024 جميع الحقوق محفوظة | تصميم بكل ❤️"
+    "footerText": "© 2024 جميع الحقوق محفوظة | تصميم بكل ❤️",
+
+    "booksPage": {
+      "books": "الكتب",
+      "prev": "السابق",
+      "next": "التالي",
+      "page": "صفحه",
+      "details": "التفاصيل",
+      "author": "المؤلف",
+      "category": "التصنيف",
+      "search_placeholder": "استخدم: category:فنتازيا، author:تولكين، writer:أوستن",
+      "no_results": "لا توجد نتائج",
+      "language": "English🌐",
+      "all": "الكل",
+      "search_button": "بحث",
+      "dark_mode": "🌙 الوضع الليلي",
+      "light_mode": "☀️ الوضع النهاري"
+    }
   },
+
   "en": {
     "siteName": "Book Worms",
     "navAllBooks": "All Books",
@@ -219,6 +238,23 @@
         "desc": "We encourage creative thinking and innovative solutions to keep pace with developments and meet modern needs."
       }
     ],
-    "footerText": "© 2024 All Rights Reserved | Designed with ❤️"
+    "footerText": "© 2024 All Rights Reserved | Designed with ❤️",
+
+    "booksPage": {
+      "books": "Books",
+      "prev": "Prev",
+      "next": "Next",
+      "page": "page",
+      "details": "Details",
+      "author": "Author",
+      "category": "Category",
+      "search_placeholder": "Use: category:Fantasy, author:Tolkien, writer:Austen",
+      "no_results": "No results found",
+      "language": "🌐عربي",
+      "all": "All",
+      "search_button": "Search",
+      "dark_mode": "🌙 Dark Mode",
+      "light_mode": "☀️ Light Mode"
+    }
   }
 }

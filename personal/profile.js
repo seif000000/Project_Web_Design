@@ -5,17 +5,17 @@ document.addEventListener("DOMContentLoaded", () => {
    { 
     title: { ar: "الأمير", en: "The Prince" }, 
     author: { ar: "نيكولو مكيافيلي", en: "Niccolò Machiavelli" }, 
-    cover: "image/Art of iron man.webp" 
+    cover: "../image/Art of iron man.webp" 
   },
   { 
     title: { ar: "الخيميائي", en: "The Alchemist" }, 
     author: { ar: "باولو كويلو", en: "Paulo Coelho" }, 
-    cover: "image/The Alchemist.jpeg" 
+    cover: "../image/The Alchemist.jpeg" 
   },
   { 
     title: { ar: "العادات السبع للناس الأكثر فعالية", en: "The 7 Habits of Highly Effective People" }, 
     author: { ar: "ستيفن كوفي", en: "Stephen Covey" }, 
-    cover: "image/The Art of Captain America.webp" 
+    cover: "../image/The Art of Captain America.webp" 
   }
   ];
 
@@ -83,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   // initialize
-  let currentLang = localStorage.getItem("lang") || "ar";
+  let currentLang = localStorage.getItem("translations") || "ar";
   updateUI(currentLang);
 
   // toggle button
