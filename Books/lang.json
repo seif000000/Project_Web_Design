@@ -13,7 +13,26 @@
     "all": "All",
     "search_button": "Search",
     "dark_mode": "🌙 ",
-    "light_mode": "☀️"
+    "light_mode": "☀️",
+    "siteName": "Book Worms",
+    "navContact": "Contact Us",
+    "navAbout": "About Us",
+    "navEditors": "Editors' Picks",
+    "navBestsellers": "Bestsellers",
+    "navNewArrivals": "New Arrivals",
+    "navAllBooks": "All Books",
+    "footerQuickLinksTitle": "Quick Links",
+    "navOffers": "Offers",
+    "footerDiscoverTitle": "Discover",
+    "navDiscounts": "Discounts",
+    "navBest2022": "Best of 2022",
+    "navFeatured": "Featured",
+    "footerHelpTitle": "Help",
+    "helpTrackOrder": "Track Order",
+    "helpShippingReturns": "Shipping & Returns",
+    "helpFAQ": "FAQ",
+    "helpCommunity": "Community",
+    "footerCopyright": "Copyright © 2025 Book Worms | Developed by Book Worms"
     
   },
   "ar": {
@@ -30,6 +49,28 @@
     "all": "الكل",
     "search_button": "بحث",
     "dark_mode": "🌙",
-    "light_mode": "☀️"
+    "light_mode": "☀️",
+    "siteName": "Book Worms",
+    "navContact": "اتصل بنا",
+    "navAbout": "من نحن",
+    "navEditors": "اختيار المحررين",
+    "navBestsellers": "الأكثر مبيعاً",
+    "navNewArrivals": "وصل حديثاً",
+    "navAllBooks": "جميع الكتب",
+    "footerQuickLinksTitle": "روابط سريعة",
+    "navOffers": "العروض",
+    "footerDiscoverTitle": "استكشف",
+    "navDiscounts": "التخفيضات",
+    "navBest2022": "الأفضل 2022",
+    "navFeatured": "المميزة",
+    "footerHelpTitle": "المساعدة",
+    "helpTrackOrder": "تتبع الطلب",
+    "helpShippingReturns": "التوصيل والإرجاع",
+    "helpFAQ": "الأسئلة الشائعة",
+    "helpCommunity": "المجتمع",
+    "footerCopyright": "حقوق النشر © 2025 Book Warms | تم التطوير بواسطة Book Warms"
+
   }
 }
+
+

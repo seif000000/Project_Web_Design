@@ -8,36 +8,39 @@
 
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="navbar-container">
-            <div class="logo">
-                <!-- <div class="logo-icon">📚</div> -->
-                <a href="/index.html" class="logo-icon">📚</a>
-                <span data-lang="siteName">Book Worms</span>
-            </div>
-            
-            <ul class="nav-links">
-                <li><a href="Books/books.html" data-lang="navAllBooks">جميع الكتب</a></li>
-                <li><a href="#" data-lang="navNewArrival">وصل حديثاً</a></li>
-                <li><a href="#" data-lang="navBestSeller">الأكثر مبيعاً</a></li>
-                <li><a href="#" data-lang="navEditorsPick">اختيار المحررين</a></li>
-                <li><a href="about/about-us.html" data-lang="navAbout">من نحن</a></li>
-                <li><a href="#" data-lang="navContact">اتصل بنا</a></li>
-            </ul>
+           <nav class="navbar">
+        <div class="logo">
+            <a href="../index.html" class="logo-icon">📚</a>
+            <span data-key="siteName" onclick="homepage()" onmouseover="this.style.cursor='pointer'">Book Worms</span>
+        </div>
+        
+        <div class="nav-section nav-center" id="main-nav-links">
+            <a href="contact/contact.html" class="nav-link" data-key="navContact">Contact Us</a>
+            <a href="about/about-us.html" class="nav-link" data-key="navAbout">About Us</a>
+            <a href="#" class="nav-link" data-key="navEditors">Editors' Picks</a>
+            <a href="#" class="nav-link" data-key="navBestsellers">Bestsellers</a>
+            <a href="new-arrive/new-arrive.html" class="nav-link" data-key="navNewArrivals">New Arrivals</a>
+            <a href="Books/books.html" class="nav-link" data-key="navAllBooks">All Books</a>
+        </div>
 
-            <div class="nav-actions">
-                <button class="lang-btn" onclick="toggleLanguage()">EN</button>
-                <div class="cart-icon">
-                    🛒
-                    <span class="cart-badge">3</span>
-                </div>
-                <!-- <div class="user-icon" a="../personal/login" >👤</div> -->
-                <a href="personal/register.html" class="user-icon">👤</a>
-            </div>
+        <div class="nav-section nav-right">
+            <button id="language-toggle-btn" class="nav-icon-btn lang-btn" data-lang="ar">AR</button>
+            <button id="theme-toggle" class="nav-icon-btn" aria-label="Toggle dark mode">
+                <span id="sun-icon" role="img">☀️</span>
+                <span id="moon-icon" role="img" style="display:none;">🌙</span>
+            </button>
+        <a href="../Checkout/checkout.html" class="nav-cart-link" aria-label="Go to Cart">
+            <button class="nav-icon-btn nav-cart-btn">
+        
+        <span role="img" class="cart-emoji">🛒</span>
+        
+        <span class="cart-count" id="cart-count">0</span>
+        
+    </button>
+</a>
+            <a href="../personal/register.html" class="user-icon">👤</a>
         </div>
     </nav>
-
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-container">
@@ -146,6 +149,7 @@
                 <div class="footer-logo">
                     <div class="footer-logo-icon"></div>
                     <span data-lang="siteName">Book Worms</span>
+                    <a href="../index.html" class="logo-icon">📚</a>
                 </div>
             </div>
 
@@ -156,7 +160,7 @@
                     <li><a href="#" data-lang="footerBooks">الكتب</a></li>
                     <li><a href="#" data-lang="footerDeals">العروض</a></li>
                     <li><a href="about/about-us.html" data-lang="footerAbout">من نحن</a></li>
-                    <li><a href="#" data-lang="footerContact">اتصل بنا</a></li>
+                    <li><a href="contact/contact.html" data-lang="footerContact">اتصل بنا</a></li>
                 </ul>
             </div>
 
@@ -202,7 +206,6 @@
     </footer>
 
 
-    <!-- <script type="module" src="lang.js"></script> -->
     <script type="module" src="script.js"></script>
 
 </body>

@@ -85,7 +85,7 @@
         "image": "https://media.licdn.com/dms/image/v2/D4D03AQEui49tF3Wljw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1731985519092?e=1764201600&v=beta&t=r5zhkqZJB4swzs7E9zxvdP54vymwyGYEPRU7kT70L6s"
       },
       {
-        "name": "ماريا",
+        "name":  " ماريا محمود",
         "role": "مديرة العمليات",
         "desc": "خبير في تحسين العمليات وإدارة المشاريع لضمان تنفيذ سلس وفعال لجميع المهام.",
         "image": "../image/Marya.png"
@@ -214,7 +214,7 @@
         "image": "https://media.licdn.com/dms/image/v2/D4D03AQEui49tF3Wljw/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1731985519092?e=1764201600&v=beta&t=r5zhkqZJB4swzs7E9zxvdP54vymwyGYEPRU7kT70L6s"
       },
       {
-        "name": "Marya",
+        "name": "Marya Mahmoud",
         "role": "Operations Manager",
         "desc": "Expert in process improvement and project management to ensure smooth and effective execution of all tasks.",
         "image": "../image/Marya.png"

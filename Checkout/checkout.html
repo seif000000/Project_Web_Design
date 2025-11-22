@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛒 إكمال الطلب - Book Worms</title>
+    <link rel="stylesheet" href="../style.css"> 
+    <link rel="stylesheet" href="checkout.css"> 
+</head>
+<body class="checkout-page">
+    <div class="container">
+        <h2 class="page-title">🛒 إكمال طلبك وتفاصيل التوصيل</h2>
+        
+       <div id="order-summary" class="summary-box">
+    <h3 class="box-header">ملخص مشترياتك</h3>
+    
+    <div id="cart-items-list">
+        </div>
+
+    <div class="summary-total">
+        <span>الإجمالي الفرعي:</span>
+        <span id="subtotal-price" class="total-price">$0.00</span> 
+    </div>
+    
+    <div class="summary-row shipping-area">
+        <label for="governorate-select" data-key="checkoutDeliveryArea">منطقة التوصيل:</label>
+        <select id="governorate-select" aria-label="اختر المحافظة" class="form-control">
+            </select>
+    </div>
+
+    <div class="summary-row">
+        <span>تكلفة التوصيل:</span>
+        <span id="shipping-price">$0.00</span>
+    </div>
+
+    <div class="summary-total final-total-row">
+        <span>الإجمالي النهائي:</span>
+        <span id="final-total" class="total-price">$0.00</span>
+    </div>
+
+    <button id="proceed-to-delivery" class="btn final-purchase-btn" style="margin-top: 25px;">
+        متابعة لإدخال بيانات التوصيل
+    </button>
+</div>
+            
+            <div id="delivery-form-container" class="delivery-form-container">
+                <h3 class="box-header">إدخال تفاصيل التوصيل</h3>
+                <form class="contact-form" id="delivery-form">
+                    <input type="text" placeholder="الاسم الكامل" required>
+                    <input type="email" placeholder="البريد الإلكتروني" required>
+                    <input type="tel" placeholder="رقم الهاتف" required>
+                    <textarea placeholder="العنوان بالكامل (المدينة، الحي، الشارع)" rows="3" required></textarea>
+                    
+                    <button type="submit" class="btn final-purchase-btn">
+                        تأكيد الطلب والدفع 
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+]
+    
+    <script src="../Books/booksData.js"></script>
+    <script src="checkout.js"></script>
+</body>
+</html>

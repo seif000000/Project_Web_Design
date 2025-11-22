@@ -1,56 +1,182 @@
+
 :root {
   --bg-color: linear-gradient(to bottom, #F5E6D3, #EDE3D5);
-
+  --navbar-bg: #FFFFFF; /* New variable for navbar background */
   --card-bg: #FFFFFF;
   --text-color: #2d2d2d;
-  --muted: #5C5C5C;
-  --accent: #FDB750;
+  --muted: #5C5C5C;      
+  --accent: #FDB750;     
   --accent-hover: #E0A840;
-  --search-border: #D1C7BB;
-  --search-glow: #FDB750;
   --page-title-color: #2d2d2d;
-  --pagination-disabled-bg: #EDE3D5;
-  --pagination-disabled-color: #A0A0A0;
-  --category-text-color: #2d2d2d;
   --category-hover-text-color: #2d2d2d;
+  --icon-color: var(--text-color);
+  --badge-color: #FFFFFF;
+  --badge-bg: #FF3B30; 
 }
 
 
 :root.dark-mode {
+  /* Dark Mode Variables */
   --bg-color: linear-gradient(to bottom, #F5E6D3, #000000);
-
+  --navbar-bg: #2d2d2d;
   --card-bg: #2d2d2d;
   --text-color: #FFFFFF;
   --muted: #A0A0A0;
   --accent: #FDB750;
   --accent-hover: #E0A840;
-  --search-border: #444444;
-  --search-glow: #FDB750;
-  --page-title-color: #060606;
-  --pagination-disabled-bg: #383838;
-  --pagination-disabled-color: #777777;
-  --category-text-color: #FFFFFF;
+  --page-title-color: #FFFFFF;
   --category-hover-text-color: #2d2d2d;
 }
-
-
 
 body {
   font-family: "Poppins", system-ui, sans-serif;
   background: var(--bg-color);
   margin: 0;
-  color: var(--page-title-color);
+  color: var(--page-title-color); 
   transition: background 0.5s, color 0.5s;
+  direction: ltr; 
+  text-align: left;
 }
 
-.container {
+body.rtl {
+    direction: rtl; 
+    text-align: right; 
+}
+
+.new-arrivals-container { 
   max-width: 1200px;
   margin: 40px auto;
   padding: 0 16px;
   width: 100%;
 }
 
- .navbar {
+#theme-toggle, #lang-toggle {
+    padding: 10px 16px;
+    border-radius: 25px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s, transform 0.3s;
+    background: var(--accent);
+    color: var(--category-hover-text-color);
+    margin: 0 5px 20px 5px; 
+    display: inline-block;
+}
+
+#theme-toggle:hover, #lang-toggle:hover {
+    background: var(--accent-hover);
+    transform: scale(1.05);
+}
+
+.page-title {
+  display: block;
+  width: fit-content;
+  background-color: var(--accent);
+  color: var(--category-hover-text-color);
+  padding: 0.5rem 1rem;
+  border-radius: 25px;
+  margin: 0 auto 50px auto;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  box-shadow: 0 6px 15px rgba(253, 183, 80, 0.6);
+}
+
+.no-books-message {
+    text-align: center;
+    color: var(--muted);
+    font-size: 1.3em;
+    padding: 80px 0;
+}
+
+.books-grid { 
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 24px;
+  justify-items: center;
+}
+
+.book-card { 
+  width: 100%;
+  max-width: 340px;
+  background: var(--card-bg);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 1s ease-in-out, opacity 0.6s ease-in-out, box-shadow 0.3s, background 0.5s;
+  cursor: pointer;
+  z-index: 10;
+  display: flex; 
+  flex-direction: column;
+}
+
+.book-card:hover { 
+    transform: scale(1.04) rotateX(40deg) ;
+    box-shadow: 0px 18px 30px rgba(0, 0, 0, 0.4), 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.book-cover { 
+  width: 100%;
+  height: 250px;
+  object-fit: fill;
+  display: block;
+}
+
+.book-details-content { 
+  padding: 20px;
+  text-align: right;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.book-details-content { 
+    text-align: left; 
+}
+
+body.rtl .book-details-content {
+    text-align: right;
+}
+
+.book-details-content h3 {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+  color: var(--accent); 
+}
+
+.book-details-content p {
+  margin: 0 0 5px;
+  color: var(--muted);
+  font-size: 1em;
+  line-height: 1.4;
+}
+
+.book-actions { /* الفئة المستخدمة في HTML */
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.btn { /* الفئة المستخدمة في HTML */
+  width: 100%;
+  padding: 8px 14px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: var(--accent);
+  color: var(--category-hover-text-color);
+  font-weight: 600;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.btn:hover {
+  background: var(--accent-hover);
+  transform: scale(1.03);
+}
+
+.navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -92,6 +218,7 @@ body {
             cursor: pointer;
         }
         
+        /* Ensure the logo's elements inherit the body direction for proper layout on AR */
         body[dir="rtl"] .logo {
             flex-direction: row-reverse;
         }
@@ -100,6 +227,8 @@ body {
             flex-direction: row-reverse;
         }
         
+        /* --- END Logo Update --- */
+
         .nav-section {
             display: flex;
             align-items: center;
@@ -114,6 +243,7 @@ body {
             min-width: 250px;
         }
 
+        /* Main Navigation Links */
         .nav-link {
             color: var(--muted);
             font-weight: 500;
@@ -129,6 +259,7 @@ body {
             background-color: rgba(253, 183, 80, 0.1);
         }
         
+        /* Icon Buttons (Theme, Cart, Profile) */
         .nav-icon-btn {
             background: var(--card-bg);
             border: none;
@@ -165,36 +296,22 @@ body {
             stroke: var(--text-color);
         }
 
-.nav-cart-btn .cart-emoji {
-  font-size: 1.4rem; 
-  line-height: 1; 
-  transition: transform 0.2s;
-}
+        /* Cart Badge */
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--badge-bg);
+            color: var(--badge-color);
+            border-radius: 50%;
+            padding: 2px 5px;
+            font-size: 0.7rem;
+            font-weight: bold;
+            line-height: 1;
+            z-index: 10;
+        }
 
-.nav-cart-btn:hover .cart-emoji {
-    /* تأثير بسيط عند تمرير الماوس */
-    transform: scale(1.1); 
-}
-
-
-.cart-count {
-  position: absolute;
-    top: -5px; 
-    right: -5px; 
-    background-color: var(--accent); 
-    color: var(--card-bg, #FFFFFF); 
-    border-radius: 50%;
-    padding: 2px 5px;
-    font-size: 0.75rem; 
-    font-weight: 700;
-    line-height: 1;
-    min-width: 18px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-    z-index: 20;
-    display: none; /* يتم إظهاره بالجافاسكريبت */
-}
-
+        /* Single Language Button Style */
         #language-toggle-btn {
             padding: 8px 18px;
             font-size: 0.95rem;
@@ -225,310 +342,8 @@ body {
         }
 
 
-#books-title {
-  display: block;
-  width: fit-content;
-  background-color: var(--accent);
-  color: var(--category-hover-text-color);
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  margin: 0 auto;
-  text-align: center;
-  font-size: 1.8rem;
-  font-weight: 700;
-  box-shadow: 0 6px 15px rgba(253, 183, 80, 0.6);
-}
-
-.categories {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin: 20px 0;
-}
-
-.cat-btn {
-  background: var(--card-bg);
-  border: 2px solid var(--accent);
-  padding: 8px 18px;
-  border-radius: 25px;
-  cursor: pointer;
-  font-weight: bold;
-  color: var(--category-text-color);
-  transition: all 0.3s ease;
-  flex-shrink: 0;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-}
-
-.cat-btn.active,
-.cat-btn:hover {
-  background: var(--accent);
-  color: var(--category-hover-text-color);
-  transform: scale(1.05);
-  box-shadow: 0 4px 10px rgba(253, 183, 80, 0.7);
-}
-
-:root.dark-mode .cat-btn {
-  background: var(--card-bg);
-  border: 2px solid var(--accent);
-  color: var(--text-color);
-}
-
-:root.dark-mode .cat-btn.active,
-:root.dark-mode .cat-btn:hover {
-  background: var(--accent);
-  color: var(--category-hover-text-color);
-}
-
-.cards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
-  justify-items: center;
-  perspective: 1200px; 
-}
-
-.card {
-  width: 100%;
-  max-width: 340px;
-  background: var(--card-bg);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.05);
-  transform: translateY(8px);
-  opacity: 0;
-  transition: transform 1s ease-in-out, opacity 0.6s ease-in-out, box-shadow 0.3s, background 0.5s;
-  cursor: pointer;
-  z-index: 10;
-  transform-style: preserve-3d; 
-}
-
-.card.show {
-  transform: none;
-  opacity: 1;
-}
-
-.card:hover {
-  transform: scale(1.04) rotateX(30deg) ;
-  box-shadow: 0px 18px 30px rgba(0, 0, 0, 0.4), 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.card .cover {
-  width: 100%;
-  height: 250px;
-  object-fit: fill;
-  display: block;
-}
-
-.card .body {
-  padding: 20px;
-  text-align: center;
-}
-
-.card h3 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-  color: var(--accent);
-}
-
-.card p {
-  margin: 0 0 10px;
-  color: var(--muted);
-  font-size: 1em;
-}
-
-.card .actions {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
-}
-
-.card .actions .btn {
-  width: 100%;
-}
-
-.btn {
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  background: var(--accent);
-  color: var(--category-hover-text-color);
-  font-weight: 600;
-  transition: background 0.3s, transform 0.3s;
-}
-
-.btn:hover {
-  background: var(--accent-hover);
-  transform: scale(1.05);
-}
-
-.pagination {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  align-items: center;
-  margin-top: 30px;
-}
-
-.pagination button {
-  background: var(--accent);
-  border: none;
-  color: var(--category-hover-text-color);
-  font-weight: 600;
-  padding: 10px 20px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.pagination button:hover {
-  background: var(--accent-hover);
-  transform: translateY(-2px);
-}
-
-.pagination button:disabled {
-  background: var(--pagination-disabled-bg);
-  color: var(--pagination-disabled-color);
-  cursor: not-allowed;
-  transform: none;
-}
-
-#search-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  position: relative;
-  margin: 20px auto 50px auto;
-}
-
-#search-block {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
-  width: 100%;
-  max-width: 600px;
-  margin: 20px auto 50px auto;
-}
-
-#get-books {
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  border: 1px solid var(--search-border);
-  width: clamp(200px, 60vw, 500px);
-  font-size: 1rem;
-  transition: all 0.2s ease;
-  outline: none;
-  flex-grow: 1;
-  background-color: var(--card-bg);
-  color: var(--text-color);
-  margin: 20px auto 50px auto;
-}
-
-#get-books:hover,
-#get-books:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 4px var(--search-glow);
-}
-
-#search-button {
-  padding: 0.6rem 1rem;
-  border-radius: 8px;
-  border: none;
-  background-color: var(--accent);
-  color: var(--category-hover-text-color);
-  cursor: pointer;
-  transition: background 0.2s;
-  font-size: 1rem;
-  flex-shrink: 0;
-  margin: 20px auto 50px auto;
-}
-
-#search-button:hover {
-  background-color: var(--accent-hover);
-}
-
-#under-text {
-  font-size: 0.9rem;
-  color: var(--muted);
-}
-
-#theme-toggle {
-  padding: 10px 16px;
-  border-radius: 25px;
-  border: none;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s, transform 0.3s;
-  background: var(--accent);
-  color: var(--category-hover-text-color);
-  margin: 0 auto 20px auto;
-  display: block;
-}
-
-#theme-toggle:hover {
-  background: var(--accent-hover);
-  transform: scale(1.05);
-}
-
-@media (max-width: 520px) {
-  .container {
-    padding: 0 10px;
-    margin: 20px auto;
-  }
-
-  #books-title {
-    font-size: 1.5rem;
-  }
-
-  #search-block {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  #search-container {
-    margin-bottom: 30px;
-  }
-
-  #get-books {
-    width: 100%;
-    max-width: 90%;
-  }
-
-  #search-button {
-    width: 100%;
-    max-width: 90%;
-  }
-
-  .card .cover {
-    height: 180px;
-  }
-
-  .card h3 {
-    font-size: 1.2em;
-  }
-
-  .card p {
-    font-size: 0.9em;
-  }
-
-  .cat-btn {
-    padding: 7px 14px;
-    font-size: 0.9rem;
-  }
-
-  .pagination button {
-    padding: 8px 16px;
-        font-size: 0.9rem;
-  }
-}
-
- #main-footer {
-            background-color: #000; 
+        #main-footer {
+            background-color: #000; /* Always black as per the image */
             color: #fff;
             padding: 40px 16px 20px;
             margin-top: 50px;
@@ -599,6 +414,7 @@ body {
             color: var(--accent);
         }
 
+        /* Footer Bottom Section (Social/Copyright) */
         .footer-bottom {
             max-width: 1200px;
             margin: 20px auto 0;
@@ -617,6 +433,7 @@ body {
             order: 2;
         }
         
+        /* Alignment fixes for RTL in the footer bottom */
         #main-footer.rtl .footer-bottom {
             flex-direction: row-reverse;
         }
@@ -646,11 +463,31 @@ body {
             transition: all 0.3s;
         }
 
-        .social-btn:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
+.social-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
 
+.payment-icons {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+.payment-icon {
+    width: 45px;
+    height: 30px;
+    background: white;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+        /* =========================================================================
+            Responsive Design
+            ========================================================================= */
         @media (min-width: 800px) {
             .contact-layout {
                 grid-template-columns: 2fr 1fr;
@@ -667,12 +504,14 @@ body {
                 justify-content: space-around;
             }
             
+            /* Footer Responsive */
             .footer-container {
                 grid-template-columns: repeat(2, 1fr);
             }
             .footer-logo {
                 grid-column: span 2;
                 text-align: center;
+                /* Center the logo itself */
                 display: flex;
                 justify-content: center;
             }
@@ -689,7 +528,7 @@ body {
                 text-align: center;
             }
             #main-footer.rtl .footer-bottom {
-                flex-direction: column; 
+                flex-direction: column; /* override row-reverse */
             }
         }
 
@@ -736,3 +575,4 @@ body {
             }
         }
  
+

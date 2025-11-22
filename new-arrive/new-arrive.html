@@ -1,17 +1,14 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title id="page-title">Books</title>
-  <link rel="stylesheet" href="books.css"/>
-  <link rel="stylesheet" href="../style.css" />
-  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>وصل حديثاً - المكتبة</title>
+    
+    <link rel="stylesheet" href="new-arrive.css"> 
 </head>
-
 <body>
-    <nav class="navbar">
+        <nav class="navbar">
         <div class="logo">
             <a href="../index.html" class="logo-icon">📚</a>
             <span data-key="siteName" onclick="homepage()" onmouseover="this.style.cursor='pointer'">Book Worms</span>
@@ -22,8 +19,8 @@
             <a href="../about/about-us.html" class="nav-link" data-key="navAbout">About Us</a>
             <a href="#" class="nav-link" data-key="navEditors">Editors' Picks</a>
             <a href="#" class="nav-link" data-key="navBestsellers">Bestsellers</a>
-            <a href="../new-arrive/new-arrive.html" class="nav-link" data-key="navNewArrivals">New Arrivals</a>
-            <a href="books.html" class="nav-link" data-key="navAllBooks">All Books</a>
+            <a href="new-arrive.html" class="nav-link" data-key="navNewArrivals">New Arrivals</a>
+            <a href="../Books/books.html" class="nav-link" data-key="navAllBooks">All Books</a>
         </div>
 
         <div class="nav-section nav-right">
@@ -32,9 +29,8 @@
                 <span id="sun-icon" role="img">☀️</span>
                 <span id="moon-icon" role="img" style="display:none;">🌙</span>
             </button>
-            
-<a href="../Checkout/checkout.html" class="nav-cart-link" aria-label="Go to Cart">
-    <button class="nav-icon-btn nav-cart-btn">
+        <a href="../Checkout/checkout.html" class="nav-cart-link" aria-label="Go to Cart">
+            <button class="nav-icon-btn nav-cart-btn">
         
         <span role="img" class="cart-emoji">🛒</span>
         
@@ -45,58 +41,37 @@
             <a href="../personal/register.html" class="user-icon">👤</a>
         </div>
     </nav>
+    <div id="app" class="new-arrivals-container">
+                
+        <div id="books-container" class="books-grid"></div>
 
-  
-  <div id="include-navbar"></div>
-  <main class="container">
+        <p id="no-books-message" class="no-books-message" style="display: none;"></p>
+    </div>
 
-    <div id="categories" class="categories"></div>
-  
+    <template id="book-card-template">
+    <div class="book-card">
+        <img data-id="cover" src="" alt="" class="book-cover">
+        <div class="book-details-content">
+            <h3 data-id="title"></h3>
+            
+            <p class="author-label"><span data-translate-key="author">المؤلف</span>: <span data-id="author"></span></p>
+            <p class="category-label"><span data-translate-key="category">التصنيف</span>: <span data-id="category"></span></p>
+            
+            <div class="book-actions">
+                <button data-id="preview-btn" data-translate-key="preview" class="btn btn-preview">معاينة</button>
+                <button data-id="details-btn" data-translate-key="details" class="btn btn-details">تفاصيل</button>
+            </div>
+        </div>
+    </div>
+</template>
     
-    <!-- Ahmyd search bar -->
+    
+    <script src="../Books/booksData.js"></script> 
+    <script src="new-arrive.js"></script>
 
-    <div id="search-block">
-      <button id="search-button" onclick="getBook()">Search</button>
-      <input type="search" id="get-books" placeholder="Use: category:Fantasy, author:Tolkien, writer:Austen ">
-
-    </div>
-
-
-    <div id="cards-container" class="cards-grid"></div>
-
-    <div class="pagination" id="pagination">
-      <button id="prevBtn" class="btn">السابق</button>
-      <span id="pageInfo"></span>
-      <button id="nextBtn" class="btn">التالي</button>
-    </div>
-
-  </main>
-
-  <div id="include-footer"></div>
-
-  <script src="booksData.js"></script>
-  <script src="books.js"></script>
-  <!-- import ahmyd js  -->
-  <script src="ahmyd.js"></script>
-  <script src="lang.js"></script>
-  <script>
-
-    // go to the details
-   function openDetails(id) {
-    window.location.href = `../Project_Web_Design-raneem-branch/index.html?id=${id}`;
-}
-
-    function openPreview(id) {
-      window.location.href = `../Summary/summary.html?id=${id}`;
-    }
-function homepage() {
-        window.location.href = "../index.html"; 
-    }
-  </script>
-    <footer id="main-footer">
+<footer id="main-footer">
         <div class="footer-container">
             
-            <!-- Column 1: Logo/Branding -->
             <div class="footer-col footer-logo">
                 <div class="logo">
                     <span data-key="siteName">Book Worms</span>
@@ -104,7 +79,6 @@ function homepage() {
                 </div>
             </div>
 
-            <!-- Column 2: Quick Links -->
             <div class="footer-col">
                 <h4 data-key="footerQuickLinksTitle">Quick Links</h4>
                 <ul>
@@ -115,7 +89,6 @@ function homepage() {
                 </ul>
             </div>
 
-            <!-- Column 3: Discover -->
             <div class="footer-col">
                 <h4 data-key="footerDiscoverTitle">Discover</h4>
                 <ul>
@@ -127,7 +100,6 @@ function homepage() {
                 </ul>
             </div>
 
-            <!-- Column 4: Help -->
             <div class="footer-col">
                 <h4 data-key="footerHelpTitle">Help</h4>
                 <ul>
@@ -139,8 +111,7 @@ function homepage() {
             </div>
         </div>
         
-        <!-- Bottom Bar -->
-        <div class="footer-bottom">
+                <div class="footer-bottom">
             <div>
                 <p data-lang="footerCopyright">حقوق النشر © 2025 Book Worms | تم التطوير بواسطة Book Worms</p>
             </div>
@@ -152,15 +123,18 @@ function homepage() {
                 <div class="payment-icon">G Pay</div>
             </div>
             <div class="social-icons">
-                <button class="social-btn" aria-label="Mobile App">📱</button>
-                <button class="social-btn" aria-label="Facebook">📘</button>
-                <button class="social-btn" aria-label="Twitter">🐦</button>
-                <button class="social-btn" aria-label="Instagram">📸</button>
-                <button class="social-btn" aria-label="YouTube">▶️</button>
+                <div class="social-icon">f</div>
+                <div class="social-icon">🐦</div>
+                <div class="social-icon">📷</div>
             </div>
         </div>
     </footer>
-
 </body>
-
 </html>
+
+
+
+
+
+
+
