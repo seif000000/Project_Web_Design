@@ -4,49 +4,82 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title id="page-title">Books</title>
+    <title id="page-title">تسجيل الدخول</title>
     <link rel="stylesheet" href="../Books/books.css" />
-    <!-- ahmyd css file -->
-  <link rel="stylesheet" href="Also-Ahmyd.css" />
+    <link rel="stylesheet" href="Also-Ahmyd.css" />
 </head>
 
 <body>
-    <div id="include-navbar"></div>
-    <button id="theme-toggle">🌙 الوضع الليلي</button>
+    <!-- Theme Toggle Button -->
+    <button id="theme-toggle" class="theme-btn">
+        <span id="sun-icon">☀️</span>
+        <span id="moon-icon" style="display:none;">🌙</span>
+    </button>
+
     <div class="input-carrier">
         <img src="../image/book_image.jpg" alt="Book Image">
         <br><br><br>
         <form id="login-form">
-
             <label for="email">البريد الالكتروني</label>
             <input type="email" id="email" name="email" placeholder="البريد الالكتروني" required />
-
-
 
             <label for="password">كلمة المرور</label>
             <input type="password" id="password" name="password" placeholder="••••••••" required />
 
             <button type="submit">تسجيل الدخول</button>
-
         </form>
+        
+        <p style="margin-top: 1rem;">
+            ليس لديك حساب؟ <a href="register.html" style="color: var(--accent);">سجل الآن</a>
+        </p>
     </div>
+
+    <script>
+        // Dark Mode Toggle
+        const themeToggle = document.getElementById("theme-toggle");
+        const sunIcon = document.getElementById("sun-icon");
+        const moonIcon = document.getElementById("moon-icon");
+        const root = document.documentElement;
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem("theme") || "light";
+        if (savedTheme === "dark") {
+            root.classList.add("dark-mode");
+            sunIcon.style.display = "none";
+            moonIcon.style.display = "inline";
+        }
+
+        // Toggle theme
+        themeToggle.addEventListener("click", () => {
+            root.classList.toggle("dark-mode");
+            const isDark = root.classList.contains("dark-mode");
+            
+            if (isDark) {
+                sunIcon.style.display = "none";
+                moonIcon.style.display = "inline";
+                localStorage.setItem("theme", "dark");
+            } else {
+                sunIcon.style.display = "inline";
+                moonIcon.style.display = "none";
+                localStorage.setItem("theme", "light");
+            }
+        });
+
+        // Login Form
+        document.getElementById("login-form").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value.trim();
+            const password = document.getElementById("password").value.trim();
+
+            // Store in localStorage
+            localStorage.setItem("email", email);
+            localStorage.setItem("username", email.split('@')[0]); 
+
+            // Redirect
+            window.location.href = "../Books/books.html";
+        });
+    </script>
 </body>
-<script>
-document.getElementById("login-form").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value.trim();
-
-  // Store in localStorage
-  localStorage.setItem("email", email);
-  localStorage.setItem("username", email.split('@')[0]); 
-  // Redirect
-  window.location.href = "../Books/books.html";
-});
-
-
-</script>
-
 
 </html>
