@@ -1,578 +1,308 @@
-
+/* =========================================
+   Root Variables
+   ========================================= */
 :root {
   --bg-color: linear-gradient(to bottom, #F5E6D3, #EDE3D5);
-  --navbar-bg: #FFFFFF; /* New variable for navbar background */
-  --card-bg: #FFFFFF;
+  --navbar-bg: #ffffff;
+  --card-bg: #ffffff;
   --text-color: #2d2d2d;
-  --muted: #5C5C5C;      
-  --accent: #FDB750;     
-  --accent-hover: #E0A840;
+  --muted: #5c5c5c;
+  --accent: #fdb750;
+  --accent-hover: #e0a840;
   --page-title-color: #2d2d2d;
   --category-hover-text-color: #2d2d2d;
   --icon-color: var(--text-color);
-  --badge-color: #FFFFFF;
-  --badge-bg: #FF3B30; 
+  --badge-color: #ffffff;
+  --badge-bg: #ff3b30;
 }
 
-
 :root.dark-mode {
-  /* Dark Mode Variables */
-  --bg-color: linear-gradient(to bottom, #F5E6D3, #000000);
+  --bg-color: linear-gradient(to bottom, #111, #000);
   --navbar-bg: #2d2d2d;
   --card-bg: #2d2d2d;
-  --text-color: #FFFFFF;
-  --muted: #A0A0A0;
-  --accent: #FDB750;
-  --accent-hover: #E0A840;
-  --page-title-color: #FFFFFF;
+  --text-color: #ffffff;
+  --muted: #bbbbbb;
+  --accent: #fdb750;
+  --accent-hover: #e0a840;
+  --page-title-color: #ffffff;
   --category-hover-text-color: #2d2d2d;
 }
 
+/* =========================================
+   General Styles
+   ========================================= */
 body {
   font-family: "Poppins", system-ui, sans-serif;
   background: var(--bg-color);
   margin: 0;
-  color: var(--page-title-color); 
+  color: var(--page-title-color);
   transition: background 0.5s, color 0.5s;
-  direction: ltr; 
-  text-align: left;
 }
 
 body.rtl {
-    direction: rtl; 
-    text-align: right; 
+  direction: rtl;
 }
 
-.new-arrivals-container { 
+/* =========================================
+   Books Layout
+   ========================================= */
+.new-arrivals-container {
   max-width: 1200px;
-  margin: 40px auto;
+  margin: 30px auto;
   padding: 0 16px;
-  width: 100%;
-}
-
-#theme-toggle, #lang-toggle {
-    padding: 10px 16px;
-    border-radius: 25px;
-    border: none;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.3s, transform 0.3s;
-    background: var(--accent);
-    color: var(--category-hover-text-color);
-    margin: 0 5px 20px 5px; 
-    display: inline-block;
-}
-
-#theme-toggle:hover, #lang-toggle:hover {
-    background: var(--accent-hover);
-    transform: scale(1.05);
 }
 
 .page-title {
-  display: block;
-  width: fit-content;
-  background-color: var(--accent);
+  display: inline-block;
+  background: var(--accent);
   color: var(--category-hover-text-color);
-  padding: 0.5rem 1rem;
-  border-radius: 25px;
-  margin: 0 auto 50px auto;
-  text-align: center;
+  padding: 12px 28px;
+  margin: 0 auto 40px auto;
   font-size: 1.8rem;
-  font-weight: 700;
+  border-radius: 40px;
   box-shadow: 0 6px 15px rgba(253, 183, 80, 0.6);
 }
 
-.no-books-message {
-    text-align: center;
-    color: var(--muted);
-    font-size: 1.3em;
-    padding: 80px 0;
-}
-
-.books-grid { 
+.books-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 24px;
-  justify-items: center;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 22px;
 }
 
-.book-card { 
-  width: 100%;
-  max-width: 340px;
+.book-card {
   background: var(--card-bg);
-  border-radius: 20px;
+  border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.1), 0px 2px 4px rgba(0, 0, 0, 0.05);
-  transition: transform 1s ease-in-out, opacity 0.6s ease-in-out, box-shadow 0.3s, background 0.5s;
-  cursor: pointer;
-  z-index: 10;
-  display: flex; 
-  flex-direction: column;
+  transition: 0.4s ease-in-out;
+  box-shadow: 0 8px 18px rgba(0,0,0,0.12);
 }
 
-.book-card:hover { 
-    transform: scale(1.04) rotateX(40deg) ;
-    box-shadow: 0px 18px 30px rgba(0, 0, 0, 0.4), 0px 4px 8px rgba(0, 0, 0, 0.2);
+.book-card:hover {
+  transform: scale(1.04);
+  box-shadow: 0 18px 35px rgba(0,0,0,0.3);
 }
 
-.book-cover { 
+.book-cover {
   width: 100%;
-  height: 250px;
-  object-fit: fill;
-  display: block;
+  height: 260px;
+  object-fit: cover;
 }
 
-.book-details-content { 
-  padding: 20px;
-  text-align: right;
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-
-.book-details-content { 
-    text-align: left; 
-}
-
-body.rtl .book-details-content {
-    text-align: right;
+.book-details-content {
+  padding: 18px;
 }
 
 .book-details-content h3 {
-  font-size: 1.5em;
-  margin-bottom: 10px;
-  color: var(--accent); 
+  color: var(--accent);
+  margin: 0 0 8px;
 }
 
 .book-details-content p {
-  margin: 0 0 5px;
   color: var(--muted);
-  font-size: 1em;
-  line-height: 1.4;
+  margin: 0 0 4px;
 }
 
-.book-actions { /* الفئة المستخدمة في HTML */
+.book-actions {
   display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 15px;
+  gap: 8px;
+  margin-top: 12px;
 }
 
-.btn { /* الفئة المستخدمة في HTML */
-  width: 100%;
-  padding: 8px 14px;
-  border-radius: 10px;
+.btn {
+  flex: 1;
+  padding: 10px;
   border: none;
-  cursor: pointer;
+  border-radius: 10px;
   background: var(--accent);
   color: var(--category-hover-text-color);
   font-weight: 600;
-  transition: background 0.3s, transform 0.3s;
 }
 
 .btn:hover {
   background: var(--accent-hover);
-  transform: scale(1.03);
 }
 
+/* =========================================
+   Navbar
+   ========================================= */
 .navbar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            background-color: var(--navbar-bg);
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-            transition: background-color 0.5s;
-            flex-wrap: wrap;
-        }
-
-        /* --- UPDATED: Increased Logo/Branding Size --- */
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 15px; /* Increased gap */
-        }
-
-        .logo a.logo-icon {
-            /* Styles for the "Books" button/icon look in the image */
-            font-weight: 700;
-            background: var(--accent);
-            color: white;
-            padding: 8px 15px;
-            border-radius: 15px;
-            text-decoration: none;
-            line-height: 1;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s;
-            flex-shrink: 0;
-        }
-
-        .logo span {
-            /* Styles for the "Book Worms" text */
-            font-size: 1.8rem; 
-            font-weight: 700;
-            color: var(--page-title-color);
-            white-space: nowrap;
-            transition: color 0.5s;
-            cursor: pointer;
-        }
-        
-        /* Ensure the logo's elements inherit the body direction for proper layout on AR */
-        body[dir="rtl"] .logo {
-            flex-direction: row-reverse;
-        }
-
-        body[dir="rtl"] .navbar .nav-center {
-            flex-direction: row-reverse;
-        }
-        
-        /* --- END Logo Update --- */
-
-        .nav-section {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .nav-center {
-            flex-grow: 1;
-            justify-content: center;
-            padding: 5px 0;
-            min-width: 250px;
-        }
-
-        /* Main Navigation Links */
-        .nav-link {
-            color: var(--muted);
-            font-weight: 500;
-            text-decoration: none;
-            padding: 5px 10px;
-            border-radius: 8px;
-            transition: color 0.3s, background-color 0.3s;
-            white-space: nowrap;
-        }
-
-        .nav-link:hover {
-            color: var(--accent);
-            background-color: rgba(253, 183, 80, 0.1);
-        }
-        
-        /* Icon Buttons (Theme, Cart, Profile) */
-        .nav-icon-btn {
-            background: var(--card-bg);
-            border: none;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
-            position: relative;
-            color: var(--text-color); 
-            font-size: 1.2rem;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            flex-shrink: 0;
-        }
-        
-        .nav-icon-btn:hover {
-            transform: translateY(-1px);
-            background: var(--search-border);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        .theme-icon {
-            width: 20px;
-            height: 20px;
-            stroke: var(--text-color); 
-            fill: none; 
-            transition: stroke 0.5s;
-        }
-        
-        :root.dark-mode .theme-icon {
-            stroke: var(--text-color);
-        }
-
-        /* Cart Badge */
-        .cart-badge {
-            position: absolute;
-            top: -5px;
-            right: -5px;
-            background-color: var(--badge-bg);
-            color: var(--badge-color);
-            border-radius: 50%;
-            padding: 2px 5px;
-            font-size: 0.7rem;
-            font-weight: bold;
-            line-height: 1;
-            z-index: 10;
-        }
-
-        /* Single Language Button Style */
-        #language-toggle-btn {
-            padding: 8px 18px;
-            font-size: 0.95rem;
-            font-weight: 600;
-            background: var(--card-bg);
-            border: 2px solid var(--accent);
-            border-radius: 10px;
-            color: var(--category-text-color);
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        #language-toggle-btn:hover {
-            background: var(--accent);
-            color: var(--category-hover-text-color);
-            box-shadow: 0 4px 8px rgba(253, 183, 80, 0.4);
-        }
-
-        :root.dark-mode #language-toggle-btn {
-            background: var(--card-bg);
-            color: var(--text-color);
-        }
-
-        :root.dark-mode #language-toggle-btn:hover {
-            background: var(--accent);
-            color: var(--category-hover-text-color);
-        }
-
-
-        #main-footer {
-            background-color: #000; /* Always black as per the image */
-            color: #fff;
-            padding: 40px 16px 20px;
-            margin-top: 50px;
-            font-size: 0.95rem;
-            box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.2);
-            transition: all 0.3s;
-        }
-
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            padding-bottom: 30px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .footer-col {
-            text-align: left; 
-        }
-
-        #main-footer.rtl .footer-col {
-            text-align: right; 
-        }
-        
-        .footer-logo .logo .logo-icon, 
-        .footer-logo .logo a.logo-icon {
-            font-size: 1.8rem;
-            padding: 5px 10px;
-            background: #fff;
-            color: #000;
-            box-shadow: none;
-        }
-        
-        .footer-logo .logo span[data-key="siteName"] {
-            color: #fff;
-            font-size: 1.8rem;
-            font-weight: 600;
-        }
-
-
-        .footer-col h4 {
-            color: var(--accent); 
-            font-weight: 700;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .footer-col ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 10px;
-        }
-
-        .footer-col ul li a {
-            color: #aaa;
-            text-decoration: none;
-            transition: color 0.2s;
-        }
-
-        .footer-col ul li a:hover {
-            color: var(--accent);
-        }
-
-        /* Footer Bottom Section (Social/Copyright) */
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 20px auto 0;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            padding-top: 10px;
-        }
-
-        .footer-bottom .copyright {
-            color: #aaa;
-            margin: 10px 0;
-            font-size: 0.85rem;
-            text-align: right;
-            order: 2;
-        }
-        
-        /* Alignment fixes for RTL in the footer bottom */
-        #main-footer.rtl .footer-bottom {
-            flex-direction: row-reverse;
-        }
-        
-        #main-footer.rtl .footer-bottom .copyright {
-            text-align: left;
-        }
-        
-        .social-icons {
-            display: flex;
-            gap: 10px;
-            order: 1;
-        }
-
-        .social-btn {
-            background: transparent;
-            border: 2px solid #555;
-            color: #fff;
-            width: 38px;
-            height: 38px;
-            border-radius: 8px;
-            font-size: 1.2rem;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-.social-btn:hover {
-    border-color: var(--accent);
-    color: var(--accent);
+  display: flex;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: var(--navbar-bg);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  flex-wrap: wrap;
 }
 
-.payment-icons {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+.logo {
+  display: flex;
+  gap: 12px;
+  align-items: center;
 }
-.payment-icon {
-    width: 45px;
-    height: 30px;
-    background: white;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
+
+.logo-icon {
+  background: var(--accent);
+  padding: 8px 16px;
+  border-radius: 14px;
+  color: #fff;
+  font-weight: 700;
+}
+
+.logo span {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--page-title-color);
+}
+
+.nav-section {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  color: var(--muted);
+  padding: 6px 10px;
+  border-radius: 8px;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  background: rgba(253, 183, 80, 0.15);
+  color: var(--accent);
+}
+
+.nav-icon-btn {
+  width: 40px;
+  height: 40px;
+  background: var(--card-bg);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--text-color);
+  border: none;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  background: var(--badge-bg);
+  color: #fff;
+  font-size: 0.75rem;
+  padding: 3px 6px;
+  border-radius: 50%;
+}
+
+/* =========================================
+   Footer
+   ========================================= */
+#main-footer {
+  background: #000;
+  color: #fff;
+  padding: 40px 16px;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+.footer-col h4 {
+  color: var(--accent);
+}
+
+.footer-col ul {
+  padding: 0;
+  list-style: none;
+}
+
+.footer-col ul li a {
+  color: #bbb;
+  text-decoration: none;
+}
+
+.footer-col ul li a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 25px auto 0;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.social-icons {
+  display: flex;
+  gap: 10px;
+}
+
+.social-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 8px;
+  border: 2px solid #555;
+  background: transparent;
+  color: #fff;
+}
+
+/* =========================================
+   RESPONSIVE BREAKPOINTS
+   ========================================= */
+
+/* Tablets */
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+
+  .nav-center {
+    width: 100%;
     justify-content: center;
-    font-size: 0.7rem;
-    font-weight: bold;
+    margin-top: 12px;
+  }
 }
 
-        /* =========================================================================
-            Responsive Design
-            ========================================================================= */
-        @media (min-width: 800px) {
-            .contact-layout {
-                grid-template-columns: 2fr 1fr;
-            }
-        }
-        
-        @media (max-width: 900px) {
-            .nav-section {
-                gap: 10px;
-            }
-            .nav-center {
-                order: 3;
-                flex-basis: 100%;
-                justify-content: space-around;
-            }
-            
-            /* Footer Responsive */
-            .footer-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            .footer-logo {
-                grid-column: span 2;
-                text-align: center;
-                /* Center the logo itself */
-                display: flex;
-                justify-content: center;
-            }
-            .footer-bottom {
-                flex-direction: column;
-                align-items: center;
-            }
-            .social-icons {
-                order: 2;
-                margin-top: 15px;
-            }
-            .footer-bottom .copyright {
-                order: 1;
-                text-align: center;
-            }
-            #main-footer.rtl .footer-bottom {
-                flex-direction: column; /* override row-reverse */
-            }
-        }
+/* Mobile */
+@media (max-width: 600px) {
 
-        @media (max-width: 550px) {
-            .footer-container {
-                grid-template-columns: 1fr;
-            }
-            .footer-logo {
-                grid-column: span 1;
-            }
-            .footer-col {
-                text-align: center; /* Center align all columns on small screens */
-            }
-            #main-footer.rtl .footer-col {
-                text-align: center;
-            }
-        }
-        
-        @media (max-width: 520px) {
-            .container {
-                padding: 0 10px;
-                margin: 20px auto;
-            }
-            .navbar {
-                padding: 10px 10px;
-                gap: 10px;
-                justify-content: space-around;
-            }
-            .nav-section {
-                gap: 8px;
-            }
-            .navbar-logo-btn {
-                font-size: 1.2rem;
-                padding: 0.4rem 0.8rem;
-            }
-            .nav-logo-text {
-                display: none; 
-            }
-            .nav-center {
-                padding-top: 10px;
-            }
-            .nav-link {
-                font-size: 0.85rem;
-            }
-        }
- 
+  .navbar {
+    justify-content: center;
+    gap: 10px;
+    text-align: center;
+  }
 
+  .logo span {
+    display: none; /* يقلل طول الـnavbar */
+  }
+
+  .books-grid {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  }
+
+  .book-cover {
+    height: 220px;
+  }
+
+  .footer-container {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+}
