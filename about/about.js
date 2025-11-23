@@ -200,3 +200,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
     loadTranslations();
 });
+function toggleDarkMode() {
+    document.body.classList.toggle("dark");
+
+    // حفظ الوضع في localStorage
+    if (document.body.classList.contains("dark")) {
+        localStorage.setItem("theme", "dark");
+        document.getElementById("darkBtn").textContent = "☀️";
+    } else {
+        localStorage.setItem("theme", "light");
+        document.getElementById("darkBtn").textContent = "🌙";
+    }
+}
+
+// تشغيل الدارك مود تلقائياً لو محفوظ
+window.onload = () => {
+    if (localStorage.getItem("theme") === "dark") {
+        document.body.classList.add("dark");
+        document.getElementById("darkBtn").textContent = "☀️";
+    }
+};

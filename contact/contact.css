@@ -490,7 +490,7 @@
     transition: all 0.3s;
 }
 
-social-btn:hover {
+.social-btn:hover {
     border-color: var(--accent);
     color: var(--accent);
 }

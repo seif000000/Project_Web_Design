@@ -546,3 +546,103 @@ body {
         font-size: 2rem;
     }
 }
+/* ============================================
+   DARK MODE
+   ============================================ */
+
+body.dark {
+    background: #121212;
+    color: #eee;
+}
+
+/* Navbar */
+body.dark .navbar {
+    background: #1e1e1e;
+    box-shadow: 0 2px 15px rgba(255,255,255,0.05);
+}
+
+body.dark .logo,
+body.dark #logoText {
+    color: white;
+}
+
+/* Buttons */
+body.dark .lang-btn {
+    background: #333;
+    color: white;
+}
+body.dark .lang-btn:hover {
+    box-shadow: 0 5px 15px rgba(255,255,255,0.1);
+}
+
+/* Hero Section */
+body.dark .hero-about {
+    background: linear-gradient(135deg, #5d410f, #c4871f);
+}
+body.dark .hero-about h1,
+body.dark .hero-about p {
+    color: white;
+}
+
+/* Story Section */
+body.dark .story-section {
+    background: #1a1a1a;
+}
+body.dark .story-content h2 {
+    color: #fff;
+}
+body.dark .story-content p {
+    color: #bbb;
+}
+
+/* Team Section */
+body.dark .team-section {
+    background: #121212;
+}
+body.dark .team-card {
+    background: #1f1f1f;
+}
+body.dark .team-info h3 {
+    color: white;
+}
+body.dark .team-info p {
+    color: #ccc;
+}
+
+/* Values Section */
+body.dark .values-section {
+    background: #1a1a1a;
+}
+body.dark .value-card {
+    background: #222;
+}
+body.dark .value-card:hover {
+    background: #c4871f;
+}
+body.dark .value-card h3 {
+    color: white;
+}
+body.dark .value-card p {
+    color: #ccc;
+}
+
+/* Footer */
+body.dark .footer {
+    background: #000;
+    color: #ddd;
+}
+body.dark .footer h4 {
+    color: var(--primary);
+}
+body.dark .footer ul li a {
+    color: #bbb;
+}
+body.dark .footer ul li a:hover {
+    color: var(--primary);
+}
+body.dark .social-icon {
+    border-color: #ccc;
+}
+body.dark .social-icon:hover {
+    background: var(--primary);
+}
