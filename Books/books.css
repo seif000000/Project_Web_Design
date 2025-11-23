@@ -317,7 +317,7 @@ body[dir="rtl"] .navbar .nav-center {
 }
 
 .card:hover {
-  transform: scale(1.04) rotateX(30deg);
+  transform: scale(1.04);
   box-shadow: 0px 18px 30px rgba(0, 0, 0, 0.4), 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
