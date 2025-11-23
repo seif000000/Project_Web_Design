@@ -764,3 +764,140 @@ body {
         height: 250px;
     }
 }
+/* ============================================
+   DARK MODE STYLES
+   ============================================ */
+
+/* Dark Mode Variables */
+:root.dark-mode {
+    --bg-color: linear-gradient(to bottom, #1a1a1a, #2d2d2d);
+    --navbar-bg: #2d2d2d;
+    --card-bg: #3a3a3a;
+    --text-color: #e0e0e0;
+    --muted: #b0b0b0;
+    --accent: #FDB750;
+    --accent-hover: #E0A840;
+    --page-title-color: #ffffff;
+    --category-hover-text-color: #ffffff;
+    --icon-color: #e0e0e0;
+    --badge-color: #FFFFFF;
+    --badge-bg: #FF3B30;
+    --dark: #e0e0e0;
+    --text-dark: #e0e0e0;
+    --light-bg: #2d2d2d;
+}
+
+/* Body Dark Mode */
+body.dark-mode {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Navbar Dark Mode */
+.dark-mode .navbar {
+    background-color: var(--navbar-bg);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.dark-mode .logo span {
+    color: var(--page-title-color);
+}
+
+.dark-mode .nav-link {
+    color: var(--muted);
+}
+
+.dark-mode .nav-link:hover {
+    color: var(--accent);
+    background-color: rgba(253, 183, 80, 0.2);
+}
+
+.dark-mode .nav-icon-btn {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+.dark-mode .nav-icon-btn:hover {
+    background: #4a4a4a;
+}
+
+/* Hero Section Dark Mode */
+.dark-mode .hero {
+    background: var(--light-bg);
+}
+
+.dark-mode .hero-content h1,
+.dark-mode .hero-content h3 {
+    color: var(--text-color);
+}
+
+.dark-mode .hero-content p {
+    color: var(--muted);
+}
+
+.dark-mode .arrow {
+    background: var(--card-bg);
+    color: var(--text-color);
+}
+
+/* Categories Section Dark Mode */
+.dark-mode .categories {
+    background: #1a1a1a;
+}
+
+.dark-mode .section-title {
+    color: var(--page-title-color);
+}
+
+.dark-mode .category-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+}
+
+/* Features Section Dark Mode */
+.dark-mode .features {
+    background: var(--light-bg);
+}
+
+.dark-mode .feature-item h3 {
+    color: var(--text-color);
+}
+
+.dark-mode .feature-item p {
+    color: var(--muted);
+}
+
+/* Partner Section Dark Mode */
+.dark-mode .partner {
+    background: #1a1a1a;
+}
+
+.dark-mode .partner-content h2,
+.dark-mode .partner-content h3 {
+    color: var(--text-color);
+}
+
+.dark-mode .partner-content p {
+    color: var(--muted);
+}
+
+/* Footer Dark Mode (يبقى أسود) */
+.dark-mode .footer {
+    background: #000000;
+}
+
+.dark-mode .footer-logo span {
+    color: var(--primary);
+}
+
+/* Smooth transitions for dark mode */
+body,
+.navbar,
+.hero,
+.categories,
+.features,
+.partner,
+.nav-icon-btn,
+.arrow,
+h1, h2, h3, h4, p, span {
+    transition: background-color 0.3s ease, color 0.3s ease, background 0.3s ease;
+}

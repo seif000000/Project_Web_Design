@@ -7,7 +7,6 @@
   <title id="page-title">Books</title>
   <link rel="stylesheet" href="books.css"/>
   <link rel="stylesheet" href="../style.css" />
-  
 </head>
 
 <body>
@@ -33,69 +32,58 @@
                 <span id="moon-icon" role="img" style="display:none;">🌙</span>
             </button>
             
-<a href="../Checkout/checkout.html" class="nav-cart-link" aria-label="Go to Cart">
-    <button class="nav-icon-btn nav-cart-btn">
-        
-        <span role="img" class="cart-emoji">🛒</span>
-        
-        <span class="cart-count" id="cart-count">0</span>
-        
-    </button>
-</a>
+            <a href="../Checkout/checkout.html" class="nav-cart-link" aria-label="Go to Cart">
+                <button class="nav-icon-btn nav-cart-btn">
+                    <span role="img" class="cart-emoji">🛒</span>
+                    <span class="cart-count" id="cart-count">0</span>
+                </button>
+            </a>
             <a href="../personal/register.html" class="user-icon">👤</a>
         </div>
     </nav>
 
-  
-  <div id="include-navbar"></div>
-  <main class="container">
+    <div id="include-navbar"></div>
+    <main class="container">
+        <div id="categories" class="categories"></div>
+        
+        <!-- Ahmyd search bar -->
+        <div id="search-block">
+            <button id="search-button">Search</button>
+            <input type="search" id="get-books" placeholder="Use: category:Fantasy, author:Tolkien, writer:Austen">
+        </div>
 
-    <div id="categories" class="categories"></div>
-  
+        <div id="cards-container" class="cards-grid"></div>
+
+        <div class="pagination" id="pagination">
+            <button id="prevBtn" class="btn">السابق</button>
+            <span id="pageInfo"></span>
+            <button id="nextBtn" class="btn">التالي</button>
+        </div>
+    </main>
+
+    <div id="include-footer"></div>
+
+    <script src="booksData.js"></script>
+    <script src="books.js"></script>
+    <script src="ahmyd.js"></script>
+    <script src="lang.js"></script>
+    <script>
+        // go to the details
+        function openDetails(id) {
+            window.location.href = `../Project_Web_Design-raneem-branch/index.html?id=${id}`;
+        }
+
+        function openPreview(id) {
+            window.location.href = `../Summary/summary.html?id=${id}`;
+        }
+
+        function homepage() {
+            window.location.href = "../index.html"; 
+        }
+    </script>
     
-    <!-- Ahmyd search bar -->
-
-    <div id="search-block">
-      <button id="search-button" onclick="getBook()">Search</button>
-      <input type="search" id="get-books" placeholder="Use: category:Fantasy, author:Tolkien, writer:Austen ">
-
-    </div>
-
-
-    <div id="cards-container" class="cards-grid"></div>
-
-    <div class="pagination" id="pagination">
-      <button id="prevBtn" class="btn">السابق</button>
-      <span id="pageInfo"></span>
-      <button id="nextBtn" class="btn">التالي</button>
-    </div>
-
-  </main>
-
-  <div id="include-footer"></div>
-
-  <script src="booksData.js"></script>
-  <script src="books.js"></script>
-  <!-- import ahmyd js  -->
-  <script src="ahmyd.js"></script>
-  <script src="lang.js"></script>
-  <script>
-
-    // go to the details
-   function openDetails(id) {
-    window.location.href = `../Project_Web_Design-raneem-branch/index.html?id=${id}`;
-}
-
-    function openPreview(id) {
-      window.location.href = `../Summary/summary.html?id=${id}`;
-    }
-function homepage() {
-        window.location.href = "../index.html"; 
-    }
-  </script>
     <footer id="main-footer">
         <div class="footer-container">
-            
             <!-- Column 1: Logo/Branding -->
             <div class="footer-col footer-logo">
                 <div class="logo">
