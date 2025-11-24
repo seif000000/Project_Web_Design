@@ -4,34 +4,288 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>تسجيل مستخدم جديد</title>
-    <link rel="stylesheet" href="../Books/books.css" />
-    <!-- ahmyd css file -->
+  <link rel="stylesheet" href="../Books/books.css" />
   <link rel="stylesheet" href="Also-Ahmyd.css" />
+  <style>
+    .form-group {
+      margin-bottom: 1rem;
+      position: relative;
+    }
+    .error-message {
+      color: #ef4444;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      display: block;
+      font-weight: bold;
+      background-color: rgba(239, 68, 68, 0.1);
+      padding: 0.5rem;
+      border-radius: 4px;
+      border-left: 3px solid #ef4444;
+    }
+    input.error {
+      border-color: #ef4444 !important;
+      border-width: 2px;
+    }
+    .success-message {
+      color: #10b981;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      display: block;
+    }
+  </style>
 </head>
 <body>
   <div class="input-carrier">
     <h1>إنشاء حساب جديد</h1>
     <form id="register-form">
-      <label for="username">اسم المستخدم</label>
-      <input type="text" id="username" name="username" placeholder="أدخل اسمك" required />
+      <div class="form-group">
+        <label for="username">اسم المستخدم</label>
+        <input type="text" id="username" name="username" placeholder="أدخل اسمك" />
+      </div>
 
-      <label for="email">البريد الإلكتروني</label>
-      <input type="email" id="email" name="email" placeholder="أدخل بريدك" required />
+      <div class="form-group">
+        <label for="email">البريد الإلكتروني</label>
+        <input type="email" id="email" name="email" placeholder="أدخل بريدك" />
+      </div>
 
-      <label for="password">كلمة المرور</label>
-      <input type="password" id="password" name="password" placeholder="••••••••" required />
+      <div class="form-group">
+        <label for="password">كلمة المرور</label>
+        <input type="password" id="password" name="password" placeholder="••••••••" />
+      </div>
 
-      <label for="confirm-password">تأكيد كلمة المرور</label>
-      <input type="password" id="confirm-password" name="confirm-password" placeholder="••••••••" required />
+      <div class="form-group">
+        <label for="confirm-password">تأكيد كلمة المرور</label>
+        <input type="password" id="confirm-password" name="confirm-password" placeholder="••••••••" />
+      </div>
 
       <button type="submit">إنشاء الحساب</button>
     </form>
+    
+    <p style="margin-top: 1rem;">
+      لديك حساب بالفعل؟ <a href="login.html" style="color: var(--accent);">سجل دخول</a>
+    </p>
   </div>
 
   <script>
+    // Validation Functions
+    function validateUsername(username) {
+      const usernameRegex = /^[a-zA-Z0-9_\u0600-\u06FF]{3,}$/;
+      return usernameRegex.test(username);
+    }
+
+    function validateEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function validatePassword(password) {
+      if (password.length < 8) {
+        return { valid: false, message: '⚠️ كلمة المرور يجب أن تكون 8 أحرف على الأقل' };
+      }
+      if (!/[a-zA-Z]/.test(password)) {
+        return { valid: false, message: '⚠️ كلمة المرور يجب أن تحتوي على حرف واحد على الأقل' };
+      }
+      if (!/[0-9]/.test(password)) {
+        return { valid: false, message: '⚠️ كلمة المرور يجب أن تحتوي على رقم واحد على الأقل' };
+      }
+      return { valid: true };
+    }
+
+    function showError(inputId, message) {
+      const input = document.getElementById(inputId);
+      const formGroup = input.closest('.form-group');
+      
+      // Remove any existing error
+      const existingError = formGroup.querySelector('.error-message');
+      if (existingError) {
+        existingError.remove();
+      }
+      
+      // Add error styling to input
+      input.classList.add('error');
+      
+      // Create and show error message
+      const errorDiv = document.createElement('div');
+      errorDiv.className = 'error-message';
+      errorDiv.textContent = message;
+      formGroup.appendChild(errorDiv);
+    }
+
+    function clearError(inputId) {
+      const input = document.getElementById(inputId);
+      const formGroup = input.closest('.form-group');
+      
+      const existingError = formGroup.querySelector('.error-message');
+      if (existingError) {
+        existingError.remove();
+      }
+      input.classList.remove('error');
+    }
+
+    // Get form inputs
+    const usernameInput = document.getElementById("username");
+    const emailInput = document.getElementById("email");
+    const passwordInput = document.getElementById("password");
+    const confirmPasswordInput = document.getElementById("confirm-password");
+
+    // Real-time validation for username
+    usernameInput.addEventListener('blur', () => {
+      const username = usernameInput.value.trim();
+      if (username === '') {
+        showError('username', '⚠️ اسم المستخدم مطلوب');
+      } else if (!validateUsername(username)) {
+        showError('username', '⚠️ اسم المستخدم يجب أن يكون 3 أحرف على الأقل');
+      } else {
+        clearError('username');
+      }
+    });
+
+    usernameInput.addEventListener('input', () => {
+      if (usernameInput.value.trim() !== '') {
+        clearError('username');
+      }
+    });
+
+    // Real-time validation for email
+    emailInput.addEventListener('blur', () => {
+      const email = emailInput.value.trim();
+      if (email === '') {
+        showError('email', '⚠️ البريد الإلكتروني مطلوب');
+      } else if (!validateEmail(email)) {
+        showError('email', '⚠️ من فضلك أدخل بريد إلكتروني صحيح');
+      } else {
+        clearError('email');
+      }
+    });
+
+    emailInput.addEventListener('input', () => {
+      if (emailInput.value.trim() !== '') {
+        clearError('email');
+      }
+    });
+
+    // Real-time validation for password
+    passwordInput.addEventListener('blur', () => {
+      const password = passwordInput.value.trim();
+      if (password === '') {
+        showError('password', '⚠️ كلمة المرور مطلوبة');
+      } else {
+        const validation = validatePassword(password);
+        if (!validation.valid) {
+          showError('password', validation.message);
+        } else {
+          clearError('password');
+        }
+      }
+    });
+
+    passwordInput.addEventListener('input', () => {
+      const password = passwordInput.value.trim();
+      if (password !== '') {
+        clearError('password');
+        // Re-validate confirm password if it has value
+        if (confirmPasswordInput.value.trim() !== '') {
+          if (passwordInput.value !== confirmPasswordInput.value) {
+            showError('confirm-password', '⚠️ كلمة المرور غير متطابقة');
+          } else {
+            clearError('confirm-password');
+          }
+        }
+      }
+    });
+
+    // Real-time validation for confirm password
+    confirmPasswordInput.addEventListener('blur', () => {
+      const password = passwordInput.value.trim();
+      const confirmPassword = confirmPasswordInput.value.trim();
+      
+      if (confirmPassword === '') {
+        showError('confirm-password', '⚠️ تأكيد كلمة المرور مطلوب');
+      } else if (password !== confirmPassword) {
+        showError('confirm-password', '⚠️ كلمة المرور غير متطابقة');
+      } else {
+        clearError('confirm-password');
+      }
+    });
+
+    confirmPasswordInput.addEventListener('input', () => {
+      if (confirmPasswordInput.value.trim() !== '') {
+        if (passwordInput.value === confirmPasswordInput.value) {
+          clearError('confirm-password');
+        }
+      }
+    });
+
+    // Form submission
     document.getElementById("register-form").addEventListener("submit", function(e) {
-      e.preventDefault(); 
-      window.location.href = "profile.html"; 
+      e.preventDefault();
+      
+      const username = usernameInput.value.trim();
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+      const confirmPassword = confirmPasswordInput.value.trim();
+      
+      let isValid = true;
+      
+      // Validate username
+      if (username === '') {
+        showError('username', '⚠️ اسم المستخدم مطلوب');
+        isValid = false;
+      } else if (!validateUsername(username)) {
+        showError('username', '⚠️ اسم المستخدم يجب أن يكون 3 أحرف على الأقل');
+        isValid = false;
+      } else {
+        clearError('username');
+      }
+      
+      // Validate email
+      if (email === '') {
+        showError('email', '⚠️ البريد الإلكتروني مطلوب');
+        isValid = false;
+      } else if (!validateEmail(email)) {
+        showError('email', '⚠️ من فضلك أدخل بريد إلكتروني صحيح');
+        isValid = false;
+      } else {
+        clearError('email');
+      }
+      
+      // Validate password
+      if (password === '') {
+        showError('password', '⚠️ كلمة المرور مطلوبة');
+        isValid = false;
+      } else {
+        const validation = validatePassword(password);
+        if (!validation.valid) {
+          showError('password', validation.message);
+          isValid = false;
+        } else {
+          clearError('password');
+        }
+      }
+      
+      // Validate confirm password
+      if (confirmPassword === '') {
+        showError('confirm-password', '⚠️ تأكيد كلمة المرور مطلوب');
+        isValid = false;
+      } else if (password !== confirmPassword) {
+        showError('confirm-password', '⚠️ كلمة المرور غير متطابقة');
+        isValid = false;
+      } else {
+        clearError('confirm-password');
+      }
+      
+      // If all validations pass, proceed
+      if (isValid) {
+        // Store in memory instead of localStorage
+        sessionStorage.setItem("username", username);
+        sessionStorage.setItem("email", email);
+        
+        // Show success message
+        alert('✅ تم إنشاء الحساب بنجاح!');
+        
+        // Redirect to profile
+        window.location.href = "profile.html";
+      }
     });
   </script>
 </body>

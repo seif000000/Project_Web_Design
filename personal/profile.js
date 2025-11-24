@@ -56,8 +56,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("books-title").textContent = t.favorites;
   document.getElementById("logout-btn").textContent = t.logout;
 
-  const storedUsername = localStorage.getItem("username") || "";
-  const storedEmail = localStorage.getItem("email") || "";
+  // Use sessionStorage instead of localStorage
+  const storedUsername = sessionStorage.getItem("username") || "Guest";
+  const storedEmail = sessionStorage.getItem("email") || "guest@example.com";
   document.getElementById("display-username").textContent = `${t.username} : ${storedUsername}`;
   document.getElementById("display-email").textContent = `${t.email} : ${storedEmail}`;
 
@@ -79,17 +80,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // logout
   document.getElementById("logout-btn").addEventListener("click", () => {
+    // Clear session data
+    sessionStorage.clear();
     window.location.href = "login.html";
   });
 
-  // initialize
-  let currentLang = localStorage.getItem("translations") || "ar";
+  // initialize - use sessionStorage for language preference
+  let currentLang = sessionStorage.getItem("lang") || "ar";
   updateUI(currentLang);
 
   // toggle button
   document.getElementById("langBtn").addEventListener("click", () => {
     currentLang = currentLang === "ar" ? "en" : "ar";
-    localStorage.setItem("lang", currentLang);
+    sessionStorage.setItem("lang", currentLang);
     updateUI(currentLang);
   });
 
@@ -145,6 +148,5 @@ const emailDiv = document.getElementById('display-email');
 emailDiv.addEventListener('click', () => {
     alert("متعملش كده تاني");
     location.reload();
-}
-);
+});
 

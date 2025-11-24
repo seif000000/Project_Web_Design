@@ -35,50 +35,154 @@
     </div>
 
     <script>
-        // Dark Mode Toggle
-        const themeToggle = document.getElementById("theme-toggle");
-        const sunIcon = document.getElementById("sun-icon");
-        const moonIcon = document.getElementById("moon-icon");
-        const root = document.documentElement;
+// Dark Mode Toggle
+const themeToggle = document.getElementById("theme-toggle");
+const sunIcon = document.getElementById("sun-icon");
+const moonIcon = document.getElementById("moon-icon");
+const root = document.documentElement;
 
-        // Load saved theme
-        const savedTheme = localStorage.getItem("theme") || "light";
-        if (savedTheme === "dark") {
-            root.classList.add("dark-mode");
-            sunIcon.style.display = "none";
-            moonIcon.style.display = "inline";
-        }
+// Load saved theme
+const savedTheme = localStorage.getItem("theme") || "light";
+if (savedTheme === "dark") {
+    root.classList.add("dark-mode");
+    sunIcon.style.display = "none";
+    moonIcon.style.display = "inline";
+}
 
-        // Toggle theme
-        themeToggle.addEventListener("click", () => {
-            root.classList.toggle("dark-mode");
-            const isDark = root.classList.contains("dark-mode");
-            
-            if (isDark) {
-                sunIcon.style.display = "none";
-                moonIcon.style.display = "inline";
-                localStorage.setItem("theme", "dark");
-            } else {
-                sunIcon.style.display = "inline";
-                moonIcon.style.display = "none";
-                localStorage.setItem("theme", "light");
-            }
-        });
+// Toggle theme
+themeToggle.addEventListener("click", () => {
+    root.classList.toggle("dark-mode");
+    const isDark = root.classList.contains("dark-mode");
+    
+    if (isDark) {
+        sunIcon.style.display = "none";
+        moonIcon.style.display = "inline";
+        localStorage.setItem("theme", "dark");
+    } else {
+        sunIcon.style.display = "inline";
+        moonIcon.style.display = "none";
+        localStorage.setItem("theme", "light");
+    }
+});
 
-        // Login Form
-        document.getElementById("login-form").addEventListener("submit", function(e) {
-            e.preventDefault();
+// Validation Functions
+function validateEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
 
-            const email = document.getElementById("email").value.trim();
-            const password = document.getElementById("password").value.trim();
+function validatePassword(password) {
+    // Password must be at least 8 characters
+    return password.length >= 8;
+}
 
-            // Store in localStorage
-            localStorage.setItem("email", email);
-            localStorage.setItem("username", email.split('@')[0]); 
+function showError(input, message) {
+    // Remove any existing error
+    const existingError = input.parentElement.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+    
+    // Add error styling
+    input.style.borderColor = '#ef4444';
+    
+    // Create and show error message
+    const errorDiv = document.createElement('div');
+    errorDiv.className = 'error-message';
+    errorDiv.style.color = '#ef4444';
+    errorDiv.style.fontSize = '0.875rem';
+    errorDiv.style.marginTop = '0.25rem';
+    errorDiv.textContent = message;
+    input.parentElement.appendChild(errorDiv);
+}
 
-            // Redirect
-            window.location.href = "../Books/books.html";
-        });
+function clearError(input) {
+    const existingError = input.parentElement.querySelector('.error-message');
+    if (existingError) {
+        existingError.remove();
+    }
+    input.style.borderColor = '';
+}
+
+// Real-time validation
+const emailInput = document.getElementById("email");
+const passwordInput = document.getElementById("password");
+
+emailInput.addEventListener('blur', () => {
+    const email = emailInput.value.trim();
+    if (email === '') {
+        showError(emailInput, 'البريد الإلكتروني مطلوب');
+    } else if (!validateEmail(email)) {
+        showError(emailInput, 'من فضلك أدخل بريد إلكتروني صحيح');
+    } else {
+        clearError(emailInput);
+    }
+});
+
+emailInput.addEventListener('input', () => {
+    if (emailInput.value.trim() !== '') {
+        clearError(emailInput);
+    }
+});
+
+passwordInput.addEventListener('blur', () => {
+    const password = passwordInput.value.trim();
+    if (password === '') {
+        showError(passwordInput, 'كلمة المرور مطلوبة');
+    } else if (!validatePassword(password)) {
+        showError(passwordInput, 'كلمة المرور يجب أن تكون 8 أحرف على الأقل');
+    } else {
+        clearError(passwordInput);
+    }
+});
+
+passwordInput.addEventListener('input', () => {
+    if (passwordInput.value.trim() !== '') {
+        clearError(passwordInput);
+    }
+});
+
+// Login Form Submission
+document.getElementById("login-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+    
+    const email = emailInput.value.trim();
+    const password = passwordInput.value.trim();
+    
+    let isValid = true;
+    
+    // Validate email
+    if (email === '') {
+        showError(emailInput, 'البريد الإلكتروني مطلوب');
+        isValid = false;
+    } else if (!validateEmail(email)) {
+        showError(emailInput, 'من فضلك أدخل بريد إلكتروني صحيح');
+        isValid = false;
+    } else {
+        clearError(emailInput);
+    }
+    
+    // Validate password
+    if (password === '') {
+        showError(passwordInput, 'كلمة المرور مطلوبة');
+        isValid = false;
+    } else if (!validatePassword(password)) {
+        showError(passwordInput, 'كلمة المرور يجب أن تكون 8 أحرف على الأقل');
+        isValid = false;
+    } else {
+        clearError(passwordInput);
+    }
+    
+    // If all validations pass, proceed
+    if (isValid) {
+        // Store in memory instead of localStorage
+        sessionStorage.setItem("email", email);
+        sessionStorage.setItem("username", email.split('@')[0]);
+        
+        // Redirect
+        window.location.href = "profile.html";
+    }
+});
     </script>
 </body>
 
