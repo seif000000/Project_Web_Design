@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("get-books");
   const searchBtn = document.getElementById("search-button"); // Get the search button element
   const cardsContainer = document.getElementById("cards-container");
-  const categoriesContainer = document.getElementById("categories"); // NEW: Container for category buttons
+  // const categorySelect = document.getElementById("category-filter"); // REMOVED: No longer needed
   const nextBtn = document.getElementById("nextBtn");
   const prevBtn = document.getElementById("prevBtn");
   const pageInfo = document.getElementById("pageInfo");
@@ -11,7 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const perPage = 10;
   let currentPage = 1;
   let filtered = [];
-  let activeCategory = "all"; // NEW: Track the active category
 
   // Get unique categories from the big book list (booksData) - Still needed for dorking
   const categories = [];
@@ -24,60 +23,11 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // NEW: Function to render category buttons
-  function renderCategories(lang) {
-    if (!categoriesContainer) return; // Stop if the container doesn't exist
-    
-    categoriesContainer.innerHTML = ""; // Clear existing buttons
-    const allText = lang === "ar" ? "الكل" : "All";
-    
-    // Add "All" button
-    const allBtn = document.createElement("button");
-    allBtn.className = "cat-btn" + (activeCategory === "all" ? " active" : "");
-    allBtn.textContent = allText;
-    allBtn.addEventListener("click", () => {
-      activeCategory = "all";
-      filterBooks(true);
-      updateCategoryButtons();
-    });
-    categoriesContainer.appendChild(allBtn);
-    
-    // Add category buttons
-    categories.forEach(cat => {
-      const btn = document.createElement("button");
-      btn.className = "cat-btn" + (activeCategory === cat.en ? " active" : "");
-      btn.textContent = cat[lang];
-      btn.dataset.categoryEn = cat.en;
-      btn.addEventListener("click", () => {
-        activeCategory = cat.en;
-        filterBooks(true);
-        updateCategoryButtons();
-      });
-      categoriesContainer.appendChild(btn);
-    });
-  }
-
-  // NEW: Function to update active state of category buttons
-  function updateCategoryButtons() {
-    const buttons = categoriesContainer.querySelectorAll(".cat-btn");
-    buttons.forEach((btn, index) => {
-      if (index === 0) {
-        // "All" button
-        btn.classList.toggle("active", activeCategory === "all");
-      } else {
-        const categoryEn = btn.dataset.categoryEn;
-        btn.classList.toggle("active", activeCategory === categoryEn);
-      }
-    });
-  }
-
   // Function to update the search box placeholder when language changes
   function updateSearchPlaceholder(lang) {
     if (!input) return; // Stop if the input doesn't exist
     // Get the translated placeholder text, or use default
-    const placeholderText = window.langData && window.langData[lang] 
-      ? window.langData[lang].search_placeholder 
-      : (lang === "ar" ? "ابحث عن كتاب أو مؤلف..." : "Search books or authors...");
+    const placeholderText = window.langData && window.langData[lang] ? window.langData[lang].search_placeholder : (lang === "ar" ? "ابحث عن كتاب أو مؤلف..." : "Search books or authors...");
     input.placeholder = placeholderText;
   }
 
@@ -85,15 +35,13 @@ document.addEventListener("DOMContentLoaded", () => {
   function updateSearchButtonText(lang) {
     if (!searchBtn) return; // Stop if the button doesn't exist
     // Get the translated button text, or use default
-    const buttonText = window.langData && window.langData[lang] 
-      ? window.langData[lang].search_button 
-      : (lang === "ar" ? "بحث" : "Search");
+    const buttonText = window.langData && window.langData[lang] ? window.langData[lang].search_button : (lang === "ar" ? "بحث" : "Search");
     searchBtn.textContent = buttonText;
   }
 
   // This function is called by lang.js when the user clicks the language button
   window.updateBooksLang = (lang) => {
-    renderCategories(lang); // NEW: Update category buttons
+    // REMOVED: No need to update category dropdown
     updateSearchPlaceholder(lang); // Update the search box text
     updateSearchButtonText(lang); // Update the button text
     filterBooks(false); // Run the search again to show correct language for books
@@ -101,19 +49,34 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Run this code once when the page loads to set the initial language
   const initialLang = localStorage.getItem("lang") || "ar";
-  renderCategories(initialLang); // NEW: Create category buttons on page load
+  // REMOVED: No need to populate category dropdown initially
   updateSearchPlaceholder(initialLang);
   updateSearchButtonText(initialLang);
 
+  // REMOVED: No need to restore category selection from localStorage
   input.value = localStorage.getItem("ahmydQuery") || "";
 
-  // --- Filtering logic with Dorking Support ---
   
-  function filterBooks(resetPage = true) {
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+ // --- Filtering logic with Dorking Support  ---
+  
+ function filterBooks(resetPage = true) {
     const rawQuery = input.value.trim(); // Get the raw input string
     const currentLang = localStorage.getItem("lang") || "ar"; // Get current language
 
     // Save filters (using raw query for storage)
+    // REMOVED: No need to save category selection
     localStorage.setItem("ahmydQuery", rawQuery);
 
     // --- NEW: Parse the raw query for dorking commands ---
@@ -162,17 +125,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // Using the same regex to remove the matched parts
     const generalQuery = parsedQuery.replace(commandRegex, '').trim().toLowerCase();
 
-    // --- NEW: Apply Filters based on commands, general query, and active category ---
+    // --- NEW: Apply Filters based on commands and general query only ---
     filtered = booksData.filter(b => {
       const title = b.title[currentLang].toLowerCase();
       const author = b.author[currentLang].toLowerCase();
       const categoryEn = b.category.en.toLowerCase(); // Use English name for category matching
       const categoryLocal = b.category[currentLang].toLowerCase(); // Use local name for query matching
-
-      // NEW: First, check if the book matches the active category button
-      if (activeCategory !== "all" && categoryEn !== activeCategory.toLowerCase()) {
-        return false; // Skip this book if it doesn't match the active category
-      }
 
       // Start with the assumption that the book matches all commands
       let matchesAllSpecifiedCommands = true;
@@ -182,8 +140,7 @@ document.addEventListener("DOMContentLoaded", () => {
           // Check if a value was provided after 'category:' (ignoring leading/trailing spaces)
           if (commands.category.trim() !== "") {
               // A value was provided, apply the filter
-              matchesAllSpecifiedCommands = matchesAllSpecifiedCommands && 
-                (categoryEn.includes(commands.category) || categoryLocal.includes(commands.category));
+              matchesAllSpecifiedCommands = matchesAllSpecifiedCommands && (categoryEn.includes(commands.category) || categoryLocal.includes(commands.category));
           }
           // If commands.category is empty or just spaces, do nothing, matchesAllSpecifiedCommands remains true for this part
       }
@@ -199,8 +156,7 @@ document.addEventListener("DOMContentLoaded", () => {
           }
           // Check if writer was specified with a value (and author wasn't, or was empty)
           // Note: This logic assumes 'author' takes precedence if both are specified with values
-          if (writerValue !== undefined && writerValue.trim() !== "" && 
-              (authorValue === undefined || authorValue.trim() === "")) {
+          if (writerValue !== undefined && writerValue.trim() !== "" && (authorValue === undefined || authorValue.trim() === "")) {
               matchesAllSpecifiedCommands = matchesAllSpecifiedCommands && author.includes(writerValue); // Uses same author field
           }
       }
@@ -214,9 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
       let matchesGeneralQuery = true;
       if (generalQuery) {
          // Check if the remaining query text matches title, author, or local category
-         matchesGeneralQuery = title.includes(generalQuery) || 
-                             author.includes(generalQuery) || 
-                             categoryLocal.includes(generalQuery);
+         matchesGeneralQuery = title.includes(generalQuery) || author.includes(generalQuery) || categoryLocal.includes(generalQuery);
       }
 
       // Book is included if it matches ALL specified commands (that have values) AND the general query (if any)
@@ -239,7 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
       author: "Author",
       category: "Category",
       page: "Page",
-      no_results: "No results found"
+      no_results: "No results found "
     };
 
     // Calculate total pages
@@ -252,7 +206,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (slice.length === 0) {
       // Show "no results" message
-      cardsContainer.innerHTML = `<p style="text-align:center;color:#777;">${t.no_results}</p>`;
+      cardsContainer.innerHTML = <p style="text-align:center;color:#777;">${t.no_results}</p>;
       pageInfo.textContent = ""; // Clear page info
       nextBtn.disabled = true; // Disable buttons
       prevBtn.disabled = true;
@@ -308,16 +262,10 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // Event listeners for search input and button
+  // Event listeners for search input and category dropdown
   input.addEventListener("input", () => filterBooks(true));
   searchBtn.addEventListener("click", () => filterBooks(true));
-  
-  // NEW: Handle Enter key press in search input
-  input.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      filterBooks(true);
-    }
-  });
+  // REMOVED: No need for categorySelect change listener
 
   // Load the first page of books when the page starts
   filterBooks(true);

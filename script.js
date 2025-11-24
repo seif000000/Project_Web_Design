@@ -20,19 +20,19 @@ async function loadTranslations() {
 }
 
 function applyTranslations() {
-    // تغيير اتجاه الصفحة
     document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
     document.documentElement.setAttribute('lang', currentLang);
+
+    const elementsToTranslate = document.querySelectorAll('[data-lang], [data-key]');
     
-    // تحديث النصوص
-    document.querySelectorAll('[data-lang]').forEach(el => {
-        const key = el.getAttribute('data-lang');
-        if (translations[currentLang] && translations[currentLang][key]) {
+    elementsToTranslate.forEach(el => {
+        const key = el.getAttribute('data-key') || el.getAttribute('data-lang'); 
+        
+        if (key && translations[currentLang] && translations[currentLang][key]) {
             el.textContent = translations[currentLang][key];
         }
     });
     
-    // تحديث نص زر اللغة
     const langBtn = document.querySelector('.lang-btn');
     if (langBtn) {
         langBtn.textContent = currentLang === 'ar' ? 'EN' : 'AR';

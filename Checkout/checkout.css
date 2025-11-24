@@ -1,22 +1,17 @@
-/* ------------------------------------------- */
-/* 🛑 المتغيرات الضرورية إذا لم تكن في ملف CSS الرئيسي */
-/* ------------------------------------------- */
-/* إذا كان لديك ملف style.css رئيسي، يمكنك حذف هذا الجزء */
+
 :root {
     --bg-color: #F5E6D3;
     --card-bg: #FFFFFF;
     --text-color: #2d2d2d;
     --muted: #5C5C5C;
-    --accent: #FDB750; /* برتقالي أساسي */
-    --accent-hover: #E0A840; /* أغمق للتمرير */
-    --accent-light: #FFFAE9; /* لون فاتح للخلفيات الخفيفة */
-    --accent-dark: #C68F33; /* لون داكن للتأثير عند الضغط */
-    --category-hover-text-color: #2d2d2d; /* أو #000000 */
+    --accent: #FDB750; 
+    --accent-hover: #E0A840;
+    --accent-light: #FFFAE9; 
+    --accent-dark: #C68F33; 
+    --category-hover-text-color: #2d2d2d; 
 }
 
-/* ------------------------------------------- */
-/* أنماط صفحة الدفع العامة */
-/* ------------------------------------------- */
+
 .checkout-page {
     background: var(--bg-color); 
     padding: 40px 0;
@@ -31,9 +26,7 @@
     font-weight: 800;
 }
 
-/* ------------------------------------------- */
-/* تقسيم المحتوى (Grid) */
-/* ------------------------------------------- */
+
 .checkout-content-grid {
     display: grid;
     grid-template-columns: 2fr 1.2fr; /* النموذج 2/3، والملخص 1/3 */
@@ -43,9 +36,7 @@
     align-items: flex-start; 
 }
 
-/* ------------------------------------------- */
-/* تصميم الصناديق (النموذج والملخص) */
-/* ------------------------------------------- */
+
 .delivery-form-container,
 .summary-box {
     padding: 30px;
@@ -70,16 +61,13 @@
     border-bottom: 2px solid var(--accent-light); 
 }
 
-/* ------------------------------------------- */
-/* تفاصيل عناصر السلة */
-/* ------------------------------------------- */
 .summary-item.cart-item {
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
     font-size: 1.05em;
     color: var(--text-color);
-    border-bottom: 1px dotted var(--search-border); /* استخدم خط فاصل خفيف */
+    border-bottom: 1px dotted var(--search-border); 
     transition: background 0.2s;
 }
 
@@ -112,9 +100,7 @@
 }
 
 
-/* ------------------------------------------- */
-/* تنسيق النموذج وحقول الإدخال */
-/* ------------------------------------------- */
+
 .contact-form input,
 .contact-form textarea {
     width: 100%;
@@ -138,13 +124,11 @@
     background: var(--card-bg);
 }
 
-/* ------------------------------------------- */
-/* تنسيق الأزرار */
-/* ------------------------------------------- */
+
 .final-purchase-btn {
     width: 100%;
     background: var(--accent);
-    color: var(--category-hover-text-color); /* نص داكن على خلفية برتقالية */
+    color: var(--category-hover-text-color); 
     font-size: 1.15rem;
     padding: 15px 20px;
     margin-top: 25px;
@@ -162,7 +146,7 @@
 }
 
 #proceed-to-delivery:disabled {
-    background: var(--pagination-disabled-bg); /* لون خفيف */
+    background: var(--pagination-disabled-bg); 
     color: var(--pagination-disabled-color);
     opacity: 0.6;
     cursor: not-allowed;
@@ -170,9 +154,69 @@
     transform: none;
 }
 
-/* ------------------------------------------- */
-/* تصميم الاستجابة (Mobile Optimization) */
-/* ------------------------------------------- */
+
+#lang-toggle {
+    background: var(--accent);
+    color: var(--category-hover-text-color);
+    padding: 10px 25px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(253, 183, 80, 0.35);
+    margin-bottom: 25px;
+}
+
+#lang-toggle:hover {
+    background: var(--accent-dark);
+    box-shadow: 0 6px 15px rgba(253, 183, 80, 0.55);
+    transform: translateY(-2px);
+}
+
+#lang-toggle:active {
+    transform: scale(0.96);
+}
+
+
+#governorate-select {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 1rem;
+    border-radius: 12px;
+    border: 1px solid var(--search-border);
+    background: var(--card-bg);
+    color: var(--text-color);
+    cursor: pointer;
+    appearance: none;  /* حذف شكل السهم الافتراضي */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    box-shadow: inset 0 2px 5px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+#governorate-select:hover {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-light);
+}
+
+#governorate-select:focus {
+    outline: none;
+    border-color: var(--accent-dark);
+    box-shadow: 0 0 0 3px var(--accent-light), 
+                inset 0 2px 5px rgba(0,0,0,0.1);
+}
+
+#governorate-select {
+    background-image: url("data:image/svg+xml;utf8,<svg width='16' height='16' viewBox='0 0 24 24' fill='%235C5C5C' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5H7z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: calc(100% - 15px) center;
+    background-size: 18px;
+}
+
+
 @media (max-width: 992px) {
     .checkout-content-grid {
         grid-template-columns: 1fr; 
@@ -180,7 +224,7 @@
     }
     .summary-box {
         order: -1; 
-        position: relative; /* إلغاء خاصية sticky على الموبايل */
+        position: relative;
         top: 0;
     }
     .page-title {
