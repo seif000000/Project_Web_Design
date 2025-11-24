@@ -580,3 +580,88 @@
                 font-size: 0.85rem;
             }
         }
+
+
+
+/* ==============
+   Lalalalalalalalaala
+   ============== */
+
+
+@media (max-width: 768px) {
+    .contact-layout {
+        gap: 50px;
+    /* adding leddle space at the right :)  */
+        margin-right: 2rem;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .card h2 {
+        font-size: 1.5rem;
+        margin-bottom: 20px;
+        padding-bottom: 12px;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    .form-label {
+        font-size: 0.9rem;
+    }
+
+    .form-input,
+    .form-textarea {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.95rem;
+    }
+
+    .contact-info .icon {
+        font-size: 1.35rem;
+    }
+
+    .contact-info .details .label {
+        font-size: 0.95rem;
+    }
+
+    .contact-info .details .value {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 16px;
+    }
+  
+    .contact-layout {
+        gap: 50px;
+        margin-right: 1.5rem;
+    }
+    .card h2 {
+        font-size: 1.4rem;
+        margin-bottom: 16px;
+    }
+
+    .form-input,
+    .form-textarea {
+        padding: 9px;
+    }
+
+    .btn {
+        padding: 9px 14px;
+        font-size: 0.9rem;
+    }
+
+    .contact-info .info-item {
+        margin-bottom: 18px;
+    }
+}
