@@ -592,7 +592,7 @@
     .contact-layout {
         gap: 50px;
     /* adding leddle space at the right :)  */
-        margin-right: 2rem;
+        padding-right: 2rem;
     }
 
     .card {
@@ -635,6 +635,9 @@
     .contact-info .details .value {
         font-size: 0.9rem;
     }
+    html, body {
+    overflow-x: hidden;
+}
 }
 
 @media (max-width: 480px) {
@@ -644,7 +647,7 @@
   
     .contact-layout {
         gap: 50px;
-        margin-right: 1.5rem;
+        padding-right: 1.5rem;
     }
     .card h2 {
         font-size: 1.4rem;
@@ -664,4 +667,7 @@
     .contact-info .info-item {
         margin-bottom: 18px;
     }
+    html, body {
+    overflow-x: hidden;
+}
 }
