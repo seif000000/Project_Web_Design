@@ -42,16 +42,17 @@ function applyTranslations() {
 function toggleLanguage() {
     currentLang = currentLang === 'en' ? 'ar' : 'en';
     
-    // حفظ اللغة في localStorage للاستمرارية
+    //  حفظ اللغه في الجهاز في ال localStorage 
     localStorage.setItem('language', currentLang);
     
     applyTranslations();
 }
 
-// تحميل الترجمات أول ما الصفحة تفتح
+// تحميل الترجمه أول ما الصفحة تفتح
+
 loadTranslations();
 
-// ربط زر اللغة
+// ربط اللغة
 document.querySelector('.lang-btn').addEventListener('click', toggleLanguage);
 
 
@@ -136,7 +137,7 @@ function homepage() {
 }
 
 // ============================================
-// CART COUNTER (إذا كنت تستخدمه)
+// CART COUNTER 
 // ============================================
 function updateCartCount() {
     const cartCount = document.getElementById('cart-count');
