@@ -9,38 +9,109 @@ document.getElementById('bookPDF').addEventListener('change', function(e) {
     document.getElementById('pdfFileName').textContent = fileName;
 });
 
+// API base URL - detect automatically based on current page
+function getApiBaseUrl() {
+    if (window.location.port === '5502' || window.location.hostname === '127.0.0.1') {
+        return 'http://127.0.0.1:5000/api';
+    }
+    return 'http://localhost:5000/api';
+}
+
+window.API_BASE_URL = window.API_BASE_URL || getApiBaseUrl();
+window.API_BASE_URL_FALLBACK = window.API_BASE_URL_FALLBACK || (window.location.hostname === '127.0.0.1' 
+    ? 'http://localhost:5000/api' 
+    : 'http://127.0.0.1:5000/api');
+
+// Helper function to fetch with fallback
+async function fetchWithFallback(url, fallbackUrl, options) {
+    try {
+        const response = await fetch(url, options);
+        if (response.ok || response.status < 500) {
+            return response;
+        }
+        throw new Error('Primary URL failed');
+    } catch (error) {
+        console.log('Trying fallback URL...');
+        return await fetch(fallbackUrl, options);
+    }
+}
+
+// Ensure credentials are included in fetch requests (not used globally here)
+
 // Handle form submission
-document.getElementById('addBookForm').addEventListener('submit', function(e) {
+document.getElementById('addBookForm').addEventListener('submit', async function(e) {
     e.preventDefault();
     
     // Get form values
-    const bookData = {
-        title: document.getElementById('bookTitle').value,
-        author: document.getElementById('bookAuthor').value,
-        category: document.getElementById('bookCategory').value,
-        description: document.getElementById('bookDescription').value,
-        price: document.getElementById('bookPrice').value,
-        coverFile: document.getElementById('bookCover').files[0],
-        pdfFile: document.getElementById('bookPDF').files[0]
-    };
+    const title = document.getElementById('bookTitle').value.trim();
+    const author = document.getElementById('bookAuthor').value.trim();
+    const category = document.getElementById('bookCategory').value.trim();
+    const description = document.getElementById('bookDescription').value.trim();
+    const price = document.getElementById('bookPrice').value;
+    const coverFile = document.getElementById('bookCover').files[0];
+    const pdfFile = document.getElementById('bookPDF').files[0];
+    
+    // Validate required fields
+    if (!title || !author || !category || !description || !price) {
+        alert('الرجاء ملء جميع الحقول المطلوبة');
+        return;
+    }
     
     // Validate files
-    if (!bookData.coverFile || !bookData.pdfFile) {
+    if (!coverFile || !pdfFile) {
         alert('الرجاء اختيار صورة الغلاف وملف PDF');
         return;
     }
     
-    // In a real application, you would send this data to a server
-    // For now, we'll just simulate the upload
-    console.log('Book data to be uploaded:', bookData);
+    // Create FormData for file upload
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('author', author);
+    formData.append('category', category);
+    formData.append('description', description);
+    formData.append('price', price);
+    formData.append('cover', coverFile);
+    formData.append('pdf', pdfFile);
     
-    // Show success modal
-    showSuccessModal();
-    
-    // Reset form
-    document.getElementById('addBookForm').reset();
-    document.getElementById('coverFileName').textContent = 'لم يتم اختيار ملف';
-    document.getElementById('pdfFileName').textContent = 'لم يتم اختيار ملف';
+    try {
+        // Show loading state
+        const submitBtn = document.querySelector('.submit-btn');
+        const originalText = submitBtn.textContent;
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'جاري الإضافة...';
+        
+        // Send POST request to Flask API
+        const response = await fetch(`${window.API_BASE_URL}/books`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+        });
+        
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
+            // Show success modal
+            showSuccessModal();
+            
+            // Reset form
+            document.getElementById('addBookForm').reset();
+            document.getElementById('coverFileName').textContent = 'لم يتم اختيار ملف';
+            document.getElementById('pdfFileName').textContent = 'لم يتم اختيار ملف';
+        } else {
+            alert('حدث خطأ أثناء إضافة الكتاب: ' + (result.message || 'خطأ غير معروف'));
+        }
+        
+        // Reset button state
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+        
+    } catch (error) {
+        console.error('Error:', error);
+        alert('حدث خطأ في الاتصال بالخادم. تأكد من تشغيل الخادم على http://localhost:5000');
+        const submitBtn = document.querySelector('.submit-btn');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'إضافة الكتاب ✨';
+    }
 });
 
 // Function to show success modal
@@ -50,7 +121,7 @@ function showSuccessModal() {
     
     // Redirect to admin page after 3 seconds
     setTimeout(() => {
-        window.location.href = 'admin.html';
+        window.location.href = 'admin-page.html';
     }, 3000);
 }
 
@@ -61,7 +132,7 @@ function goToAdmin() {
 
 // Function to go to home page
 function goToHome() {
-    window.location.href = 'index.html'; // or whatever your main page is called
+    window.location.href = '../index.html';
 }
 
 // Add smooth animation on page load

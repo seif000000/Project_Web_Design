@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار الاتصال</title>
+</head>
+<body>
+    <h1>اختبار الاتصال بالسيرفر</h1>
+    <button onclick="testConnection()">اختبار الاتصال</button>
+    <div id="result"></div>
+
+    <script>
+        async function testConnection() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'جاري الاختبار...';
+            
+            const urls = [
+                'http://localhost:5000/api/me',
+                'http://127.0.0.1:5000/api/me'
+            ];
+            
+            for (const url of urls) {
+                try {
+                    console.log(`Testing: ${url}`);
+                    const response = await fetch(url, {
+                        method: 'GET',
+                        credentials: 'include',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    });
+                    
+                    const result = await response.json();
+                    resultDiv.innerHTML += `<p style="color: green;">✅ ${url} - Success! Status: ${response.status}</p>`;
+                    resultDiv.innerHTML += `<pre>${JSON.stringify(result, null, 2)}</pre>`;
+                    break;
+                } catch (error) {
+                    resultDiv.innerHTML += `<p style="color: red;">❌ ${url} - Error: ${error.message}</p>`;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
+

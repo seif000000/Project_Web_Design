@@ -217,7 +217,7 @@
     });
 
     // Form submission
-    document.getElementById("register-form").addEventListener("submit", function(e) {
+    document.getElementById("register-form").addEventListener("submit", async function(e) {
       e.preventDefault();
       
       const username = usernameInput.value.trim();
@@ -275,18 +275,62 @@
       }
       
       // If all validations pass, proceed
-      if (isValid) {
-        // Store in memory instead of localStorage
-        sessionStorage.setItem("username", username);
-        sessionStorage.setItem("email", email);
-        
-        // Show success message
-        alert('✅ تم إنشاء الحساب بنجاح!');
-        
-        // Redirect to profile
-        window.location.href = "profile.html";
+      if (!isValid) return;
+
+      const payload = { username, email, password };
+
+      // Determine API base URL (supports fallback on localhost/127.0.0.1)
+      function getApiBaseUrl() {
+        if (window.location.port === '5502' || window.location.hostname === '127.0.0.1') {
+            return 'http://127.0.0.1:5000/api';
+        }
+        return 'http://localhost:5000/api';
+      }
+
+      const API_BASE_URL = getApiBaseUrl();
+      const API_BASE_URL_FALLBACK = window.location.hostname === '127.0.0.1' 
+          ? 'http://localhost:5000/api' 
+          : 'http://127.0.0.1:5000/api';
+
+      const fetchOptions = {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      };
+
+      try {
+        let response = await fetch(`${API_BASE_URL}/register`, fetchOptions);
+        if (!response.ok) {
+          // try fallback
+          response = await fetch(`${API_BASE_URL_FALLBACK}/register`, fetchOptions);
+        }
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+          // show success and redirect to login
+          const successDiv = document.createElement('div');
+          successDiv.className = 'success-message';
+          successDiv.textContent = result.message || 'تم إنشاء الحساب بنجاح';
+          document.getElementById('register-form').appendChild(successDiv);
+
+          setTimeout(() => {
+            window.location.href = 'login.html';
+          }, 1000);
+          return;
+        }
+
+        // show server error message
+        const msg = result && result.message ? result.message : 'فشل إنشاء الحساب';
+        alert(msg);
+
+      } catch (err) {
+        console.error('Register error:', err);
+        alert('حدث خطأ في الاتصال بالخادم. تأكد من تشغيل الخادم على http://localhost:5000');
       }
     });
   </script>
 </body>
+
 </html>

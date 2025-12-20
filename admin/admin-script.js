@@ -8,7 +8,7 @@ function navigateToRemoveBook() {
 }
 
 function goToHome() {
-    window.location.href = 'index.html'; // or whatever your main page is called
+    window.location.href = '../index.html';
 }
 
 // Add smooth animation on page load

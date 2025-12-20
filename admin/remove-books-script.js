@@ -1,57 +1,54 @@
-// Sample book data - In a real application, this would come from a database
-let books = [
-    {
-        id: 1,
-        title: "Into the Wild",
-        author: "Jon Krakauer",
-        cover: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23134E4A' width='300' height='400'/%3E%3Ctext x='50%25' y='45%25' font-size='60' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EInto the%3C/text%3E%3Ctext x='50%25' y='55%25' font-size='80' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-style='italic'%3EWild%3C/text%3E%3C/svg%3E"
-    },
-    {
-        id: 2,
-        title: "This Dark Road",
-        author: "Kathryn Morris",
-        cover: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%238B2727' width='300' height='400'/%3E%3Ctext x='50%25' y='30%25' font-size='40' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EKathryn%3C/text%3E%3Ctext x='50%25' y='40%25' font-size='50' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EMORIS%3C/text%3E%3Ctext x='50%25' y='60%25' font-size='45' fill='%23FDB750' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EThis Dark Road%3C/text%3E%3C/svg%3E"
-    },
-    {
-        id: 3,
-        title: "The Castle",
-        author: "Franz Kafka",
-        cover: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%231a1a1a' width='300' height='400'/%3E%3Ctext x='50%25' y='40%25' font-size='50' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3ETHE%3C/text%3E%3Ctext x='50%25' y='50%25' font-size='45' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='serif'%3ECASTLE%3C/text%3E%3C/svg%3E"
-    },
-    {
-        id: 4,
-        title: "1984",
-        author: "George Orwell",
-        cover: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23B22222' width='300' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='120' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-weight='bold'%3E1984%3C/text%3E%3C/svg%3E"
-    },
-    {
-        id: 5,
-        title: "The Great Gatsby",
-        author: "F. Scott Fitzgerald",
-        cover: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23002366' width='300' height='400'/%3E%3Ctext x='50%25' y='40%25' font-size='40' fill='%23FFD700' text-anchor='middle' dominant-baseline='middle' font-family='Georgia'%3EThe Great%3C/text%3E%3Ctext x='50%25' y='50%25' font-size='50' fill='%23FFD700' text-anchor='middle' dominant-baseline='middle' font-family='Georgia' font-style='italic'%3EGatsby%3C/text%3E%3C/svg%3E"
-    },
-    {
-        id: 6,
-        title: "To Kill a Mockingbird",
-        author: "Harper Lee",
-        cover: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='400'%3E%3Crect fill='%23654321' width='300' height='400'/%3E%3Ctext x='50%25' y='45%25' font-size='35' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3ETo Kill a%3C/text%3E%3Ctext x='50%25' y='55%25' font-size='40' fill='white' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3EMockingbird%3C/text%3E%3C/svg%3E"
+// API base URL - detect automatically
+function getApiBaseUrl() {
+    if (window.location.port === '5502' || window.location.hostname === '127.0.0.1') {
+        return 'http://127.0.0.1:5000/api';
     }
-];
+    return 'http://localhost:5000/api';
+}
+window.API_BASE_URL = window.API_BASE_URL || getApiBaseUrl();
+window.API_BASE_URL_FALLBACK = window.API_BASE_URL_FALLBACK || (window.location.hostname === '127.0.0.1' 
+    ? 'http://localhost:5000/api' 
+    : 'http://127.0.0.1:5000/api');
+window.BACKEND_BASE = window.BACKEND_BASE || window.API_BASE_URL.replace(/\/api$/, '');
+
+let books = [];
 
 // Load books on page load
 document.addEventListener('DOMContentLoaded', function() {
     loadBooks();
 });
 
-// Function to load and display all books
-function loadBooks() {
+// Function to load and display all books from API
+async function loadBooks() {
     const booksGrid = document.getElementById('booksGrid');
-    booksGrid.innerHTML = '';
+    booksGrid.innerHTML = '<div class="loading">جاري تحميل الكتب...</div>';
 
-    books.forEach(book => {
-        const bookElement = createBookElement(book);
-        booksGrid.appendChild(bookElement);
-    });
+    try {
+        const response = await fetch(`${window.API_BASE_URL}/books`, {
+            credentials: 'include'  // Important for session cookies
+        });
+        
+        if (!response.ok) {
+            throw new Error('Failed to fetch books');
+        }
+        
+        books = await response.json();
+        
+        if (books.length === 0) {
+            booksGrid.innerHTML = '<div class="no-books">لا توجد كتب في المكتبة</div>';
+            return;
+        }
+        
+        booksGrid.innerHTML = '';
+        books.forEach(book => {
+            const bookElement = createBookElement(book);
+            booksGrid.appendChild(bookElement);
+        });
+        
+    } catch (error) {
+        console.error('Error loading books:', error);
+        booksGrid.innerHTML = '<div class="error">حدث خطأ في تحميل الكتب. تأكد من تشغيل الخادم على http://localhost:5000</div>';
+    }
 }
 
 // Function to create a book element
@@ -61,13 +58,22 @@ function createBookElement(book) {
     bookDiv.style.opacity = '0';
     bookDiv.style.transform = 'translateY(20px)';
     
+    // Use image_url if available, otherwise use a placeholder
+    const coverImage = book.image_url 
+        ? `${window.BACKEND_BASE}/${book.image_url}` 
+        : 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="300" height="400"%3E%3Crect fill="%23ddd" width="300" height="400"/%3E%3Ctext x="50%25" y="50%25" font-size="20" fill="%23999" text-anchor="middle" dominant-baseline="middle"%3Eلا توجد صورة%3C/text%3E%3C/svg%3E';
+    
     bookDiv.innerHTML = `
-        <img src="${book.cover}" alt="${book.title}" class="book-cover">
+        <img src="${coverImage}" alt="${book.title}" class="book-cover" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'300\' height=\'400\'%3E%3Crect fill=\'%23ddd\' width=\'300\' height=\'400\'/%3E%3Ctext x=\'50%25\' y=\'50%25\' font-size=\'20\' fill=\'%23999\' text-anchor=\'middle\' dominant-baseline=\'middle\'%3Eلا توجد صورة%3C/text%3E%3C/svg%3E'">
         <div class="book-info">
             <h3 class="book-title">${book.title}</h3>
             <p class="book-author">${book.author}</p>
+            ${book.price ? `<p class="book-price">${book.price} جنيه</p>` : ''}
         </div>
-        <button class="remove-btn" onclick="removeBook(${book.id})" title="حذف الكتاب">✕</button>
+        <div class="book-actions">
+            <button class="edit-btn" onclick="editBook(${book.id})" title="تعديل الكتاب">✏️</button>
+            <button class="remove-btn" onclick="removeBook(${book.id})" title="حذف الكتاب">✕</button>
+        </div>
     `;
     
     // Animate the book element
@@ -80,22 +86,38 @@ function createBookElement(book) {
     return bookDiv;
 }
 
+// Function to edit a book
+function editBook(bookId) {
+    window.location.href = `edit-book.html?id=${bookId}`;
+}
+
 // Function to remove a book
-function removeBook(bookId) {
-    if (confirm('هل أنت متأكد من حذف هذا الكتاب؟')) {
-        // Find the book index
-        const bookIndex = books.findIndex(book => book.id === bookId);
+async function removeBook(bookId) {
+    if (!confirm('هل أنت متأكد من حذف هذا الكتاب؟')) {
+        return;
+    }
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/books/${bookId}`, {
+            method: 'DELETE',
+            credentials: 'include'
+        });
         
-        if (bookIndex !== -1) {
-            // Remove book from array
-            books.splice(bookIndex, 1);
-            
+        const result = await response.json();
+        
+        if (response.ok && result.success) {
             // Reload the books display
-            loadBooks();
+            await loadBooks();
             
             // Show success message
             alert('تم حذف الكتاب بنجاح!');
+        } else {
+            alert('حدث خطأ أثناء حذف الكتاب: ' + (result.message || 'خطأ غير معروف'));
         }
+        
+    } catch (error) {
+        console.error('Error deleting book:', error);
+        alert('حدث خطأ في الاتصال بالخادم. تأكد من تشغيل الخادم على http://localhost:5000');
     }
 }
 
@@ -106,5 +128,5 @@ function goToAdmin() {
 
 // Function to go to home page
 function goToHome() {
-    window.location.href = 'index.html'; // or whatever your main page is called
+    window.location.href = '../index.html';
 }

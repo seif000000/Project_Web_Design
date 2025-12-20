@@ -1,0 +1,50 @@
+# ======================
+# Python
+# ======================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+env/
+venv/
+.venv/
+ENV/
+env.bak/
+venv.bak/
+
+# ======================
+# Flask
+# ======================
+.webassets-cache
+
+# ======================
+# Database
+# ======================
+# Uncomment if you want to ignore DB files
+# *.db
+# *.sqlite
+# *.sqlite3
+# instance/
+
+# ======================
+# Uploads
+# ======================
+uploads/
+
+# ======================
+# IDEs & Editors
+# ======================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ======================
+# OS Files
+# ======================
+.DS_Store
+Thumbs.db

@@ -132,52 +132,110 @@ function updateShippingAndTotal(governorateKey) {
     }
 }
 
-function getCart() {
-    const cart = localStorage.getItem('shoppingCart');
-    return cart ? JSON.parse(cart) : [];
+// API base URL - detect automatically
+function getApiBaseUrl() {
+    if (window.location.port === '5502' || window.location.hostname === '127.0.0.1') {
+        return 'http://127.0.0.1:5000/api';
+    }
+    return 'http://localhost:5000/api';
+}
+const API_BASE_URL = getApiBaseUrl();
+
+// Load books from database
+let booksDataFromDB = [];
+
+async function loadBooksFromDatabase() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/books`);
+        if (!response.ok) {
+            throw new Error('Failed to fetch books');
+        }
+        
+        const books = await response.json();
+        
+        // Convert database format to frontend format
+        booksDataFromDB = books.map(book => ({
+            id: book.id,
+            category: {
+                en: book.category_name || 'Uncategorized',
+                ar: book.category_name || 'غير مصنف'
+            },
+            title: {
+                en: book.title,
+                ar: book.title
+            },
+            author: {
+                en: book.author,
+                ar: book.author
+            },
+            cover: book.image_url ? `http://127.0.0.1:5000/${book.image_url}` : '../image/book_image.jpg',
+            price: book.price || 0,
+            description: book.description || ''
+        }));
+        
+        return booksDataFromDB;
+    } catch (error) {
+        console.error('Error loading books from database:', error);
+        return [];
+    }
 }
 
-function renderCart() {
-    const cartIds = getCart();
-    let subtotal = 0;
-    
-    cartListContainer.innerHTML = ''; 
-    
-    if (typeof booksData === 'undefined') {
-        cartListContainer.innerHTML = '<p style="color:red;">خطأ: لم يتم تحميل بيانات الكتب.</p>';
-        return;
-    }
-    
-    if (cartIds.length === 0) {
-        cartListContainer.innerHTML = '<p style="text-align: center; color: var(--muted);">سلة المشتريات فارغة. عد إلى صفحة الكتب لإضافة عناصر.</p>';
-        document.getElementById('proceed-to-delivery').disabled = true;
-        document.getElementById('subtotal-price').textContent = '$0.00';
-        document.getElementById('shipping-price').textContent = '$0.00';
-        document.getElementById('final-total').textContent = '$0.00';
-        return;
-    }
+function getCart() {
+    const cart = localStorage.getItem('shoppingCart');
+    return cart ? JSON.parse(cart) : [];
+}
 
-    currentCartBooks = booksData.filter(b => cartIds.includes(b.id.toString()));
+async function renderCart() {
+    const cartIds = getCart();
+    let subtotal = 0;
+    
+    cartListContainer.innerHTML = '<p>جاري تحميل الكتب...</p>'; 
+    
+    // Load books from database
+    if (booksDataFromDB.length === 0) {
+        booksDataFromDB = await loadBooksFromDatabase();
+    }
+    
+    // Fallback to static booksData if available
+    const allBooks = booksDataFromDB.length > 0 ? booksDataFromDB : (typeof booksData !== 'undefined' ? booksData : []);
+    
+    if (allBooks.length === 0) {
+        cartListContainer.innerHTML = '<p style="color:red;">خطأ: لم يتم تحميل بيانات الكتب.</p>';
+        return;
+    }
+    
+    if (cartIds.length === 0) {
+        cartListContainer.innerHTML = '<p style="text-align: center; color: var(--muted);">سلة المشتريات فارغة. عد إلى صفحة الكتب لإضافة عناصر.</p>';
+        document.getElementById('proceed-to-delivery').disabled = true;
+        document.getElementById('subtotal-price').textContent = '$0.00';
+        document.getElementById('shipping-price').textContent = '$0.00';
+        document.getElementById('final-total').textContent = '$0.00';
+        return;
+    }
 
-    currentCartBooks.forEach(book => {
-        subtotal += book.price;
+    currentCartBooks = allBooks.filter(b => cartIds.includes(b.id.toString()));
 
-        const item = document.createElement("div");
-        item.className = "summary-item cart-item";
-        item.innerHTML = `
-            <span>${book.title[currentLang]}</span>
-            <span class="summary-price">$${book.price.toFixed(2)}</span>
-        `;
-        cartListContainer.appendChild(item);
-    });
+    currentCartBooks.forEach(book => {
+        const bookPrice = typeof book.price === 'object' ? (book.price[currentLang] || book.price.en || book.price.ar || 0) : (book.price || 0);
+        subtotal += bookPrice;
+
+        const item = document.createElement("div");
+        item.className = "summary-item cart-item";
+        const bookTitle = typeof book.title === 'object' ? (book.title[currentLang] || book.title.ar || book.title.en) : book.title;
+        item.innerHTML = `
+            <span>${bookTitle}</span>
+            <span class="summary-price">$${bookPrice.toFixed(2)}</span>
+        `;
+        cartListContainer.appendChild(item);
+    });
 
     // 1. تعيين الإجمالي الفرعي
-    cartSubtotal = subtotal;
-    document.getElementById("subtotal-price").textContent = `$${subtotal.toFixed(2)}`;
+    cartSubtotal = subtotal;
+    document.getElementById("subtotal-price").textContent = `$${subtotal.toFixed(2)}`;
     
-    // 2. تطبيق سعر الشحن الافتراضي (وهذا هو المفتاح)
-    const initialGov = document.getElementById('governorate-select')?.value || 'none';
-    updateShippingAndTotal(initialGov); 
+    // 2. تطبيق سعر الشحن الافتراضي
+    const initialGov = document.getElementById('governorate-select')?.value || 'none';
+    updateShippingAndTotal(initialGov); 
 }
 
 function setupCheckoutSteps() {
@@ -188,20 +246,81 @@ function setupCheckoutSteps() {
         deliveryFormContainer.style.display = "block";
     });
 
-    document.getElementById("delivery-form")?.addEventListener("submit", e => {
-        e.preventDefault();
+    document.getElementById("delivery-form")?.addEventListener("submit", async e => {
+        e.preventDefault();
         
-        // ⚠️ هنا يجب أن يكون التحقق من صحة النموذج (Client-Side Validation)
+        // Check if user is logged in
+        const authenticated = sessionStorage.getItem('authenticated');
+        if (authenticated !== 'true') {
+            alert('يجب تسجيل الدخول أولاً لإتمام الطلب');
+            window.location.href = '../personal/login.html';
+            return;
+        }
         
-        alert("تم تأكيد طلبك!");
-        localStorage.removeItem("shoppingCart");
-        window.location.href = "../index.html";
-    });
+        const form = e.target;
+        const formData = new FormData(form);
+        const fullName = form.querySelector('input[type="text"]').value;
+        const email = form.querySelector('input[type="email"]').value;
+        const phone = form.querySelector('input[type="tel"]').value;
+        const address = form.querySelector('textarea').value;
+        const governorate = document.getElementById('governorate-select').value;
+        
+        // Prepare order items
+        const orderItems = currentCartBooks.map(book => {
+            const bookPrice = typeof book.price === 'object' ? (book.price[currentLang] || book.price.en || book.price.ar || 0) : (book.price || 0);
+            return {
+                book_id: book.id,
+                quantity: 1,
+                price: bookPrice
+            };
+        });
+        
+        const shippingAddress = `${address}, ${SHIPPING_FEES[governorate][currentLang]}, ${fullName}, ${phone}, ${email}`;
+        const finalTotal = cartSubtotal + currentShippingPrice;
+        
+        try {
+            const submitBtn = form.querySelector('button[type="submit"]');
+            const originalText = submitBtn.textContent;
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'جاري إنشاء الطلب...';
+            
+            const response = await fetch(`${API_BASE_URL}/orders`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                credentials: 'include',
+                body: JSON.stringify({
+                    items: orderItems,
+                    shipping_address: shippingAddress,
+                    total_price: finalTotal
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok && result.success) {
+                alert("✅ تم تأكيد طلبك بنجاح! رقم الطلب: " + result.order.id);
+                localStorage.removeItem("shoppingCart");
+                window.location.href = "../index.html";
+            } else {
+                alert('حدث خطأ أثناء إنشاء الطلب: ' + (result.message || 'خطأ غير معروف'));
+                submitBtn.disabled = false;
+                submitBtn.textContent = originalText;
+            }
+        } catch (error) {
+            console.error('Error creating order:', error);
+            alert('حدث خطأ في الاتصال بالخادم. تأكد من تشغيل الخادم');
+            const submitBtn = form.querySelector('button[type="submit"]');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'تأكيد الطلب والدفع';
+        }
+    });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     // يجب أن تبدأ بتطبيق اللغة أولاً لتهيئة currentLang
-    applyLanguage(); 
-    renderCart();
-    setupCheckoutSteps();
+    applyLanguage(); 
+    await renderCart();
+    setupCheckoutSteps();
 });

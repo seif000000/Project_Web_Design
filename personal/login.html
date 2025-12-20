@@ -142,15 +142,30 @@ passwordInput.addEventListener('input', () => {
     }
 });
 
+
+
+// Determine API base URL (supports fallback on localhost/127.0.0.1)
+function getApiBaseUrl() {
+    if (window.location.port === '5502' || window.location.hostname === '127.0.0.1') {
+        return 'http://127.0.0.1:5000/api';
+    }
+    return 'http://localhost:5000/api';
+}
+
+const API_BASE_URL = getApiBaseUrl();
+const API_BASE_URL_FALLBACK = window.location.hostname === '127.0.0.1' 
+    ? 'http://localhost:5000/api' 
+    : 'http://127.0.0.1:5000/api';
+
 // Login Form Submission
-document.getElementById("login-form").addEventListener("submit", function(e) {
+document.getElementById("login-form").addEventListener("submit", async function(e) {
     e.preventDefault();
-    
+
     const email = emailInput.value.trim();
     const password = passwordInput.value.trim();
-    
+
     let isValid = true;
-    
+
     // Validate email
     if (email === '') {
         showError(emailInput, 'البريد الإلكتروني مطلوب');
@@ -161,7 +176,7 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
     } else {
         clearError(emailInput);
     }
-    
+
     // Validate password
     if (password === '') {
         showError(passwordInput, 'كلمة المرور مطلوبة');
@@ -172,15 +187,50 @@ document.getElementById("login-form").addEventListener("submit", function(e) {
     } else {
         clearError(passwordInput);
     }
-    
-    // If all validations pass, proceed
-    if (isValid) {
-        // Store in memory instead of localStorage
-        sessionStorage.setItem("email", email);
-        sessionStorage.setItem("username", email.split('@')[0]);
-        
-        // Redirect
-        window.location.href = "profile.html";
+
+    if (!isValid) return;
+
+    const payload = { email, password };
+
+    const fetchOptions = {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    };
+
+    try {
+        // Try primary API URL
+        let response = await fetch(`${API_BASE_URL}/login`, fetchOptions);
+        if (!response.ok && response.status !== 401) {
+            // try fallback
+            response = await fetch(`${API_BASE_URL_FALLBACK}/login`, fetchOptions);
+        }
+
+        const result = await response.json();
+
+        if (response.ok && result.success) {
+            // store lightweight info for UI; server keeps session cookie
+            sessionStorage.setItem('authenticated', 'true');
+            sessionStorage.setItem('role', result.user.role);
+            sessionStorage.setItem('user_id', result.user.id);
+            sessionStorage.setItem('username', result.user.username);
+
+            if (result.user.role === 'admin') {
+                window.location.href = '../admin/admin-page.html';
+            } else {
+                window.location.href = 'profile.html';
+            }
+            return;
+        }
+
+        // show error message
+        const message = result && result.message ? result.message : 'فشل تسجيل الدخول';
+        showError(passwordInput, message);
+
+    } catch (err) {
+        console.error('Login error:', err);
+        alert('حدث خطأ في الاتصال بالخادم. تأكد من تشغيل الخادم على http://localhost:5000');
     }
 });
     </script>

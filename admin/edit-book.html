@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Worms - Add Book</title>
+    <title>Book Worms - Edit Book</title>
     <link rel="stylesheet" href="admin-style.css">
     <script src="admin-lang.js"></script>
 </head>
@@ -13,7 +13,7 @@
         <div class="navbar-container">
             <div class="logo" onclick="goToHome()">
                 <div class="logo-icon">📚</div>
-                <span data-lang="addPageName">Book Worms - إضافة كتاب</span>
+                <span data-lang="editPageName">Book Worms - تعديل كتاب</span>
             </div>
             
             <div class="nav-actions">
@@ -26,9 +26,11 @@
     <!-- Form Section -->
     <section class="form-section">
         <div class="form-container">
-            <h1 class="form-title" data-lang="addBookTitle">إضافة كتاب جديد</h1>
+            <h1 class="form-title" data-lang="editBookTitle">تعديل كتاب</h1>
             
-            <form id="addBookForm">
+            <form id="editBookForm">
+                <input type="hidden" id="bookId" value="">
+                
                 <div class="form-group">
                     <label class="form-label" for="bookTitle" data-lang="bookTitle">عنوان الكتاب</label>
                     <input type="text" id="bookTitle" class="form-input" required data-lang="bookTitlePlaceholder" placeholder="أدخل عنوان الكتاب">
@@ -55,28 +57,29 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-lang="bookCover">صورة غلاف الكتاب</label>
+                    <label class="form-label" data-lang="bookCover">صورة غلاف الكتاب (اختياري - اتركه فارغاً للاحتفاظ بالصورة الحالية)</label>
                     <div class="file-input-wrapper">
                         <label class="file-input-btn" for="bookCover" data-lang="chooseCover">
-                            📷 اختر صورة الغلاف
+                            📷 اختر صورة غلاف جديدة
                         </label>
-                        <input type="file" id="bookCover" accept="image/*" required>
+                        <input type="file" id="bookCover" accept="image/*">
                     </div>
                     <div class="file-name" id="coverFileName" data-lang="noFile">لم يتم اختيار ملف</div>
+                    <div id="currentCoverPreview" style="margin-top: 10px;"></div>
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label" data-lang="bookPDF">ملف PDF للكتاب</label>
+                    <label class="form-label" data-lang="bookPDF">ملف PDF للكتاب (اختياري - اتركه فارغاً للاحتفاظ بالملف الحالي)</label>
                     <div class="file-input-wrapper">
                         <label class="file-input-btn" for="bookPDF" data-lang="choosePDF">
-                            📄 اختر ملف PDF
+                            📄 اختر ملف PDF جديد
                         </label>
-                        <input type="file" id="bookPDF" accept=".pdf" required>
+                        <input type="file" id="bookPDF" accept=".pdf">
                     </div>
                     <div class="file-name" id="pdfFileName" data-lang="noFile">لم يتم اختيار ملف</div>
                 </div>
 
-                <button type="submit" class="submit-btn" data-lang="submitBtn">إضافة الكتاب ✨</button>
+                <button type="submit" class="submit-btn" data-lang="updateBtn">تحديث الكتاب ✨</button>
             </form>
         </div>
     </section>
@@ -85,8 +88,8 @@
     <div class="modal" id="successModal">
         <div class="modal-content">
             <div class="modal-icon">✅</div>
-            <h2 class="modal-title" data-lang="successTitle">شكراً لإضافة هذه القطعة الفنية!</h2>
-            <p class="modal-text" data-lang="successText">سيقوم فريقنا بمراجعة الكتاب وسيتم رفعه خلال 24 ساعة كحد أقصى</p>
+            <h2 class="modal-title" data-lang="successTitle">تم التحديث بنجاح!</h2>
+            <p class="modal-text" data-lang="successText">تم تحديث معلومات الكتاب بنجاح</p>
         </div>
     </div>
 
@@ -98,6 +101,7 @@
     </footer>
 
     <script src="auth-check.js"></script>
-    <script src="add-book-script.js"></script>
+    <script src="edit-book-script.js"></script>
 </body>
 </html>
+

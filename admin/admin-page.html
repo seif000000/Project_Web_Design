@@ -38,9 +38,9 @@
                 </div>
 
                 <div class="admin-card" onclick="navigateToRemoveBook()">
-                    <div class="card-icon">➖</div>
-                    <h2 data-lang="removeBook">حذف كتاب</h2>
-                    <p data-lang="removeBookDesc">إزالة كتاب من المكتبة</p>
+                    <div class="card-icon">📚</div>
+                    <h2 data-lang="manageBooks">إدارة الكتب</h2>
+                    <p data-lang="manageBooksDesc">عرض وتعديل وحذف الكتب</p>
                     <div class="card-glow"></div>
                 </div>
             </div>
@@ -55,6 +55,7 @@
     </footer>
 
     <!-- Local scripts (loaded after DOM) -->
+    {% comment %} <script src="auth-check.js"></script> {% endcomment %}
     <script src="admin-lang.js"></script>
     <script src="admin-script.js"></script>
 </body>
