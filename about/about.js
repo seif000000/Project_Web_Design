@@ -150,10 +150,21 @@ document.addEventListener('DOMContentLoaded', () => {
         if (teamGrid && data.team) {
             teamGrid.innerHTML = '';
             data.team.forEach(member => {
+                // Fix image path - ensure it uses correct relative path
+                let imagePath = member.image;
+                // If it's already a relative path starting with ../image/, keep it
+                // If it's a full URL, keep it
+                // Otherwise, ensure it's ../image/filename
+                if (imagePath && !imagePath.startsWith('http') && !imagePath.startsWith('../')) {
+                    // Extract filename if it's a full path
+                    const filename = imagePath.split('/').pop();
+                    imagePath = `../image/${filename}`;
+                }
+                
                 teamGrid.innerHTML += `
                     <div class="team-card">
                         <div class="team-image">
-                            <img src="${member.image}" alt="${member.name}">
+                            <img src="${imagePath}" alt="${member.name}" onerror="this.src='../image/user_avatar.jpg'">
                             <div class="team-overlay">
                                 <div class="social-links">
                                     <a href="#" class="social-link">in</a>

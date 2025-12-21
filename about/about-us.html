@@ -4,19 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>من نحن - فريقنا</title>
+    <link rel="stylesheet" href="../style.css">
     <link rel="stylesheet" href="about.css">
 </head>
 <body>
-    <!-- Navbar -->
+    <!-- Navbar - Matching main page exactly -->
     <nav class="navbar">
-        <div class="navbar-container">
-            <div class="logo">
-                <!-- <div class="logo-icon">📚</div> -->
-                <a href="../index.html" class="logo-icon">📚</a>
-                <span id="logoText">مكتبتنا</span>
-            </div>
-            <button class="lang-btn" onclick="toggleDarkMode()" id="darkBtn">🌙</button>
-            <button class="lang-btn" onclick="toggleLanguage()" id="langBtn">English</button>
+        <div class="logo">
+            <a href="../index.html" class="logo-icon">📚</a>
+            <span data-key="siteName" onclick="homepage()" onmouseover="this.style.cursor='pointer'">Book Worms</span>
+        </div>
+        
+        <div class="nav-section nav-center" id="main-nav-links">
+            <a href="../contact/contact.html" class="nav-link" data-key="navContact">Contact Us</a>
+            <a href="about-us.html" class="nav-link" data-key="navAbout">About Us</a>
+            <a href="#" class="nav-link" data-key="navEditors">Editors' Picks</a>
+            <a href="#" class="nav-link" data-key="navBestsellers">Bestsellers</a>
+            <a href="../new-arrive/new-arrive.html" class="nav-link" data-key="navNewArrivals">New Arrivals</a>
+            <a href="../Books/books.html" class="nav-link" data-key="navAllBooks">All Books</a>
+        </div>
+
+        <div class="nav-section nav-right">
+            <button id="language-toggle-btn" class="nav-icon-btn lang-btn" data-lang="ar">AR</button>
+            <button id="theme-toggle" class="nav-icon-btn" aria-label="Toggle dark mode">
+                <span id="sun-icon" role="img">☀️</span>
+                <span id="moon-icon" role="img" style="display:none;">🌙</span>
+            </button>
+        <a href="../Checkout/checkout.html" class="nav-cart-link" aria-label="Go to Cart">
+            <button class="nav-icon-btn nav-cart-btn">
+        
+        <span role="img" class="cart-emoji">🛒</span>
+        
+        <span class="cart-count" id="cart-count">0</span>
+        
+    </button>
+</a>
+            <a href="../personal/register.html" class="user-icon">👤</a>
         </div>
     </nav>
 
@@ -124,6 +147,12 @@
         </div>
     </footer>
 
+    <script src="../script.js"></script>
     <script src="about.js"></script>
+    <script>
+        function homepage() {
+            window.location.href = "../index.html";
+        }
+    </script>
 </body>
 </html>

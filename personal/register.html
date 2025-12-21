@@ -1,292 +1,375 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ar" dir="rtl">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>تسجيل مستخدم جديد</title>
-  <link rel="stylesheet" href="../Books/books.css" />
-  <link rel="stylesheet" href="Also-Ahmyd.css" />
-  <style>
-    .form-group {
-      margin-bottom: 1rem;
-      position: relative;
-    }
-    .error-message {
-      color: #ef4444;
-      font-size: 0.875rem;
-      margin-top: 0.5rem;
-      display: block;
-      font-weight: bold;
-      background-color: rgba(239, 68, 68, 0.1);
-      padding: 0.5rem;
-      border-radius: 4px;
-      border-left: 3px solid #ef4444;
-    }
-    input.error {
-      border-color: #ef4444 !important;
-      border-width: 2px;
-    }
-    .success-message {
-      color: #10b981;
-      font-size: 0.875rem;
-      margin-top: 0.5rem;
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <div class="input-carrier">
-    <h1>إنشاء حساب جديد</h1>
-    <form id="register-form">
-      <div class="form-group">
-        <label for="username">اسم المستخدم</label>
-        <input type="text" id="username" name="username" placeholder="أدخل اسمك" />
-      </div>
-
-      <div class="form-group">
-        <label for="email">البريد الإلكتروني</label>
-        <input type="email" id="email" name="email" placeholder="أدخل بريدك" />
-      </div>
-
-      <div class="form-group">
-        <label for="password">كلمة المرور</label>
-        <input type="password" id="password" name="password" placeholder="••••••••" />
-      </div>
-
-      <div class="form-group">
-        <label for="confirm-password">تأكيد كلمة المرور</label>
-        <input type="password" id="confirm-password" name="confirm-password" placeholder="••••••••" />
-      </div>
-
-      <button type="submit">إنشاء الحساب</button>
-    </form>
-    
-    <p style="margin-top: 1rem;">
-      لديك حساب بالفعل؟ <a href="login.html" style="color: var(--accent);">سجل دخول</a>
-    </p>
-  </div>
-
-  <script>
-    // Validation Functions
-    function validateUsername(username) {
-      const usernameRegex = /^[a-zA-Z0-9_\u0600-\u06FF]{3,}$/;
-      return usernameRegex.test(username);
-    }
-
-    function validateEmail(email) {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    }
-
-    function validatePassword(password) {
-      if (password.length < 8) {
-        return { valid: false, message: '⚠️ كلمة المرور يجب أن تكون 8 أحرف على الأقل' };
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>التسجيل - Book Worms</title>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      .auth-container {
+        max-width: 500px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
       }
-      if (!/[a-zA-Z]/.test(password)) {
-        return { valid: false, message: '⚠️ كلمة المرور يجب أن تحتوي على حرف واحد على الأقل' };
+      .auth-header {
+        text-align: center;
+        margin-bottom: 2rem;
       }
-      if (!/[0-9]/.test(password)) {
-        return { valid: false, message: '⚠️ كلمة المرور يجب أن تحتوي على رقم واحد على الأقل' };
+      .auth-header h1 {
+        font-size: 2rem;
+        color: var(--text-color);
+        margin-bottom: 0.5rem;
       }
-      return { valid: true };
-    }
-
-    function showError(inputId, message) {
-      const input = document.getElementById(inputId);
-      const formGroup = input.closest('.form-group');
-      
-      // Remove any existing error
-      const existingError = formGroup.querySelector('.error-message');
-      if (existingError) {
-        existingError.remove();
+      .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
       }
-      
-      // Add error styling to input
-      input.classList.add('error');
-      
-      // Create and show error message
-      const errorDiv = document.createElement('div');
-      errorDiv.className = 'error-message';
-      errorDiv.textContent = message;
-      formGroup.appendChild(errorDiv);
-    }
-
-    function clearError(inputId) {
-      const input = document.getElementById(inputId);
-      const formGroup = input.closest('.form-group');
-      
-      const existingError = formGroup.querySelector('.error-message');
-      if (existingError) {
-        existingError.remove();
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
       }
-      input.classList.remove('error');
-    }
-
-    // Get form inputs
-    const usernameInput = document.getElementById("username");
-    const emailInput = document.getElementById("email");
-    const passwordInput = document.getElementById("password");
-    const confirmPasswordInput = document.getElementById("confirm-password");
-
-    // Real-time validation for username
-    usernameInput.addEventListener('blur', () => {
-      const username = usernameInput.value.trim();
-      if (username === '') {
-        showError('username', '⚠️ اسم المستخدم مطلوب');
-      } else if (!validateUsername(username)) {
-        showError('username', '⚠️ اسم المستخدم يجب أن يكون 3 أحرف على الأقل');
-      } else {
-        clearError('username');
+      .form-group label {
+        font-weight: bold;
+        color: var(--text-color);
       }
-    });
-
-    usernameInput.addEventListener('input', () => {
-      if (usernameInput.value.trim() !== '') {
-        clearError('username');
+      .form-control {
+        padding: 0.75rem;
+        border: 1px solid var(--muted);
+        border-radius: 8px;
+        background: var(--input-bg);
+        color: var(--text-color);
+        font-size: 1rem;
       }
-    });
-
-    // Real-time validation for email
-    emailInput.addEventListener('blur', () => {
-      const email = emailInput.value.trim();
-      if (email === '') {
-        showError('email', '⚠️ البريد الإلكتروني مطلوب');
-      } else if (!validateEmail(email)) {
-        showError('email', '⚠️ من فضلك أدخل بريد إلكتروني صحيح');
-      } else {
-        clearError('email');
+      .form-control:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgba(106, 175, 235, 0.2);
       }
-    });
-
-    emailInput.addEventListener('input', () => {
-      if (emailInput.value.trim() !== '') {
-        clearError('email');
+      .btn-primary {
+        padding: 0.8rem;
+        background: var(--accent);
+        color: var(--dark);
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.3s;
       }
-    });
-
-    // Real-time validation for password
-    passwordInput.addEventListener('blur', () => {
-      const password = passwordInput.value.trim();
-      if (password === '') {
-        showError('password', '⚠️ كلمة المرور مطلوبة');
-      } else {
-        const validation = validatePassword(password);
-        if (!validation.valid) {
-          showError('password', validation.message);
-        } else {
-          clearError('password');
+      .btn-primary:hover {
+        background: var(--accent-hover);
+      }
+      .auth-footer {
+        text-align: center;
+        margin-top: 1.5rem;
+      }
+      .auth-footer a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .auth-footer a:hover {
+        text-decoration: underline;
+      }
+      .error-message {
+        background: #ffebee;
+        color: #c62828;
+        padding: 0.75rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        display: none;
+      }
+      .success-message {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 0.75rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        display: none;
+      }
+      @media (max-width: 600px) {
+        .auth-container {
+          margin: 1rem;
+          padding: 1.5rem;
         }
       }
-    });
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="../index.html" class="logo-icon">📚</a>
+        <span id="site-name">Book Worms</span>
+      </div>
+      <div class="nav-section nav-center">
+        <a href="../Books/books.html" class="nav-link">جميع الكتب</a>
+        <a href="../contact/contact.html" class="nav-link">اتصل بنا</a>
+        <a href="../about/about-us.html" class="nav-link">من نحن</a>
+      </div>
+      <div class="nav-section nav-right">
+        <button id="language-toggle-btn" class="nav-icon-btn lang-btn">
+          AR
+        </button>
+        <button
+          id="theme-toggle"
+          class="nav-icon-btn"
+          aria-label="Toggle dark mode"
+        >
+          <span id="sun-icon">☀️</span>
+          <span id="moon-icon" style="display: none">🌙</span>
+        </button>
+        <a href="../Checkout/checkout.html" class="nav-cart-link">
+          <button class="nav-icon-btn nav-cart-btn">
+            <span class="cart-emoji">🛒</span>
+            <span class="cart-count" id="cart-count">0</span>
+          </button>
+        </a>
+        <a href="register.html" class="user-icon">👤</a>
+      </div>
+    </nav>
 
-    passwordInput.addEventListener('input', () => {
-      const password = passwordInput.value.trim();
-      if (password !== '') {
-        clearError('password');
-        // Re-validate confirm password if it has value
-        if (confirmPasswordInput.value.trim() !== '') {
-          if (passwordInput.value !== confirmPasswordInput.value) {
-            showError('confirm-password', '⚠️ كلمة المرور غير متطابقة');
+    <div class="auth-container">
+      <div class="auth-header">
+        <h1 id="page-title">إنشاء حساب جديد</h1>
+        <p id="page-desc">انضم إلى مجتمع Book Worms اليوم</p>
+      </div>
+
+      <div id="error-message" class="error-message"></div>
+      <div id="success-message" class="success-message"></div>
+
+      <form id="register-form" class="auth-form">
+        <div class="form-group">
+          <label for="name" id="label-name">الاسم الكامل</label>
+          <input type="text" id="name" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="email" id="label-email">البريد الإلكتروني</label>
+          <input type="email" id="email" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="password" id="label-password">كلمة المرور</label>
+          <input
+            type="password"
+            id="password"
+            class="form-control"
+            minlength="6"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="confirm-password" id="label-confirm"
+            >تأكيد كلمة المرور</label
+          >
+          <input
+            type="password"
+            id="confirm-password"
+            class="form-control"
+            required
+          />
+        </div>
+        <button type="submit" class="btn-primary" id="submit-btn">
+          إنشاء الحساب
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        <p id="have-account">
+          هل لديك حساب؟ <a href="login.html">تسجيل الدخول</a>
+        </p>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <span id="footer-site-name">Book Worms</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p id="copyright">حقوق النشر © 2025 Book Worms</p>
+      </div>
+    </footer>
+
+    <script>
+      // ================================
+      // Register Page — Full Backend Integration
+      // ================================
+
+      let currentLang = localStorage.getItem("language") || "ar";
+
+      // Translations
+      const translations = {
+        ar: {
+          siteName: "Book Worms",
+          pageTitle: "إنشاء حساب جديد",
+          pageDesc: "انضم إلى مجتمع Book Worms اليوم",
+          labelName: "الاسم الكامل",
+          labelEmail: "البريد الإلكتروني",
+          labelPassword: "كلمة المرور",
+          labelConfirm: "تأكيد كلمة المرور",
+          submitBtn: "إنشاء الحساب",
+          haveAccount: "هل لديك حساب؟",
+          loginLink: "تسجيل الدخول",
+          nameRequired: "الاسم مطلوب",
+          emailInvalid: "البريد الإلكتروني غير صالح",
+          passwordShort: "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
+          passwordMismatch: "كلمات المرور غير متطابقة",
+          registerSuccess: "تم إنشاء الحساب بنجاح! يُرجى تسجيل الدخول.",
+          serverError: "حدث خطأ. يُرجى المحاولة لاحقاً.",
+          copyright: "حقوق النشر © 2025 Book Worms",
+          usernameRequired: "اسم المستخدم مطلوب",
+          usernameShort: "اسم المستخدم يجب أن يكون 3 أحرف على الأقل",
+          usernameLong: "اسم المستخدم لا يمكن أن يتجاوز 30 حرفاً",
+        },
+        en: {
+          siteName: "Book Worms",
+          pageTitle: "Create Account",
+          pageDesc: "Join the Book Worms community today",
+          labelName: "Full Name",
+          labelEmail: "Email",
+          labelPassword: "Password",
+          labelConfirm: "Confirm Password",
+          submitBtn: "Create Account",
+          haveAccount: "Already have an account?",
+          loginLink: "Log in",
+          nameRequired: "Name is required",
+          emailInvalid: "Invalid email",
+          passwordShort: "Password must be at least 6 characters",
+          passwordMismatch: "Passwords do not match",
+          registerSuccess: "Account created successfully! Please log in.",
+          serverError: "An error occurred. Please try again.",
+          copyright: "Copyright © 2025 Book Worms",
+          usernameRequired: "Username is required",
+          usernameShort: "Username must be at least 3 characters",
+          usernameLong: "Username cannot exceed 30 characters",
+        },
+      };
+
+      function t(key) {
+        return translations[currentLang][key] || key;
+      }
+
+      function applyTranslations() {
+        document.getElementById("site-name").textContent = t("siteName");
+        document.getElementById("page-title").textContent = t("pageTitle");
+        document.getElementById("page-desc").textContent = t("pageDesc");
+        document.getElementById("label-name").textContent = t("labelName");
+        document.getElementById("label-email").textContent = t("labelEmail");
+        document.getElementById("label-password").textContent =
+          t("labelPassword");
+        document.getElementById("label-confirm").textContent =
+          t("labelConfirm");
+        document.getElementById("submit-btn").textContent = t("submitBtn");
+        document.getElementById("have-account").innerHTML =
+          `${t("haveAccount")} <a href="login.html">${t("loginLink")}</a>`;
+        document.getElementById("footer-site-name").textContent = t("siteName");
+        document.getElementById("copyright").textContent = t("copyright");
+      }
+
+      // Show error
+      function showError(message) {
+        const el = document.getElementById("error-message");
+        el.textContent = message;
+        el.style.display = "block";
+        document.getElementById("success-message").style.display = "none";
+      }
+
+      // Show success
+      function showSuccess(message) {
+        const el = document.getElementById("success-message");
+        el.textContent = message;
+        el.style.display = "block";
+        document.getElementById("error-message").style.display = "none";
+      }
+
+      async function register(event) {
+        event.preventDefault();
+        document.getElementById("error-message").style.display = "none";
+
+        const username = document.getElementById("name").value.trim(); // Reuse "name" field for username
+        const email = document.getElementById("email").value.trim();
+        const password = document.getElementById("password").value;
+        const confirmPassword =
+          document.getElementById("confirm-password").value;
+
+        // Client validation (match backend rules)
+        if (!username) return showError(t("usernameRequired"));
+        if (username.length < 3) return showError(t("usernameShort"));
+        if (username.length > 30) return showError(t("usernameLong"));
+        if (!/^\S+@\S+\.\S+$/.test(email)) return showError(t("emailInvalid"));
+        if (password.length < 6) return showError(t("passwordShort"));
+        if (password !== confirmPassword)
+          return showError(t("passwordMismatch"));
+
+        try {
+          const res = await fetch("/api/auth/register", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              username,
+              email: email.toLowerCase(), // backend expects lowercase
+              password,
+            }),
+          });
+
+          const data = await res.json();
+
+          if (res.ok) {
+            showSuccess(t("registerSuccess"));
+            setTimeout(() => {
+              window.location.href = "login.html";
+            }, 2000);
           } else {
-            clearError('confirm-password');
+            // Handle Mongoose validation errors
+            let msg = data.message || data.error || t("serverError");
+            if (data.errors) {
+              const firstError = Object.values(data.errors)[0];
+              msg = firstError.message || firstError;
+            }
+            showError(msg);
           }
+        } catch (err) {
+          console.error("❌ Register error:", err);
+          showError(t("serverError"));
         }
       }
-    });
+      // Init
+      document.addEventListener("DOMContentLoaded", () => {
+        applyTranslations();
 
-    // Real-time validation for confirm password
-    confirmPasswordInput.addEventListener('blur', () => {
-      const password = passwordInput.value.trim();
-      const confirmPassword = confirmPasswordInput.value.trim();
-      
-      if (confirmPassword === '') {
-        showError('confirm-password', '⚠️ تأكيد كلمة المرور مطلوب');
-      } else if (password !== confirmPassword) {
-        showError('confirm-password', '⚠️ كلمة المرور غير متطابقة');
-      } else {
-        clearError('confirm-password');
-      }
-    });
-
-    confirmPasswordInput.addEventListener('input', () => {
-      if (confirmPasswordInput.value.trim() !== '') {
-        if (passwordInput.value === confirmPasswordInput.value) {
-          clearError('confirm-password');
+        // Theme
+        if (localStorage.getItem("theme") === "dark") {
+          document.body.classList.add("dark-mode");
+          document.getElementById("sun-icon").style.display = "none";
+          document.getElementById("moon-icon").style.display = "inline";
         }
-      }
-    });
 
-    // Form submission
-    document.getElementById("register-form").addEventListener("submit", function(e) {
-      e.preventDefault();
-      
-      const username = usernameInput.value.trim();
-      const email = emailInput.value.trim();
-      const password = passwordInput.value.trim();
-      const confirmPassword = confirmPasswordInput.value.trim();
-      
-      let isValid = true;
-      
-      // Validate username
-      if (username === '') {
-        showError('username', '⚠️ اسم المستخدم مطلوب');
-        isValid = false;
-      } else if (!validateUsername(username)) {
-        showError('username', '⚠️ اسم المستخدم يجب أن يكون 3 أحرف على الأقل');
-        isValid = false;
-      } else {
-        clearError('username');
-      }
-      
-      // Validate email
-      if (email === '') {
-        showError('email', '⚠️ البريد الإلكتروني مطلوب');
-        isValid = false;
-      } else if (!validateEmail(email)) {
-        showError('email', '⚠️ من فضلك أدخل بريد إلكتروني صحيح');
-        isValid = false;
-      } else {
-        clearError('email');
-      }
-      
-      // Validate password
-      if (password === '') {
-        showError('password', '⚠️ كلمة المرور مطلوبة');
-        isValid = false;
-      } else {
-        const validation = validatePassword(password);
-        if (!validation.valid) {
-          showError('password', validation.message);
-          isValid = false;
-        } else {
-          clearError('password');
+        // Lang
+        const langToggle = document.getElementById("language-toggle-btn");
+        if (langToggle) {
+          langToggle.addEventListener("click", () => {
+            currentLang = currentLang === "ar" ? "en" : "ar";
+            localStorage.setItem("language", currentLang);
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+            langToggle.textContent = currentLang.toUpperCase();
+            applyTranslations();
+          });
         }
-      }
-      
-      // Validate confirm password
-      if (confirmPassword === '') {
-        showError('confirm-password', '⚠️ تأكيد كلمة المرور مطلوب');
-        isValid = false;
-      } else if (password !== confirmPassword) {
-        showError('confirm-password', '⚠️ كلمة المرور غير متطابقة');
-        isValid = false;
-      } else {
-        clearError('confirm-password');
-      }
-      
-      // If all validations pass, proceed
-      if (isValid) {
-        // Store in memory instead of localStorage
-        sessionStorage.setItem("username", username);
-        sessionStorage.setItem("email", email);
-        
-        // Show success message
-        alert('✅ تم إنشاء الحساب بنجاح!');
-        
-        // Redirect to profile
-        window.location.href = "profile.html";
-      }
-    });
-  </script>
-</body>
+
+        // Form submit
+        const form = document.getElementById("register-form");
+        if (form) {
+          form.addEventListener("submit", register);
+        }
+      });
+    </script>
+  </body>
 </html>
+

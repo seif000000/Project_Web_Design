@@ -133,31 +133,37 @@ function updateShippingAndTotal(governorateKey) {
 }
 
 function getCart() {
-    const cart = localStorage.getItem('shoppingCart');
-    return cart ? JSON.parse(cart) : [];
+    const cart = localStorage.getItem('shoppingCart');
+    return cart ? JSON.parse(cart) : [];
 }
 
-function renderCart() {
-    const cartIds = getCart();
-    let subtotal = 0;
-    
-    cartListContainer.innerHTML = ''; 
-    
-    if (typeof booksData === 'undefined') {
-        cartListContainer.innerHTML = '<p style="color:red;">خطأ: لم يتم تحميل بيانات الكتب.</p>';
-        return;
-    }
-    
-    if (cartIds.length === 0) {
-        cartListContainer.innerHTML = '<p style="text-align: center; color: var(--muted);">سلة المشتريات فارغة. عد إلى صفحة الكتب لإضافة عناصر.</p>';
-        document.getElementById('proceed-to-delivery').disabled = true;
-        document.getElementById('subtotal-price').textContent = '$0.00';
-        document.getElementById('shipping-price').textContent = '$0.00';
-        document.getElementById('final-total').textContent = '$0.00';
-        return;
-    }
+async function renderCart() {
+    const cartIds = getCart();
+    let subtotal = 0;
+    
+    cartListContainer.innerHTML = ''; 
+    
+    // Check if API service is available
+    if (typeof window.booksAPI === 'undefined') {
+        cartListContainer.innerHTML = '<p style="color:red;">خطأ: لم يتم تحميل خدمة API للكتب. تأكد من تحميل js/apiService.js</p>';
+        return;
+    }
+    
+    if (cartIds.length === 0) {
+        cartListContainer.innerHTML = '<p style="text-align: center; color: var(--muted);">سلة المشتريات فارغة. عد إلى صفحة الكتب لإضافة عناصر.</p>';
+        document.getElementById('proceed-to-delivery').disabled = true;
+        document.getElementById('subtotal-price').textContent = '$0.00';
+        document.getElementById('shipping-price').textContent = '$0.00';
+        document.getElementById('final-total').textContent = '$0.00';
+        return;
+    }
 
-    currentCartBooks = booksData.filter(b => cartIds.includes(b.id.toString()));
+    // Load books from API
+    const allBooks = await window.booksAPI.loadBooks();
+    currentCartBooks = allBooks.filter(b => {
+        const bookId = b.id?.toString() || b._id?.toString();
+        return cartIds.includes(bookId);
+    });
 
     currentCartBooks.forEach(book => {
         subtotal += book.price;
@@ -199,9 +205,9 @@ function setupCheckoutSteps() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
     // يجب أن تبدأ بتطبيق اللغة أولاً لتهيئة currentLang
-    applyLanguage(); 
-    renderCart();
-    setupCheckoutSteps();
+    applyLanguage(); 
+    await renderCart();
+    setupCheckoutSteps();
 });

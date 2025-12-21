@@ -1,189 +1,320 @@
 <!doctype html>
 <html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تسجيل الدخول - Book Worms</title>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      .auth-container {
+        max-width: 500px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      .auth-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .auth-header h1 {
+        font-size: 2rem;
+        color: var(--text-color);
+        margin-bottom: 0.5rem;
+      }
+      .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .form-group label {
+        font-weight: bold;
+        color: var(--text-color);
+      }
+      .form-control {
+        padding: 0.75rem;
+        border: 1px solid var(--muted);
+        border-radius: 8px;
+        background: var(--input-bg);
+        color: var(--text-color);
+        font-size: 1rem;
+      }
+      .form-control:focus {
+        outline: none;
+        border-color: var(--accent);
+        box-shadow: 0 0 0 2px rgba(106, 175, 235, 0.2);
+      }
+      .btn-primary {
+        padding: 0.8rem;
+        background: var(--accent);
+        color: var(--dark);
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      .btn-primary:hover {
+        background: var(--accent-hover);
+      }
+      .auth-footer {
+        text-align: center;
+        margin-top: 1.5rem;
+      }
+      .auth-footer a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      .auth-footer a:hover {
+        text-decoration: underline;
+      }
+      .error-message {
+        background: #ffebee;
+        color: #c62828;
+        padding: 0.75rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        display: none;
+      }
+      .success-message {
+        background: #e8f5e9;
+        color: #2e7d32;
+        padding: 0.75rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        display: none;
+      }
+      @media (max-width: 600px) {
+        .auth-container {
+          margin: 1rem;
+          padding: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="../index.html" class="logo-icon">📚</a>
+        <span id="site-name">Book Worms</span>
+      </div>
+      <div class="nav-section nav-center">
+        <a href="../Books/books.html" class="nav-link">جميع الكتب</a>
+        <a href="../contact/contact.html" class="nav-link">اتصل بنا</a>
+        <a href="../about/about-us.html" class="nav-link">من نحن</a>
+      </div>
+      <div class="nav-section nav-right">
+        <button id="language-toggle-btn" class="nav-icon-btn lang-btn">
+          AR
+        </button>
+        <button
+          id="theme-toggle"
+          class="nav-icon-btn"
+          aria-label="Toggle dark mode"
+        >
+          <span id="sun-icon">☀️</span>
+          <span id="moon-icon" style="display: none">🌙</span>
+        </button>
+        <a href="../Checkout/checkout.html" class="nav-cart-link">
+          <button class="nav-icon-btn nav-cart-btn">
+            <span class="cart-emoji">🛒</span>
+            <span class="cart-count" id="cart-count">0</span>
+          </button>
+        </a>
+        <a href="login.html" class="user-icon">👤</a>
+      </div>
+    </nav>
 
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title id="page-title">تسجيل الدخول</title>
-    <link rel="stylesheet" href="../Books/books.css" />
-    <link rel="stylesheet" href="Also-Ahmyd.css" />
-</head>
+    <div class="auth-container">
+      <div class="auth-header">
+        <h1 id="page-title">تسجيل الدخول</h1>
+        <p id="page-desc">مرحبًا بك مجددًا في Book Worms</p>
+      </div>
 
-<body>
-    <!-- Theme Toggle Button -->
-    <button id="theme-toggle" class="theme-btn">
-        <span id="sun-icon">☀️</span>
-        <span id="moon-icon" style="display:none;">🌙</span>
-    </button>
+      <div id="error-message" class="error-message"></div>
+      <div id="success-message" class="success-message"></div>
 
-    <div class="input-carrier">
-        <img src="../image/book_image.jpg" alt="Book Image">
-        <br><br><br>
-        <form id="login-form">
-            <label for="email">البريد الالكتروني</label>
-            <input type="email" id="email" name="email" placeholder="البريد الالكتروني" required />
+      <form id="login-form" class="auth-form">
+        <div class="form-group">
+          <label for="username" id="label-username"
+            >اسم المستخدم أو البريد</label
+          >
+          <input type="text" id="username" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="password" id="label-password">كلمة المرور</label>
+          <input type="password" id="password" class="form-control" required />
+        </div>
+        <button type="submit" class="btn-primary" id="submit-btn">
+          تسجيل الدخول
+        </button>
+      </form>
 
-            <label for="password">كلمة المرور</label>
-            <input type="password" id="password" name="password" placeholder="••••••••" required />
-
-            <button type="submit">تسجيل الدخول</button>
-        </form>
-        
-        <p style="margin-top: 1rem;">
-            ليس لديك حساب؟ <a href="register.html" style="color: var(--accent);">سجل الآن</a>
+      <div class="auth-footer">
+        <p id="no-account">
+          ليس لديك حساب؟ <a href="register.html">إنشاء حساب</a>
         </p>
+      </div>
     </div>
 
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-column">
+          <div class="footer-logo">
+            <span id="footer-site-name">Book Worms</span>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p id="copyright">حقوق النشر © 2025 Book Worms</p>
+      </div>
+    </footer>
+
     <script>
-// Dark Mode Toggle
-const themeToggle = document.getElementById("theme-toggle");
-const sunIcon = document.getElementById("sun-icon");
-const moonIcon = document.getElementById("moon-icon");
-const root = document.documentElement;
+      // ================================
+      // Login Page — Backend Integration
+      // ================================
 
-// Load saved theme
-const savedTheme = localStorage.getItem("theme") || "light";
-if (savedTheme === "dark") {
-    root.classList.add("dark-mode");
-    sunIcon.style.display = "none";
-    moonIcon.style.display = "inline";
-}
+      let currentLang = localStorage.getItem("language") || "ar";
 
-// Toggle theme
-themeToggle.addEventListener("click", () => {
-    root.classList.toggle("dark-mode");
-    const isDark = root.classList.contains("dark-mode");
-    
-    if (isDark) {
-        sunIcon.style.display = "none";
-        moonIcon.style.display = "inline";
-        localStorage.setItem("theme", "dark");
-    } else {
-        sunIcon.style.display = "inline";
-        moonIcon.style.display = "none";
-        localStorage.setItem("theme", "light");
-    }
-});
+      const translations = {
+        ar: {
+          siteName: "Book Worms",
+          pageTitle: "تسجيل الدخول",
+          pageDesc: "مرحبًا بك مجددًا في Book Worms",
+          labelUsername: "اسم المستخدم أو البريد",
+          labelPassword: "كلمة المرور",
+          submitBtn: "تسجيل الدخول",
+          noAccount: "ليس لديك حساب؟",
+          registerLink: "إنشاء حساب",
+          usernameRequired: "اسم المستخدم مطلوب",
+          passwordRequired: "كلمة المرور مطلوبة",
+          loginSuccess: "تم تسجيل الدخول بنجاح!",
+          invalidCredentials: "اسم المستخدم أو كلمة المرور غير صحيحة",
+          serverError: "حدث خطأ. يُرجى المحاولة لاحقاً.",
+          copyright: "حقوق النشر © 2025 Book Worms",
+        },
+        en: {
+          siteName: "Book Worms",
+          pageTitle: "Login",
+          pageDesc: "Welcome back to Book Worms",
+          labelUsername: "Username or Email",
+          labelPassword: "Password",
+          submitBtn: "Log In",
+          noAccount: "Don’t have an account?",
+          registerLink: "Create account",
+          usernameRequired: "Username is required",
+          passwordRequired: "Password is required",
+          loginSuccess: "Logged in successfully!",
+          invalidCredentials: "Invalid username or password",
+          serverError: "An error occurred. Please try again.",
+          copyright: "Copyright © 2025 Book Worms",
+        },
+      };
 
-// Validation Functions
-function validateEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
+      function t(key) {
+        return translations[currentLang][key] || key;
+      }
 
-function validatePassword(password) {
-    // Password must be at least 8 characters
-    return password.length >= 8;
-}
+      function applyTranslations() {
+        document.getElementById("site-name").textContent = t("siteName");
+        document.getElementById("page-title").textContent = t("pageTitle");
+        document.getElementById("page-desc").textContent = t("pageDesc");
+        document.getElementById("label-username").textContent =
+          t("labelUsername");
+        document.getElementById("label-password").textContent =
+          t("labelPassword");
+        document.getElementById("submit-btn").textContent = t("submitBtn");
+        document.getElementById("no-account").innerHTML =
+          `${t("noAccount")} <a href="register.html">${t("registerLink")}</a>`;
+        document.getElementById("footer-site-name").textContent = t("siteName");
+        document.getElementById("copyright").textContent = t("copyright");
+      }
 
-function showError(input, message) {
-    // Remove any existing error
-    const existingError = input.parentElement.querySelector('.error-message');
-    if (existingError) {
-        existingError.remove();
-    }
-    
-    // Add error styling
-    input.style.borderColor = '#ef4444';
-    
-    // Create and show error message
-    const errorDiv = document.createElement('div');
-    errorDiv.className = 'error-message';
-    errorDiv.style.color = '#ef4444';
-    errorDiv.style.fontSize = '0.875rem';
-    errorDiv.style.marginTop = '0.25rem';
-    errorDiv.textContent = message;
-    input.parentElement.appendChild(errorDiv);
-}
+      function showError(message) {
+        const el = document.getElementById("error-message");
+        el.textContent = message;
+        el.style.display = "block";
+        document.getElementById("success-message").style.display = "none";
+      }
 
-function clearError(input) {
-    const existingError = input.parentElement.querySelector('.error-message');
-    if (existingError) {
-        existingError.remove();
-    }
-    input.style.borderColor = '';
-}
+      function showSuccess(message) {
+        const el = document.getElementById("success-message");
+        el.textContent = message;
+        el.style.display = "block";
+        document.getElementById("error-message").style.display = "none";
+      }
 
-// Real-time validation
-const emailInput = document.getElementById("email");
-const passwordInput = document.getElementById("password");
+      async function login(event) {
+        event.preventDefault();
+        const username = document.getElementById("username").value.trim();
+        const password = document.getElementById("password").value;
 
-emailInput.addEventListener('blur', () => {
-    const email = emailInput.value.trim();
-    if (email === '') {
-        showError(emailInput, 'البريد الإلكتروني مطلوب');
-    } else if (!validateEmail(email)) {
-        showError(emailInput, 'من فضلك أدخل بريد إلكتروني صحيح');
-    } else {
-        clearError(emailInput);
-    }
-});
+        if (!username) return showError(t("usernameRequired"));
+        if (!password) return showError(t("passwordRequired"));
 
-emailInput.addEventListener('input', () => {
-    if (emailInput.value.trim() !== '') {
-        clearError(emailInput);
-    }
-});
+        try {
+          const res = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+          });
 
-passwordInput.addEventListener('blur', () => {
-    const password = passwordInput.value.trim();
-    if (password === '') {
-        showError(passwordInput, 'كلمة المرور مطلوبة');
-    } else if (!validatePassword(password)) {
-        showError(passwordInput, 'كلمة المرور يجب أن تكون 8 أحرف على الأقل');
-    } else {
-        clearError(passwordInput);
-    }
-});
+          const data = await res.json();
 
-passwordInput.addEventListener('input', () => {
-    if (passwordInput.value.trim() !== '') {
-        clearError(passwordInput);
-    }
-});
+          if (res.ok && data.success) {
+            // ✅ Store token & user
+            localStorage.setItem("token", data.token);
+            localStorage.setItem("user", JSON.stringify(data.user));
 
-// Login Form Submission
-document.getElementById("login-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-    
-    const email = emailInput.value.trim();
-    const password = passwordInput.value.trim();
-    
-    let isValid = true;
-    
-    // Validate email
-    if (email === '') {
-        showError(emailInput, 'البريد الإلكتروني مطلوب');
-        isValid = false;
-    } else if (!validateEmail(email)) {
-        showError(emailInput, 'من فضلك أدخل بريد إلكتروني صحيح');
-        isValid = false;
-    } else {
-        clearError(emailInput);
-    }
-    
-    // Validate password
-    if (password === '') {
-        showError(passwordInput, 'كلمة المرور مطلوبة');
-        isValid = false;
-    } else if (!validatePassword(password)) {
-        showError(passwordInput, 'كلمة المرور يجب أن تكون 8 أحرف على الأقل');
-        isValid = false;
-    } else {
-        clearError(passwordInput);
-    }
-    
-    // If all validations pass, proceed
-    if (isValid) {
-        // Store in memory instead of localStorage
-        sessionStorage.setItem("email", email);
-        sessionStorage.setItem("username", email.split('@')[0]);
-        
-        // Redirect
-        window.location.href = "profile.html";
-    }
-});
+            showSuccess(t("loginSuccess"));
+            setTimeout(() => {
+              // Redirect to homepage (where navbar will update)
+              window.location.href = "../index.html";
+            }, 1500);
+          } else {
+            showError(data.error || t("invalidCredentials"));
+          }
+        } catch (err) {
+          console.error("❌ Login error:", err);
+          showError(t("serverError"));
+        }
+      }
+
+      // Init
+      document.addEventListener("DOMContentLoaded", () => {
+        applyTranslations();
+
+        if (localStorage.getItem("theme") === "dark") {
+          document.body.classList.add("dark-mode");
+          document.getElementById("sun-icon").style.display = "none";
+          document.getElementById("moon-icon").style.display = "inline";
+        }
+
+        const langToggle = document.getElementById("language-toggle-btn");
+        if (langToggle) {
+          langToggle.addEventListener("click", () => {
+            currentLang = currentLang === "ar" ? "en" : "ar";
+            localStorage.setItem("language", currentLang);
+            document.documentElement.lang = currentLang;
+            document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
+            langToggle.textContent = currentLang.toUpperCase();
+            applyTranslations();
+          });
+        }
+
+        const form = document.getElementById("login-form");
+        if (form) {
+          form.addEventListener("submit", login);
+        }
+      });
     </script>
-</body>
-
+  </body>
 </html>

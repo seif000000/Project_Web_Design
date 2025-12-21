@@ -1,0 +1,1256 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Worms - Add Book</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <script src="admin-lang.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo" onclick="goToHome()">
+                <div class="logo-icon">📚</div>
+                <span data-lang="addPageName">Book Worms - إضافة كتاب</span>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="lang-btn" onclick="toggleLanguage()">EN</button>
+                <div class="user-icon" onclick="goToAdmin()" data-lang-title="adminTooltip" title="لوحة التحكم">👤</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Form Section -->
+    <section class="form-section">
+        <div class="form-container">
+            <h1 class="form-title" data-lang="addBookTitle">إضافة كتاب جديد</h1>
+            
+            <form id="addBookForm">
+                <div class="form-group">
+                    <label class="form-label" for="bookTitle" data-lang="bookTitle">عنوان الكتاب</label>
+                    <input type="text" id="bookTitle" class="form-input" required data-lang="bookTitlePlaceholder" placeholder="أدخل عنوان الكتاب">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookAuthor" data-lang="bookAuthor">اسم المؤلف</label>
+                    <input type="text" id="bookAuthor" class="form-input" required data-lang="bookAuthorPlaceholder" placeholder="أدخل اسم المؤلف">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookCategory" data-lang="bookCategory">الفئة</label>
+                    <input type="text" id="bookCategory" class="form-input" required data-lang="bookCategoryPlaceholder" placeholder="مثال: رواية، خيال علمي، تاريخ">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookDescription" data-lang="bookDescription">وصف الكتاب</label>
+                    <textarea id="bookDescription" class="form-input" rows="4" required data-lang="bookDescPlaceholder" placeholder="أدخل وصفاً مختصراً للكتاب"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="bookPrice" data-lang="bookPrice">السعر (بالجنيه)</label>
+                    <input type="number" id="bookPrice" class="form-input" required data-lang="bookPricePlaceholder" placeholder="أدخل سعر الكتاب" min="0" step="0.01">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" data-lang="bookCover">صورة غلاف الكتاب</label>
+                    <div class="file-input-wrapper">
+                        <label class="file-input-btn" for="bookCover" data-lang="chooseCover">
+                            📷 اختر صورة الغلاف
+                        </label>
+                        <input type="file" id="bookCover" accept="image/*" required>
+                    </div>
+                    <div class="file-name" id="coverFileName" data-lang="noFile">لم يتم اختيار ملف</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" data-lang="bookPDF">ملف PDF للكتاب</label>
+                    <div class="file-input-wrapper">
+                        <label class="file-input-btn" for="bookPDF" data-lang="choosePDF">
+                            📄 اختر ملف PDF
+                        </label>
+                        <input type="file" id="bookPDF" accept=".pdf" required>
+                    </div>
+                    <div class="file-name" id="pdfFileName" data-lang="noFile">لم يتم اختيار ملف</div>
+                </div>
+
+                <button type="submit" class="submit-btn" data-lang="submitBtn">إضافة الكتاب ✨</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="modal-icon">✅</div>
+            <h2 class="modal-title" data-lang="successTitle">شكراً لإضافة هذه القطعة الفنية!</h2>
+            <p class="modal-text" data-lang="successText">سيقوم فريقنا بمراجعة الكتاب وسيتم رفعه خلال 24 ساعة كحد أقصى</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p data-lang="copyright">حقوق النشر © 2025 Book Worms | لوحة التحكم</p>
+        </div>
+    </footer>
+
+    <script src="add-book-script.js"></script>
+</body>
+</html>// admin/add-book-script.js — FINAL WORKING VERSION
+document.addEventListener("DOMContentLoaded", function () {
+  // File name display
+  document.getElementById("bookCover").addEventListener("change", function (e) {
+    document.getElementById("coverFileName").textContent =
+      e.target.files[0]?.name || "لم يتم اختيار ملف";
+  });
+  document.getElementById("bookPDF").addEventListener("change", function (e) {
+    document.getElementById("pdfFileName").textContent =
+      e.target.files[0]?.name || "لم يتم اختيار ملف";
+  });
+
+  // Form submission
+  document
+    .getElementById("addBookForm")
+    .addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const token = localStorage.getItem("adminToken");
+      if (!token) {
+        alert("يجب تسجيل الدخول كمسؤول أولاً");
+        window.location.href = "login.html";
+        return;
+      }
+
+      // Get form data
+      const formData = {
+        title: document.getElementById("bookTitle").value,
+        author: document.getElementById("bookAuthor").value,
+        category: document.getElementById("bookCategory").value,
+        description: document.getElementById("bookDescription").value,
+        price: document.getElementById("bookPrice").value,
+        image_url: document.getElementById("bookCover").files[0]
+          ? "../image/placeholder-book.webp" // For now — use existing image path
+          : "../image/placeholder-book.webp",
+        stock: 10,
+        rating: 4.5,
+        genre: document.getElementById("bookCategory").value,
+        isbn: "",
+        numberOfPages: 300,
+        isAvailable: true,
+      };
+
+      try {
+        const response = await fetch("/admin/books", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(formData),
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          alert("✅ تم إضافة الكتاب بنجاح!");
+          document.getElementById("addBookForm").reset();
+          document.getElementById("coverFileName").textContent =
+            "لم يتم اختيار ملف";
+          document.getElementById("pdfFileName").textContent =
+            "لم يتم اختيار ملف";
+        } else {
+          throw new Error(result.error || "فشل الإضافة");
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        alert("❌ خطأ: " + error.message);
+      }
+    });
+
+  // Navigation
+  window.goToAdmin = () => (window.location.href = "admin-page.html");
+  window.goToHome = () => (window.location.href = "../index.html");
+});
+// Language translations for admin pages
+const translations = {
+    ar: {
+        // Admin Dashboard
+        adminWelcome: "مرحباً بك في لوحة التحكم",
+        adminSubtitle: "إدارة الكتب والمحتوى بسهولة",
+        addBook: "إضافة كتاب",
+        addBookDesc: "أضف كتاباً جديداً إلى المكتبة",
+        removeBook: "حذف كتاب",
+        removeBookDesc: "إزالة كتاب من المكتبة",
+        
+        // Remove Books Page
+        removePageTitle: "اختر الكتاب المراد حذفه",
+        
+        // Add Book Form
+        addBookTitle: "إضافة كتاب جديد",
+        bookTitle: "عنوان الكتاب",
+        bookTitlePlaceholder: "أدخل عنوان الكتاب",
+        bookAuthor: "اسم المؤلف",
+        bookAuthorPlaceholder: "أدخل اسم المؤلف",
+        bookCategory: "الفئة",
+        bookCategoryPlaceholder: "مثال: رواية، خيال علمي، تاريخ",
+        bookDescription: "وصف الكتاب",
+        bookDescPlaceholder: "أدخل وصفاً مختصراً للكتاب",
+        bookPrice: "السعر (بالجنيه)",
+        bookPricePlaceholder: "أدخل سعر الكتاب",
+        bookCover: "صورة غلاف الكتاب",
+        chooseCover: "📷 اختر صورة الغلاف",
+        bookPDF: "ملف PDF للكتاب",
+        choosePDF: "📄 اختر ملف PDF",
+        noFile: "لم يتم اختيار ملف",
+        submitBtn: "إضافة الكتاب ✨",
+        
+        // Success Modal
+        successTitle: "شكراً لإضافة هذه القطعة الفنية!",
+        successText: "سيقوم فريقنا بمراجعة الكتاب وسيتم رفعه خلال 24 ساعة كحد أقصى",
+        
+        // Footer
+        copyright: "حقوق النشر © 2025 Book Worms | لوحة التحكم",
+        
+        // Navbar
+        siteName: "Book Worms - لوحة التحكم",
+        removePageName: "Book Worms - حذف كتاب",
+        addPageName: "Book Worms - إضافة كتاب",
+        adminTooltip: "لوحة التحكم"
+    },
+    en: {
+        // Admin Dashboard
+        adminWelcome: "Welcome to the Admin Dashboard",
+        adminSubtitle: "Manage books and content easily",
+        addBook: "Add Book",
+        addBookDesc: "Add a new book to the library",
+        removeBook: "Remove Book",
+        removeBookDesc: "Remove a book from the library",
+        
+        // Remove Books Page
+        removePageTitle: "Select the Book to Remove",
+        
+        // Add Book Form
+        addBookTitle: "Add New Book",
+        bookTitle: "Book Title",
+        bookTitlePlaceholder: "Enter book title",
+        bookAuthor: "Author Name",
+        bookAuthorPlaceholder: "Enter author name",
+        bookCategory: "Category",
+        bookCategoryPlaceholder: "Example: Novel, Sci-Fi, History",
+        bookDescription: "Book Description",
+        bookDescPlaceholder: "Enter a brief description of the book",
+        bookPrice: "Price (EGP)",
+        bookPricePlaceholder: "Enter book price",
+        bookCover: "Book Cover Image",
+        chooseCover: "📷 Choose Cover Image",
+        bookPDF: "Book PDF File",
+        choosePDF: "📄 Choose PDF File",
+        noFile: "No file chosen",
+        submitBtn: "Add Book ✨",
+        
+        // Success Modal
+        successTitle: "Thank You for Adding This Piece of Art!",
+        successText: "Our team will review the book and it will be uploaded within 24 hours max",
+        
+        // Footer
+        copyright: "Copyright © 2025 Book Worms | Admin Panel",
+        
+        // Navbar
+        siteName: "Book Worms - Admin Panel",
+        removePageName: "Book Worms - Remove Book",
+        addPageName: "Book Worms - Add Book",
+        adminTooltip: "Admin Panel"
+    }
+};
+
+// Get current language from localStorage or default to Arabic
+let currentLang = localStorage.getItem('adminLanguage') || 'ar';
+
+// Apply language on page load
+document.addEventListener('DOMContentLoaded', function() {
+    applyLanguage(currentLang);
+    updateLangButton();
+});
+
+// Toggle language function
+function toggleLanguage() {
+    currentLang = currentLang === 'ar' ? 'en' : 'ar';
+    localStorage.setItem('adminLanguage', currentLang);
+    applyLanguage(currentLang);
+    updateLangButton();
+}
+
+// Apply language to the page
+function applyLanguage(lang) {
+    const direction = lang === 'ar' ? 'rtl' : 'ltr';
+    document.documentElement.setAttribute('dir', direction);
+    document.documentElement.setAttribute('lang', lang);
+    
+    // Update all elements with data-lang attribute
+    document.querySelectorAll('[data-lang]').forEach(element => {
+        const key = element.getAttribute('data-lang');
+        if (translations[lang][key]) {
+            if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+                element.placeholder = translations[lang][key];
+            } else {
+                element.textContent = translations[lang][key];
+            }
+        }
+    });
+    
+    // Update title attribute (tooltips)
+    document.querySelectorAll('[data-lang-title]').forEach(element => {
+        const key = element.getAttribute('data-lang-title');
+        if (translations[lang][key]) {
+            element.setAttribute('title', translations[lang][key]);
+        }
+    });
+}
+
+// Update language button text
+function updateLangButton() {
+    const langBtn = document.querySelector('.lang-btn');
+    if (langBtn) {
+        langBtn.textContent = currentLang === 'ar' ? 'EN' : 'AR';
+    }
+}<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Worms - Admin Panel</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo" onclick="goToHome()">
+                <!-- <span data-lang="siteName">Book Worms - لوحة التحكم</span> -->
+                <a href="../index.html" class="logo-icon">📚</a>
+
+            </div>
+
+            <div class="nav-actions">
+                <button class="lang-btn" onclick="toggleLanguage()">EN</button>
+                <div class="user-icon" data-lang-title="adminTooltip" title="لوحة التحكم">👤</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin Hero Section -->
+    <section class="admin-hero">
+        <div class="admin-container">
+            <h1 class="admin-title" data-lang="adminWelcome">مرحباً بك في لوحة التحكم</h1>
+            <p class="admin-subtitle" data-lang="adminSubtitle">إدارة الكتب والمحتوى بسهولة</p>
+
+            <div class="admin-actions">
+                <div class="admin-card" onclick="navigateToAddBook()">
+                    <div class="card-icon">➕</div>
+                    <h2 data-lang="addBook">إضافة كتاب</h2>
+                    <p data-lang="addBookDesc">أضف كتاباً جديداً إلى المكتبة</p>
+                    <div class="card-glow"></div>
+                </div>
+
+                <div class="admin-card" onclick="navigateToRemoveBook()">
+                    <div class="card-icon">➖</div>
+                    <h2 data-lang="removeBook">حذف كتاب</h2>
+                    <p data-lang="removeBookDesc">إزالة كتاب من المكتبة</p>
+                    <div class="card-glow"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p data-lang="copyright">حقوق النشر © 2025 Book Worms | لوحة التحكم</p>
+        </div>
+    </footer>
+
+    <!-- Local scripts (loaded after DOM) -->
+    <script src="admin-lang.js"></script>
+    <script src="admin-script.js"></script>
+</body>
+</html>
+// Navigation functions for admin dashboard
+function navigateToAddBook() {
+    window.location.href = 'add-book.html';
+}
+
+function navigateToRemoveBook() {
+    window.location.href = 'remove-books.html';
+}
+
+function goToHome() {
+    window.location.href = 'index.html'; // or whatever your main page is called
+}
+
+// Add smooth animation on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const cards = document.querySelectorAll('.admin-card');
+    
+    cards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        
+        setTimeout(() => {
+            card.style.transition = 'all 0.6s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+        }, 200 * (index + 1));
+    });
+});* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #FDB750;
+    --dark: #1a1a1a;
+    --light-bg: #F5E6D3;
+    --text-dark: #2d2d2d;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Navbar Styles */
+.navbar {
+    background: white;
+    padding: 1rem 5%;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.logo:hover {
+    color: var(--primary);
+    transform: scale(1.05);
+}
+
+.logo-icon {
+    width: 35px;
+    height: 35px;
+    background: var(--primary);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* Language Switch Button (matches theme and works with RTL/LTR) */
+.lang-btn {
+    background: var(--primary);
+    color: var(--dark);
+    font-weight: 600;
+    border: none;
+    padding: 0.6rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.28s cubic-bezier(.2,.9,.2,1);
+    box-shadow: 0 6px 18px rgba(253, 183, 80, 0.25);
+    font-size: 0.95rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    user-select: none;
+}
+
+.lang-btn:hover {
+    background: #e5a640;
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(253, 183, 80, 0.38);
+}
+
+/* Small subtle indicator for current direction (circle) */
+.lang-btn::after {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* User Icon */
+.user-icon {
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--primary);
+    background: var(--primary);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 0 15px rgba(253, 183, 80, 0.5);
+}
+
+.user-icon:hover {
+    background: #e5a640;
+    border-color: #e5a640;
+    transform: scale(1.1);
+}
+
+/* Admin Hero Section */
+.admin-hero {
+    background: var(--light-bg);
+    padding: 4rem 5%;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.admin-title {
+    font-size: 3rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+.admin-subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 4rem;
+}
+
+.admin-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.admin-card {
+    background: white;
+    padding: 3rem 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.admin-card:hover {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 15px 40px rgba(253, 183, 80, 0.4);
+}
+
+.card-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, rgba(253, 183, 80, 0.3), transparent 70%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
+}
+
+.admin-card:hover .card-glow {
+    opacity: 1;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.5;
+    }
+}
+
+.card-icon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.admin-card h2 {
+    font-size: 2rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+.admin-card p {
+    color: #666;
+    font-size: 1.1rem;
+}
+
+/* Books Grid (for remove page) */
+.books-section {
+    padding: 4rem 5%;
+    background: var(--light-bg);
+    min-height: calc(100vh - 200px);
+}
+
+.books-container {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.page-title {
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--dark);
+    margin-bottom: 3rem;
+}
+
+.books-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.book-item {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.book-item:hover {
+    transform: translateY(-5px);
+}
+
+.book-cover {
+    width: 100%;
+    height: 350px;
+    object-fit: cover;
+}
+
+.book-info {
+    padding: 1rem;
+}
+
+.book-title {
+    font-size: 1.2rem;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+}
+
+.book-author {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.remove-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    box-shadow: 0 3px 10px rgba(255, 68, 68, 0.4);
+}
+
+.remove-btn:hover {
+    background: #cc0000;
+    transform: scale(1.1);
+}
+
+/* Add Book Form */
+.form-section {
+    padding: 4rem 5%;
+    background: var(--light-bg);
+    min-height: calc(100vh - 200px);
+}
+
+.form-container {
+    max-width: 700px;
+    margin: 0 auto;
+    background: white;
+    padding: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+.form-title {
+    font-size: 2.5rem;
+    color: var(--dark);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 2rem;
+}
+
+.form-label {
+    display: block;
+    font-size: 1.1rem;
+    color: var(--text-dark);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.form-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: all 0.3s;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(253, 183, 80, 0.2);
+}
+
+.file-input-wrapper {
+    position: relative;
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+}
+
+.file-input-btn {
+    background: var(--primary);
+    color: var(--dark);
+    padding: 1rem;
+    border-radius: 8px;
+    display: block;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.file-input-btn:hover {
+    background: #e5a640;
+}
+
+.file-input-wrapper input[type=file] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+}
+
+.file-name {
+    margin-top: 0.5rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.5rem;
+    background: var(--primary);
+    color: var(--dark);
+    border: none;
+    border-radius: 8px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    margin-top: 2rem;
+}
+
+.submit-btn:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(253, 183, 80, 0.5);
+    background: #e5a640;
+}
+
+.submit-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.submit-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Success Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 500px;
+    animation: modalSlideIn 0.4s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.modal-icon {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+}
+
+.modal-title {
+    font-size: 2rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+.modal-text {
+    color: #666;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Footer */
+.footer {
+    background: black;
+    color: white;
+    padding: 2rem 5%;
+    margin-top: auto;
+}
+
+.footer-bottom {
+    text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .admin-actions {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .admin-title {
+        font-size: 2rem;
+    }
+
+    .books-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+
+    .form-container {
+        padding: 2rem;
+    }
+
+    .lang-btn {
+        padding: 0.55rem 0.9rem;
+        font-size: 0.88rem;
+    }
+}
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>تسجيل الدخول كمسؤول - Book Worms</title>
+    <link rel="stylesheet" href="../style.css" />
+    <style>
+      .auth-container {
+        max-width: 500px;
+        margin: 3rem auto;
+        padding: 2rem;
+        background: var(--card-bg);
+        border-radius: 15px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      }
+      .auth-header {
+        text-align: center;
+        margin-bottom: 2rem;
+      }
+      .auth-header h1 {
+        font-size: 2rem;
+        color: var(--text-color);
+        margin-bottom: 0.5rem;
+      }
+      .auth-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+      .form-group label {
+        font-weight: bold;
+        color: var(--text-color);
+      }
+      .form-control {
+        padding: 0.75rem;
+        border: 1px solid var(--muted);
+        border-radius: 8px;
+        background: var(--input-bg);
+        color: var(--text-color);
+        font-size: 1rem;
+      }
+      .btn-primary {
+        padding: 0.8rem;
+        background: var(--accent);
+        color: var(--dark);
+        border: none;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1.1rem;
+        cursor: pointer;
+      }
+      .error-message {
+        background: #ffebee;
+        color: #c62828;
+        padding: 0.75rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar">
+      <div class="logo">
+        <a href="../index.html" class="logo-icon">📚</a>
+        <span id="site-name">Book Worms</span>
+      </div>
+      <div class="nav-section nav-right">
+        <button id="language-toggle-btn" class="nav-icon-btn lang-btn">
+          AR
+        </button>
+        <button id="theme-toggle" class="nav-icon-btn">
+          <span id="sun-icon">☀️</span>
+          <span id="moon-icon" style="display: none">🌙</span>
+        </button>
+      </div>
+    </nav>
+
+    <div class="auth-container">
+      <div class="auth-header">
+        <h1>لوحة التحكم للمسؤول</h1>
+        <p>تسجيل الدخول باستخدام حساب المسؤول</p>
+      </div>
+
+      <div id="error-message" class="error-message"></div>
+
+      <form id="admin-login-form" class="auth-form">
+        <div class="form-group">
+          <label for="username">اسم المستخدم</label>
+          <input type="text" id="username" class="form-control" required />
+        </div>
+        <div class="form-group">
+          <label for="password">كلمة المرور</label>
+          <input type="password" id="password" class="form-control" required />
+        </div>
+        <button type="submit" class="btn-primary">تسجيل الدخول</button>
+      </form>
+    </div>
+
+    <script>
+      let currentLang = localStorage.getItem("language") || "ar";
+
+      // Translations
+      const translations = {
+        ar: {
+          siteName: "Book Worms",
+          error:
+            "اسم المستخدم أو كلمة المرور غير صحيحة، أو ليس لديك صلاحية المسؤول",
+        },
+        en: {
+          siteName: "Book Worms",
+          error: "Invalid credentials or not an admin",
+        },
+      };
+
+      function t(key) {
+        return translations[currentLang][key] || key;
+      }
+
+      function showError(message) {
+        const el = document.getElementById("error-message");
+        el.textContent = message;
+        el.style.display = "block";
+      }
+
+      async function adminLogin(event) {
+        event.preventDefault();
+        const username = document.getElementById("username").value;
+        const password = document.getElementById("password").value;
+
+        try {
+          // Use your existing /api/auth/login
+          const res = await fetch("/api/auth/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, password }),
+          });
+
+          const data = await res.json();
+
+          if (res.ok && data.success) {
+            // ✅ Check if admin
+            if (data.user.role === "admin") {
+              // Store admin token + user
+              localStorage.setItem("adminToken", data.token);
+              localStorage.setItem("adminUser", JSON.stringify(data.user));
+              window.location.href = "books.html";
+            } else {
+              showError(t("error"));
+            }
+          } else {
+            showError(t("error"));
+          }
+        } catch (err) {
+          showError(t("error"));
+        }
+      }
+
+      // Init
+      document.addEventListener("DOMContentLoaded", () => {
+        document
+          .getElementById("admin-login-form")
+          .addEventListener("submit", adminLogin);
+
+        // Theme
+        if (localStorage.getItem("theme") === "dark") {
+          document.body.classList.add("dark-mode");
+          document.getElementById("sun-icon").style.display = "none";
+          document.getElementById("moon-icon").style.display = "inline";
+        }
+
+        // Lang toggle
+        const langToggle = document.getElementById("language-toggle-btn");
+        if (langToggle) {
+          langToggle.addEventListener("click", () => {
+            currentLang = currentLang === "ar" ? "en" : "ar";
+            localStorage.setItem("language", currentLang);
+            langToggle.textContent = currentLang.toUpperCase();
+          });
+        }
+
+        document.getElementById("site-name").textContent =
+          translations[currentLang].siteName;
+      });
+    </script>
+  </body>
+</html>
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Worms - Remove Book</title>
+    <link rel="stylesheet" href="admin-style.css">
+    <script src="admin-lang.js"></script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-container">
+            <div class="logo" onclick="goToHome()">
+                <!-- <div class="logo-icon">📚</div> -->
+                <a href="../index.html" class="logo-icon">📚</a>
+                <span data-lang="removePageName">Book Worms - حذف كتاب</span>
+            </div>
+            
+            <div class="nav-actions">
+                <button class="lang-btn" onclick="toggleLanguage()">EN</button>
+                <div class="user-icon" onclick="goToAdmin()" data-lang-title="adminTooltip" title="لوحة التحكم">👤</div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Books Section -->
+    <section class="books-section">
+        <div class="books-container">
+            <h1 class="page-title" data-lang="removePageTitle">اختر الكتاب المراد حذفه</h1>
+            
+            <div class="books-grid" id="booksGrid">
+                <!-- Books will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-bottom">
+            <p data-lang="copyright">حقوق النشر © 2025 Book Worms | لوحة التحكم</p>
+        </div>
+    </footer>
+
+    <script src="remove-books-script.js"></script>
+</body>
+</html>// admin/remove-books-script.js — FINAL WORKING VERSION
+document.addEventListener("DOMContentLoaded", function () {
+  loadBooks();
+
+  // Navigation
+  window.goToAdmin = () => (window.location.href = "admin-page.html");
+  window.goToHome = () => (window.location.href = "../index.html");
+});
+
+async function loadBooks() {
+  const grid = document.getElementById("booksGrid");
+  grid.innerHTML =
+    '<p style="text-align:center;padding:2rem;">جارٍ التحميل...</p>';
+
+  try {
+    const response = await fetch("/admin/books");
+    if (!response.ok) throw new Error("فشل التحميل");
+
+    const books = await response.json();
+    renderBooks(books);
+  } catch (err) {
+    grid.innerHTML = `<p style="text-align:center;color:red;">خطأ: ${err.message}</p>`;
+  }
+}
+
+function renderBooks(books) {
+  const grid = document.getElementById("booksGrid");
+  if (books.length === 0) {
+    grid.innerHTML =
+      '<p style="text-align:center;padding:2rem;">لا توجد كتب</p>';
+    return;
+  }
+
+  grid.innerHTML = books
+    .map(
+      (book) => `
+        <div class="book-item">
+            <img src="${book.image_url || "../image/placeholder-book.webp"}" 
+                 alt="${book.title?.ar || book.title || "Book"}" 
+                 class="book-cover"
+                 onerror="this.src='../image/placeholder-book.webp'">
+            <div class="book-info">
+                <h3 class="book-title">${book.title?.ar || book.title || "---"}</h3>
+                <p class="book-author">${book.author?.ar || book.author || "---"}</p>
+            </div>
+            <button class="remove-btn" 
+                    onclick="removeBook('${book._id}', this)"
+                    title="حذف الكتاب">✕</button>
+        </div>
+    `,
+    )
+    .join("");
+}
+
+async function removeBook(id, button) {
+  if (!confirm("هل أنت متأكد من الحذف؟")) return;
+
+  const token = localStorage.getItem("adminToken");
+  if (!token) {
+    alert("يجب تسجيل الدخول كمسؤول");
+    window.location.href = "login.html";
+    return;
+  }
+
+  try {
+    button.disabled = true;
+    button.textContent = "...";
+
+    const response = await fetch(`/admin/books/${id}`, {
+      method: "DELETE",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+
+    if (response.ok) {
+      button.closest(".book-item").style.opacity = "0";
+      setTimeout(() => button.closest(".book-item").remove(), 300);
+    } else {
+      const err = await response.json();
+      throw new Error(err.error || "فشل الحذف");
+    }
+  } catch (err) {
+    alert("خطأ: " + err.message);
+    button.disabled = false;
+    button.textContent = "✕";
+  }
+}
