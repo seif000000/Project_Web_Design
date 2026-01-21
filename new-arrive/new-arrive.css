@@ -132,10 +132,6 @@ body.rtl {
   background: var(--navbar-bg);
   box-shadow: 0 4px 12px rgba(0,0,0,0.08);
   flex-wrap: wrap;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
 }
 
 .logo {

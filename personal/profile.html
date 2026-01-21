@@ -1,365 +1,119 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>الملف الشخصي - Book Worms</title>
-    <link rel="stylesheet" href="../style.css" />
-    <style>
-      .profile-container {
-        max-width: 600px;
-        margin: 3rem auto;
-        padding: 2rem;
-        background: var(--card-bg);
-        border-radius: 15px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      }
-      .profile-header {
-        text-align: center;
-        margin-bottom: 2rem;
-      }
-      .profile-avatar {
-        width: 100px;
-        height: 100px;
-        border-radius: 50%;
-        background: var(--accent);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 2.5rem;
-        margin: 0 auto 1rem;
-        color: var(--dark);
-      }
-      .profile-title {
-        font-size: 1.8rem;
-        color: var(--text-color);
-        margin-bottom: 0.5rem;
-      }
-      .profile-form {
-        display: flex;
-        flex-direction: column;
-        gap: 1.25rem;
-      }
-      .form-group {
-        display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
-      }
-      .form-group label {
-        font-weight: bold;
-        color: var(--text-color);
-      }
-      .form-control {
-        padding: 0.75rem;
-        border: 1px solid var(--muted);
-        border-radius: 8px;
-        background: var(--input-bg);
-        color: var(--text-color);
-        font-size: 1rem;
-      }
-      .form-control:focus {
-        outline: none;
-        border-color: var(--accent);
-        box-shadow: 0 0 0 2px rgba(106, 175, 235, 0.2);
-      }
-      .btn-group {
-        display: flex;
-        gap: 1rem;
-        margin-top: 1.5rem;
-      }
-      .btn {
-        padding: 0.75rem 1.5rem;
-        border-radius: 8px;
-        font-weight: bold;
-        cursor: pointer;
-        text-decoration: none;
-        display: inline-block;
-        text-align: center;
-      }
-      .btn-primary {
-        background: var(--accent);
-        color: var(--dark);
-      }
-      .btn-secondary {
-        background: #e0e0e0;
-        color: var(--text-dark);
-      }
-      .btn:hover {
-        opacity: 0.9;
-      }
-      .message {
-        padding: 0.75rem;
-        border-radius: 8px;
-        margin-bottom: 1rem;
-      }
-      .message.success {
-        background: #e8f5e9;
-        color: #2e7d32;
-      }
-      .message.error {
-        background: #ffebee;
-        color: #c62828;
-      }
-      @media (max-width: 600px) {
-        .btn-group {
-          flex-direction: column;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar">
-      <div class="logo">
-        <a href="../index.html" class="logo-icon">📚</a>
-        <span id="site-name">Book Worms</span>
-      </div>
-      <div class="nav-section nav-center">
-        <a href="../Books/books.html" class="nav-link">جميع الكتب</a>
-        <a href="../contact/contact.html" class="nav-link">اتصل بنا</a>
-        <a href="../about/about-us.html" class="nav-link">من نحن</a>
-      </div>
-      <div class="nav-section nav-right">
-        <button id="language-toggle-btn" class="nav-icon-btn lang-btn">
-          AR
-        </button>
-        <button
-          id="theme-toggle"
-          class="nav-icon-btn"
-          aria-label="Toggle dark mode"
-        >
-          <span id="sun-icon">☀️</span>
-          <span id="moon-icon" style="display: none">🌙</span>
-        </button>
-        <a href="../Checkout/checkout.html" class="nav-cart-link">
-          <button class="nav-icon-btn nav-cart-btn">
-            <span class="cart-emoji">🛒</span>
-            <span class="cart-count" id="cart-count">0</span>
-          </button>
-        </a>
-        <a href="profile.html" class="user-icon">👤</a>
-      </div>
-    </nav>
-
-    <div class="profile-container">
-      <div class="profile-header">
-        <div class="profile-avatar" id="avatar">👤</div>
-        <h1 class="profile-title" id="username">Loading...</h1>
-      </div>
-
-      <div id="message-container"></div>
-
-      <form id="profile-form" class="profile-form">
-        <div class="form-group">
-          <label for="username" id="label-username">اسم المستخدم</label>
-          <input
-            type="text"
-            id="username-input"
-            class="form-control"
-            required
-            minlength="3"
-          />
-        </div>
-        <div class="form-group">
-          <label for="email" id="label-email">البريد الإلكتروني</label>
-          <input type="email" id="email-input" class="form-control" required />
-        </div>
-        <div class="btn-group">
-          <button type="submit" class="btn btn-primary" id="save-btn">
-            حفظ التغييرات
-          </button>
-          <button type="button" class="btn btn-secondary" id="logout-btn">
-            تسجيل الخروج
-          </button>
-        </div>
-      </form>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الملف الشخصي</title>
+  <link rel="stylesheet" href="../Books/books.css" />
+  <link rel="stylesheet" href="../style.css">
+    <!-- ahmyd css file -->
+  <link rel="stylesheet" href="Also-Ahmyd.css" />
+  <link rel="stylesheet" href="../homepage/style.css">
+</head>
+<body>
+    <!-- language button converter -->
+    <div class="lang-toggle">
+      <button id="langBtn">English</button>
     </div>
+    
+  <div class="input-carrier">
+    <h1 id="profile-title">الملف الشخصي</h1>
 
+
+    
+    <img src="../image/user_avatar.jpg" alt="User Avatar" id="profile-avatar" class="profile-avatar">
+
+    
+  <div class="profile-info">
+    <div class="item-block">
+        <p id="display-username"></p>
+    </div>
+      <div class="item-block">
+            <p id="display-email"></p>    
+      </div>
+  </div>
+
+    
+    <button id="logout-btn">تسجيل الخروج</button>
+    <a href="../admin/admin-page.html" id="logout-btn">Admin</a>
+
+  </div>
+
+  <div class="favorite-books">
+  <h2 id="books-title">كتبي المفضلة</h2>
+ </div>
+  <div class="books-container" id="books-container">
+    <!-- books are gonna be here :)  -->
+  </div>
+</div>
+    <!-- Footer -->
     <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-column">
-          <div class="footer-logo">
-            <span id="footer-site-name">Book Worms</span>
-          </div>
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon"></div>
+                    <span data-lang="siteName">Book Worms</span>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4 data-lang="footerQuickLinks">روابط سريعة</h4>
+                <ul>
+                    <li><a href="#" data-lang="footerHome">الرئيسية</a></li>
+                    <li><a href="#" data-lang="footerBooks">الكتب</a></li>
+                    <li><a href="#" data-lang="footerDeals">العروض</a></li>
+                    <li><a href="../about/about-us.html" data-lang="footerAbout">من نحن</a></li>
+                    <li><a href="#" data-lang="footerContact">اتصل بنا</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 data-lang="footerExplore">استكشف</h4>
+                <ul>
+                    <li><a href="#" data-lang="footerBestsellers">الأكثر مبيعاً</a></li>
+                    <li><a href="#" data-lang="footerOnSale">التخفيضات</a></li>
+                    <li><a href="#" data-lang="footerEditorsPick">اختيار المحررين</a></li>
+                    <li><a href="#" data-lang="footerBest2022">الأفضل 2022</a></li>
+                    <li><a href="#" data-lang="footerFeatured">المميزة</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 data-lang="footerHelp">المساعدة</h4>
+                <ul>
+                    <li><a href="#" data-lang="footerTrackOrder">تتبع الطلب</a></li>
+                    <li><a href="#" data-lang="footerDelivery">التوصيل والإرجاع</a></li>
+                    <li><a href="#" data-lang="footerFAQ">الأسئلة الشائعة</a></li>
+                    <li><a href="#" data-lang="footerCommunity">المجتمع</a></li>
+                </ul>
+            </div>
         </div>
-      </div>
-      <div class="footer-bottom">
-        <p id="copyright">حقوق النشر © 2025 Book Worms</p>
-      </div>
+
+        <div class="footer-bottom">
+            <div>
+                <p data-lang="footerCopyright">حقوق النشر © 2025 Book Worms | تم التطوير بواسطة Book Worms</p>
+            </div>
+            <div class="payment-icons">
+                <div class="payment-icon">VISA</div>
+                <div class="payment-icon">MC</div>
+                <div class="payment-icon">AMEX</div>
+                <div class="payment-icon">🍎Pay</div>
+                <div class="payment-icon">G Pay</div>
+            </div>
+            <div class="social-icons">
+                <div class="social-icon">f</div>
+                <div class="social-icon">🐦</div>
+                <div class="social-icon">📷</div>
+            </div>
+        </div>
     </footer>
 
-    <script>
-      let currentLang = localStorage.getItem("language") || "ar";
 
-      const translations = {
-        ar: {
-          siteName: "Book Worms",
-          labelUsername: "اسم المستخدم",
-          labelEmail: "البريد الإلكتروني",
-          saveChanges: "حفظ التغييرات",
-          logout: "تسجيل الخروج",
-          profileUpdated: "تم تحديث الملف الشخصي بنجاح",
-          updateFailed: "فشل التحديث: ",
-          notAuthorized: "غير مصرح به — يرجى تسجيل الدخول مجددًا",
-          copyright: "حقوق النشر © 2025 Book Worms",
-        },
-        en: {
-          siteName: "Book Worms",
-          labelUsername: "Username",
-          labelEmail: "Email",
-          saveChanges: "Save Changes",
-          logout: "Logout",
-          profileUpdated: "Profile updated successfully",
-          updateFailed: "Update failed: ",
-          notAuthorized: "Not authorized — please log in again",
-          copyright: "Copyright © 2025 Book Worms",
-        },
-      };
 
-      function t(key) {
-        return translations[currentLang][key] || key;
-      }
-
-      function applyTranslations() {
-        document.getElementById("site-name").textContent = t("siteName");
-        document.getElementById("label-username").textContent =
-          t("labelUsername");
-        document.getElementById("label-email").textContent = t("labelEmail");
-        document.getElementById("save-btn").textContent = t("saveChanges");
-        document.getElementById("logout-btn").textContent = t("logout");
-        document.getElementById("footer-site-name").textContent = t("siteName");
-        document.getElementById("copyright").textContent = t("copyright");
-      }
-
-      // Show message
-      function showMessage(text, type) {
-        const container = document.getElementById("message-container");
-        container.innerHTML = `<div class="message ${type}">${text}</div>`;
-        setTimeout(() => {
-          container.innerHTML = "";
-        }, 3000);
-      }
-
-      // Fetch profile
-      async function fetchProfile() {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          window.location.href = "login.html";
-          return;
-        }
-
-        try {
-          const res = await fetch("/api/users/me", {
-            headers: { Authorization: `Bearer ${token}` },
-          });
-
-          if (res.status === 401) {
-            showMessage(t("notAuthorized"), "error");
-            localStorage.removeItem("token");
-            localStorage.removeItem("user");
-            setTimeout(() => (window.location.href = "login.html"), 2000);
-            return;
-          }
-
-          const data = await res.json();
-          if (data.success) {
-            renderProfile(data.user);
-          }
-        } catch (err) {
-          console.error("Fetch profile error:", err);
-          showMessage(t("updateFailed") + "Network error", "error");
-        }
-      }
-
-      // Render profile
-      function renderProfile(user) {
-        document.getElementById("username").textContent = user.username;
-        document.getElementById("username-input").value = user.username;
-        document.getElementById("email-input").value = user.email;
-
-        const avatar = document.getElementById("avatar");
-        avatar.textContent = user.username.charAt(0).toUpperCase();
-      }
-
-      // Update profile
-      async function updateProfile(event) {
-        event.preventDefault();
-        const username = document.getElementById("username-input").value.trim();
-        const email = document.getElementById("email-input").value.trim();
-        const token = localStorage.getItem("token");
-
-        if (!token) {
-          showMessage(t("notAuthorized"), "error");
-          return;
-        }
-
-        try {
-          const res = await fetch("/api/users/me", {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({ username, email }),
-          });
-
-          const data = await res.json();
-
-          if (res.ok && data.success) {
-            // Update localStorage
-            localStorage.setItem("token", data.token);
-            localStorage.setItem("user", JSON.stringify(data.user));
-            showMessage(t("profileUpdated"), "success");
-            renderProfile(data.user);
-          } else {
-            showMessage(
-              t("updateFailed") + (data.error || "Unknown error"),
-              "error",
-            );
-          }
-        } catch (err) {
-          console.error("Update profile error:", err);
-          showMessage(t("updateFailed") + "Network error", "error");
-        }
-      }
-
-      // Logout
-      function logout() {
-        localStorage.removeItem("token");
-        localStorage.removeItem("user");
-        window.location.href = "../index.html";
-      }
-
-      // Init
-      document.addEventListener("DOMContentLoaded", () => {
-        applyTranslations();
-        fetchProfile();
-
-        document
-          .getElementById("profile-form")
-          ?.addEventListener("submit", updateProfile);
-        document
-          .getElementById("logout-btn")
-          ?.addEventListener("click", logout);
-
-        // Theme & Lang same as before
-        if (localStorage.getItem("theme") === "dark") {
-          document.body.classList.add("dark-mode");
-          document.getElementById("sun-icon").style.display = "none";
-          document.getElementById("moon-icon").style.display = "inline";
-        }
-
-        const langToggle = document.getElementById("language-toggle-btn");
-        if (langToggle) {
-          langToggle.addEventListener("click", () => {
-            currentLang = currentLang === "ar" ? "en" : "ar";
-            localStorage.setItem("language", currentLang);
-            document.documentElement.lang = currentLang;
-            document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
-            langToggle.textContent = currentLang.toUpperCase();
-            applyTranslations();
-          });
-        }
-      });
-    </script>
-  </body>
+<script src="ahmyd.js"></script>
+<script src="lang.js"></script>
+<script src="booksData.js"></script>
+<script src="books.js"></script>
+<script src="profile.js"></script>
+</body>
 </html>

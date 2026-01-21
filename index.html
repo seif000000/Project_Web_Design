@@ -1,270 +1,216 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Book Worms - مكتبة الكتب</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <nav class="navbar">
-      <div class="logo">
-        <a href="../index.html" class="logo-icon">📚</a>
-        <span
-          data-key="siteName"
-          onclick="homepage()"
-          onmouseover="this.style.cursor = 'pointer'"
-          >Book Worms</span
-        >
-      </div>
+    <link rel="stylesheet" href="style.css">
 
-      <div class="nav-section nav-center" id="main-nav-links">
-        <a href="contact/contact.html" class="nav-link" data-key="navContact"
-          >Contact Us</a
-        >
-        <a href="about/about-us.html" class="nav-link" data-key="navAbout"
-          >About Us</a
-        >
-        <a href="#" class="nav-link" data-key="navEditors">Editors' Picks</a>
-        <a href="#" class="nav-link" data-key="navBestsellers">Bestsellers</a>
-        <a
-          href="new-arrive/new-arrive.html"
-          class="nav-link"
-          data-key="navNewArrivals"
-          >New Arrivals</a
-        >
-        <a href="Books/books.html" class="nav-link" data-key="navAllBooks"
-          >All Books</a
-        >
-      </div>
+</head>
+<body>
+           <nav class="navbar">
+        <div class="logo">
+            <a href="../index.html" class="logo-icon">📚</a>
+            <span data-key="siteName" onclick="homepage()" onmouseover="this.style.cursor='pointer'">Book Worms</span>
+        </div>
+        
+        <div class="nav-section nav-center" id="main-nav-links">
+            <a href="contact/contact.html" class="nav-link" data-key="navContact">Contact Us</a>
+            <a href="about/about-us.html" class="nav-link" data-key="navAbout">About Us</a>
+            <a href="#" class="nav-link" data-key="navEditors">Editors' Picks</a>
+            <a href="#" class="nav-link" data-key="navBestsellers">Bestsellers</a>
+            <a href="new-arrive/new-arrive.html" class="nav-link" data-key="navNewArrivals">New Arrivals</a>
+            <a href="Books/books.html" class="nav-link" data-key="navAllBooks">All Books</a>
+        </div>
 
-      <div class="nav-section nav-right">
-        <button
-          id="language-toggle-btn"
-          class="nav-icon-btn lang-btn"
-          data-lang="ar"
-        >
-          AR
-        </button>
-        <button
-          id="theme-toggle"
-          class="nav-icon-btn"
-          aria-label="Toggle dark mode"
-        >
-          <span id="sun-icon" role="img">☀️</span>
-          <span id="moon-icon" role="img" style="display: none">🌙</span>
-        </button>
-        <a
-          href="../Checkout/checkout.html"
-          class="nav-cart-link"
-          aria-label="Go to Cart"
-        >
-          <button class="nav-icon-btn nav-cart-btn">
-            <span role="img" class="cart-emoji">🛒</span>
-
-            <span class="cart-count" id="cart-count">0</span>
-          </button>
-        </a>
-        <a href="../personal/register.html" class="user-icon">👤</a>
-      </div>
+        <div class="nav-section nav-right">
+            <button id="language-toggle-btn" class="nav-icon-btn lang-btn" data-lang="ar">AR</button>
+            <button id="theme-toggle" class="nav-icon-btn" aria-label="Toggle dark mode">
+                <span id="sun-icon" role="img">☀️</span>
+                <span id="moon-icon" role="img" style="display:none;">🌙</span>
+            </button>
+        <a href="../Checkout/checkout.html" class="nav-cart-link" aria-label="Go to Cart">
+            <button class="nav-icon-btn nav-cart-btn">
+        
+        <span role="img" class="cart-emoji">🛒</span>
+        
+        <span class="cart-count" id="cart-count">0</span>
+        
+    </button>
+</a>
+            <a href="../personal/register.html" class="user-icon">👤</a>
+        </div>
     </nav>
     <!-- Hero Section -->
     <section class="hero">
-      <div class="hero-container">
-        <div class="hero-content">
-          <h3 data-lang="heroSubtitle">أحدث الكتب</h3>
-          <h1 data-lang="heroTitle">أنت على بُعد كتاب واحد من مزاج جيد</h1>
-          <p data-lang="heroText">
-            اكتشف مجموعة واسعة من الكتب المميزة في جميع المجالات. ابدأ رحلتك
-            القرائية الآن!
-          </p>
-          <a href="Books/books.html" class="btn-primary" data-lang="heroBtn"
-            >اكتشف الآن</a
-          >
-        </div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h3 data-lang="heroSubtitle">أحدث الكتب</h3>
+                <h1 data-lang="heroTitle">أنت على بُعد كتاب واحد من مزاج جيد</h1>
+                <p data-lang="heroText">اكتشف مجموعة واسعة من الكتب المميزة في جميع المجالات. ابدأ رحلتك القرائية الآن!</p>
+                <a href="Books/books.html" class="btn-primary" data-lang="heroBtn">اكتشف الآن</a>
+            </div>
 
-        <div class="hero-books">
-          <div class="arrow arrow-left">◀</div>
-          <div class="book-card">
-            <img src="image/Cinematic Storytelling.webp" alt="Book 1" />
-          </div>
-          <div class="book-card">
-            <img
-              src="image/Harry Potter and the Half-Blood Prince.png"
-              alt="Book 2"
-            />
-          </div>
-          <div class="book-card">
-            <img src="image/The Art of Captain America.webp" alt="Book 3" />
-          </div>
-          <div class="arrow arrow-right">▶</div>
+            <div class="hero-books">
+                <div class="arrow arrow-left">◀</div>
+                <div class="book-card">
+                    <img src="image/Cinematic Storytelling.webp"alt="Book 1">
+                </div>
+                <div class="book-card">
+                    <img src="image/Harry Potter and the Half-Blood Prince.png" alt="Book 2">
+                </div>
+                <div class="book-card">
+                    <img src="image/The Art of Captain America.webp" alt="Book 3">
+                </div>
+                <div class="arrow arrow-right">▶</div>
+            </div>
         </div>
-      </div>
     </section>
 
     <!-- Categories Section -->
     <section class="categories">
-      <h2 class="section-title" data-lang="categoriesTitle">اختر حسب الفئة</h2>
-      <div class="categories-grid">
-        <div class="category-card">
-          <img src="image/Pride and Prejudice.webp" alt="Teen" />
-          <div class="category-overlay">
-            <h3 data-lang="catTeen">الروايات والقصص</h3>
-          </div>
-        </div>
+        <h2 class="section-title" data-lang="categoriesTitle">اختر حسب الفئة</h2>
+        <div class="categories-grid">
 
-        <div class="category-card category-large">
-          <img
-            src="image/Harry Potter and the Half-Blood Prince.png"
-            alt="Crime"
-          />
-          <div class="category-overlay">
-            <h3 data-lang="catCrime">الخيال والعلوم الغامضة</h3>
-          </div>
-        </div>
+            <div class="category-card">
+                <img src="image/Pride and Prejudice.webp" alt="Teen">
+                <div class="category-overlay">
+                    <h3 data-lang="catTeen">الروايات والقصص</h3>
+                </div>
+            </div>
 
-        <div class="category-card">
-          <img src="image/The Alchemist.jpeg" alt="Literature" />
-          <div class="category-overlay">
-            <h3 data-lang="catLiterature">السينما والفن</h3>
-          </div>
+            <div class="category-card category-large">
+                <img src="image/Harry Potter and the Half-Blood Prince.png" alt="Crime">
+                <div class="category-overlay">
+                    <h3 data-lang="catCrime">الخيال والعلوم الغامضة</h3>
+                </div>
+            </div>
+
+            <div class="category-card">
+                <img src="image/The Alchemist.jpeg" alt="Literature">
+                <div class="category-overlay">
+                    <h3 data-lang="catLiterature">السينما والفن</h3>
+                </div>
+            </div>
+
+
+
         </div>
-      </div>
-      <div class="see-all-btn">
-        <a
-          href="Books/books.html"
-          class="btn-primary"
-          data-lang="seeAllCategories"
-          >عرض جميع الفئات</a
-        >
-      </div>
+        <div class="see-all-btn">
+            <a href="Books/books.html" class="btn-primary" data-lang="seeAllCategories">عرض جميع الفئات</a>
+        </div>
     </section>
 
     <!-- Features Section -->
     <section class="features">
-      <div class="features-grid">
-        <div class="feature-item">
-          <div class="feature-icon">🚚</div>
-          <h3 data-lang="featureShipping">شحن مجاني عالمياً</h3>
-          <p data-lang="featureShippingText">نوصل لجميع أنحاء العالم</p>
+        <div class="features-grid">
+            <div class="feature-item">
+                <div class="feature-icon">🚚</div>
+                <h3 data-lang="featureShipping">شحن مجاني عالمياً</h3>
+                <p data-lang="featureShippingText">نوصل لجميع أنحاء العالم</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">♻️</div>
+                <h3 data-lang="featureReturns">إرجاع مجاني للجميع</h3>
+                <p data-lang="featureReturnsText">خلال 30 يوم من الشراء</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">✏️</div>
+                <h3 data-lang="featureDiscount">خصم 10% للطلاب</h3>
+                <p data-lang="featureDiscountText">تخفيضات خاصة للطلاب</p>
+            </div>
+            <div class="feature-item">
+                <div class="feature-icon">🎁</div>
+                <h3 data-lang="featureVouchers">قسائم هدايا</h3>
+                <p data-lang="featureVouchersText">فاجئ أحباءك بكتاب</p>
+            </div>
         </div>
-        <div class="feature-item">
-          <div class="feature-icon">♻️</div>
-          <h3 data-lang="featureReturns">إرجاع مجاني للجميع</h3>
-          <p data-lang="featureReturnsText">خلال 30 يوم من الشراء</p>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">✏️</div>
-          <h3 data-lang="featureDiscount">خصم 10% للطلاب</h3>
-          <p data-lang="featureDiscountText">تخفيضات خاصة للطلاب</p>
-        </div>
-        <div class="feature-item">
-          <div class="feature-icon">🎁</div>
-          <h3 data-lang="featureVouchers">قسائم هدايا</h3>
-          <p data-lang="featureVouchersText">فاجئ أحباءك بكتاب</p>
-        </div>
-      </div>
     </section>
 
     <!-- Partner Section -->
     <section class="partner">
-      <div class="partner-container">
-        <div class="partner-image">
-          <img
-            src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='400'%3E%3Crect fill='%23f0f0f0' width='500' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='80' fill='%23333' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3E⌨️%3C/text%3E%3C/svg%3E"
-            alt="Typewriter"
-          />
+        <div class="partner-container">
+            <div class="partner-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='500' height='400'%3E%3Crect fill='%23f0f0f0' width='500' height='400'/%3E%3Ctext x='50%25' y='50%25' font-size='80' fill='%23333' text-anchor='middle' dominant-baseline='middle' font-family='Arial'%3E⌨️%3C/text%3E%3C/svg%3E" alt="Typewriter">
+            </div>
+            <div class="partner-content">
+                <h3 data-lang="partnerSubtitle">كن شريكنا</h3>
+                <h2 data-lang="partnerTitle">النشر الذاتي وكتابة الكتب</h2>
+                <p data-lang="partnerText">هل لديك قصة تريد مشاركتها مع العالم؟ ساعدناك في نشر كتابك والوصول لآلاف القراء. نوفر لك كل الأدوات والدعم اللازم لتحقيق حلمك.</p>
+                <a href="#" class="btn-primary" data-lang="partnerBtn">تواصل معنا الآن</a>
+            </div>
         </div>
-        <div class="partner-content">
-          <h3 data-lang="partnerSubtitle">كن شريكنا</h3>
-          <h2 data-lang="partnerTitle">النشر الذاتي وكتابة الكتب</h2>
-          <p data-lang="partnerText">
-            هل لديك قصة تريد مشاركتها مع العالم؟ ساعدناك في نشر كتابك والوصول
-            لآلاف القراء. نوفر لك كل الأدوات والدعم اللازم لتحقيق حلمك.
-          </p>
-          <a href="#" class="btn-primary" data-lang="partnerBtn"
-            >تواصل معنا الآن</a
-          >
-        </div>
-      </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-column">
-          <div class="footer-logo">
-            <div class="footer-logo-icon"></div>
-            <span data-lang="siteName">Book Worms</span>
-            <a href="../index.html" class="logo-icon">📚</a>
-          </div>
+        <div class="footer-container">
+            <div class="footer-column">
+                <div class="footer-logo">
+                    <div class="footer-logo-icon"></div>
+                    <span data-lang="siteName">Book Worms</span>
+                    <a href="../index.html" class="logo-icon">📚</a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4 data-lang="footerQuickLinks">روابط سريعة</h4>
+                <ul>
+                    <li><a href="#" data-lang="footerHome">الرئيسية</a></li>
+                    <li><a href="#" data-lang="footerBooks">الكتب</a></li>
+                    <li><a href="#" data-lang="footerDeals">العروض</a></li>
+                    <li><a href="about/about-us.html" data-lang="footerAbout">من نحن</a></li>
+                    <li><a href="contact/contact.html" data-lang="footerContact">اتصل بنا</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 data-lang="footerExplore">استكشف</h4>
+                <ul>
+                    <li><a href="#" data-lang="footerBestsellers">الأكثر مبيعاً</a></li>
+                    <li><a href="#" data-lang="footerOnSale">التخفيضات</a></li>
+                    <li><a href="#" data-lang="footerEditorsPick">اختيار المحررين</a></li>
+                    <li><a href="#" data-lang="footerBest2022">الأفضل 2022</a></li>
+                    <li><a href="#" data-lang="footerFeatured">المميزة</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h4 data-lang="footerHelp">المساعدة</h4>
+                <ul>
+                    <li><a href="#" data-lang="footerTrackOrder">تتبع الطلب</a></li>
+                    <li><a href="#" data-lang="footerDelivery">التوصيل والإرجاع</a></li>
+                    <li><a href="#" data-lang="footerFAQ">الأسئلة الشائعة</a></li>
+                    <li><a href="#" data-lang="footerCommunity">المجتمع</a></li>
+                </ul>
+            </div>
         </div>
 
-        <div class="footer-column">
-          <h4 data-lang="footerQuickLinks">روابط سريعة</h4>
-          <ul>
-            <li><a href="#" data-lang="footerHome">الرئيسية</a></li>
-            <li><a href="#" data-lang="footerBooks">الكتب</a></li>
-            <li><a href="#" data-lang="footerDeals">العروض</a></li>
-            <li>
-              <a href="about/about-us.html" data-lang="footerAbout">من نحن</a>
-            </li>
-            <li>
-              <a href="contact/contact.html" data-lang="footerContact"
-                >اتصل بنا</a
-              >
-            </li>
-          </ul>
+        <div class="footer-bottom">
+            <div>
+                <p data-lang="footerCopyright">حقوق النشر © 2025 Book Worms | تم التطوير بواسطة Book Worms</p>
+            </div>
+            <div class="payment-icons">
+                <div class="payment-icon">VISA</div>
+                <div class="payment-icon">MC</div>
+                <div class="payment-icon">AMEX</div>
+                <div class="payment-icon">🍎Pay</div>
+                <div class="payment-icon">G Pay</div>
+            </div>
+            <div class="social-icons">
+                <div class="social-icon">f</div>
+                <div class="social-icon">🐦</div>
+                <div class="social-icon">📷</div>
+            </div>
         </div>
-
-        <div class="footer-column">
-          <h4 data-lang="footerExplore">استكشف</h4>
-          <ul>
-            <li><a href="#" data-lang="footerBestsellers">الأكثر مبيعاً</a></li>
-            <li><a href="#" data-lang="footerOnSale">التخفيضات</a></li>
-            <li>
-              <a href="#" data-lang="footerEditorsPick">اختيار المحررين</a>
-            </li>
-            <li><a href="#" data-lang="footerBest2022">الأفضل 2022</a></li>
-            <li><a href="#" data-lang="footerFeatured">المميزة</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-column">
-          <h4 data-lang="footerHelp">المساعدة</h4>
-          <ul>
-            <li><a href="#" data-lang="footerTrackOrder">تتبع الطلب</a></li>
-            <li><a href="#" data-lang="footerDelivery">التوصيل والإرجاع</a></li>
-            <li><a href="#" data-lang="footerFAQ">الأسئلة الشائعة</a></li>
-            <li><a href="#" data-lang="footerCommunity">المجتمع</a></li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div>
-          <p data-lang="footerCopyright">
-            حقوق النشر © 2025 Book Worms | تم التطوير بواسطة Book Worms
-          </p>
-        </div>
-        <div class="payment-icons">
-          <div class="payment-icon">VISA</div>
-          <div class="payment-icon">MC</div>
-          <div class="payment-icon">AMEX</div>
-          <div class="payment-icon">🍎Pay</div>
-          <div class="payment-icon">G Pay</div>
-        </div>
-        <div class="social-icons">
-          <div class="social-icon">f</div>
-          <div class="social-icon">🐦</div>
-          <div class="social-icon">📷</div>
-        </div>
-      </div>
     </footer>
 
-    <!-- API Service - Must be loaded first -->
-    <script src="js/apiService.js"></script>
-    <script src="js/homepage.js"></script>
+
     <script type="module" src="script.js"></script>
-  </body>
+
+</body>
 </html>
+
+
+
+

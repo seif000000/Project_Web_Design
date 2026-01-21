@@ -1,464 +1,77 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>سلة التسوق - Book Worms</title>
-    <link rel="stylesheet" href="../style.css" />
-    <style>
-      .checkout-container {
-        max-width: 1000px;
-        margin: 0 auto;
-        padding: 2rem 5%;
-      }
-      .page-header {
-        text-align: center;
-        margin-bottom: 2rem;
-      }
-      .cart-items {
-        margin-bottom: 2rem;
-      }
-      .cart-item {
-        display: flex;
-        gap: 1.5rem;
-        padding: 1.5rem;
-        background: var(--card-bg);
-        border-radius: 10px;
-        margin-bottom: 1rem;
-        align-items: center;
-      }
-      .cart-cover {
-        width: 80px;
-        height: 120px;
-        object-fit: cover;
-        border-radius: 5px;
-      }
-      .cart-info {
-        flex: 1;
-      }
-      .cart-title {
-        font-weight: bold;
-        margin-bottom: 0.5rem;
-      }
-      .cart-price {
-        color: var(--accent);
-        font-weight: bold;
-      }
-      .cart-quantity {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .qty-btn {
-        width: 30px;
-        height: 30px;
-        background: #e0e0e0;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        font-weight: bold;
-      }
-      .qty-input {
-        width: 50px;
-        text-align: center;
-        border: 1px solid var(--muted);
-        border-radius: 5px;
-        padding: 0.25rem;
-      }
-      .remove-btn {
-        background: #ff6b6b;
-        color: white;
-        border: none;
-        border-radius: 5px;
-        padding: 0.5rem 1rem;
-        cursor: pointer;
-        font-weight: bold;
-      }
-      .cart-summary {
-        background: var(--card-bg);
-        padding: 1.5rem;
-        border-radius: 10px;
-        text-align: center;
-      }
-      .summary-row {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 0.5rem;
-      }
-      .total-row {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: var(--accent);
-        margin-top: 1rem;
-      }
-      .checkout-btn {
-        padding: 1rem 2rem;
-        background: var(--accent);
-        color: var(--dark);
-        border: none;
-        border-radius: 8px;
-        font-size: 1.1rem;
-        font-weight: bold;
-        cursor: pointer;
-        margin-top: 1rem;
-        width: 100%;
-      }
-      .empty-cart {
-        text-align: center;
-        padding: 3rem;
-        color: var(--muted);
-      }
-      @media (max-width: 768px) {
-        .cart-item {
-          flex-direction: column;
-          text-align: center;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <nav class="navbar">
-      <div class="logo">
-        <a href="../index.html" class="logo-icon">📚</a>
-        <span id="site-name">Book Worms</span>
-      </div>
-      <div class="nav-section nav-center">
-        <a href="../Books/books.html" class="nav-link">جميع الكتب</a>
-        <a href="../contact/contact.html" class="nav-link">اتصل بنا</a>
-        <a href="../about/about-us.html" class="nav-link">من نحن</a>
-      </div>
-      <div class="nav-section nav-right">
-        <button id="language-toggle-btn" class="nav-icon-btn lang-btn">
-          AR
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🛒 إكمال الطلب - Book Worms</title>
+    <link rel="stylesheet" href="../style.css"> 
+    <link rel="stylesheet" href="checkout.css"> 
+</head>
+
+<body class="checkout-page">
+
+    <!-- 🔥 زر اللغة أعلى الصفحة -->
+    <div style="text-align:center; margin-top:15px;">
+        <button id="lang-toggle" class="btn" style="padding:6px 15px; font-weight:bold;">
+            EN
         </button>
-        <button
-          id="theme-toggle"
-          class="nav-icon-btn"
-          aria-label="Toggle dark mode"
-        >
-          <span id="sun-icon">☀️</span>
-          <span id="moon-icon" style="display: none">🌙</span>
-        </button>
-        <a href="checkout.html" class="nav-cart-link">
-          <button class="nav-icon-btn nav-cart-btn">
-            <span class="cart-emoji">🛒</span>
-            <span class="cart-count" id="cart-count">0</span>
-          </button>
-        </a>
-        <a href="../personal/register.html" class="user-icon">👤</a>
-      </div>
-    </nav>
-
-    <div class="checkout-container">
-      <div class="page-header">
-        <h1 id="page-title">سلة التسوق</h1>
-      </div>
-
-      <div id="cart-items" class="cart-items">
-        <div class="empty-cart" id="loading">جارٍ تحميل السلة...</div>
-      </div>
-
-      <div class="cart-summary">
-        <div class="summary-row">
-          <span id="items-count">0 عنصر</span>
-          <span id="subtotal">0 ج.م</span>
-        </div>
-        <div class="summary-row">
-          <span>الشحن</span>
-          <span>مجاناً</span>
-        </div>
-        <div class="total-row">
-          <span>المجموع</span>
-          <span id="total">0 ج.م</span>
-        </div>
-        <button class="checkout-btn" id="checkout-btn">إتمام الطلب</button>
-      </div>
     </div>
 
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-column">
-          <div class="footer-logo">
-            <span id="footer-site-name">Book Worms</span>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p id="copyright">حقوق النشر © 2025 Book Worms</p>
-      </div>
-    </footer>
+    <div class="container">
+        <h2 class="page-title" data-key="titleCheckout">🛒 إكمال طلبك وتفاصيل التوصيل</h2>
+        
+        <div id="order-summary" class="summary-box">
 
-    <script>
-      // ================================
-      // Cart Page — Fully Fixed Version
-      // ================================
+            <h3 class="box-header" data-key="summaryTitle">ملخص مشترياتك</h3>
 
-      let currentLang = localStorage.getItem("language") || "ar";
-      let cartData = { items: [], total: 0, count: 0 };
+            <div id="cart-items-list"></div>
 
-      const cartItemsEl = document.getElementById("cart-items");
-      const loadingEl = document.getElementById("loading");
-      const itemsCountEl = document.getElementById("items-count");
-      const subtotalEl = document.getElementById("subtotal");
-      const totalEl = document.getElementById("total");
-      const cartCountEl = document.getElementById("cart-count");
-      const checkoutBtn = document.getElementById("checkout-btn");
-
-      const translations = {
-        ar: {
-          siteName: "Book Worms",
-          pageTitle: "سلة التسوق",
-          loading: "جارٍ تحميل السلة...",
-          emptyCart: "سلة التسوق فارغة",
-          items: "عنصر",
-          itemsPlural: "عناصر",
-          subtotal: "المجموع الفرعي",
-          shipping: "الشحن",
-          free: "مجاناً",
-          total: "المجموع",
-          checkout: "إتمام الطلب",
-          remove: "إزالة",
-          copyright: "حقوق النشر © 2025 Book Worms",
-        },
-        en: {
-          siteName: "Book Worms",
-          pageTitle: "Shopping Cart",
-          loading: "Loading cart...",
-          emptyCart: "Your cart is empty",
-          items: "item",
-          itemsPlural: "items",
-          subtotal: "Subtotal",
-          shipping: "Shipping",
-          free: "Free",
-          total: "Total",
-          checkout: "Checkout",
-          remove: "Remove",
-          copyright: "Copyright © 2025 Book Worms",
-        },
-      };
-
-      function t(key) {
-        return translations[currentLang][key] || key;
-      }
-
-      function applyTranslations() {
-        document.getElementById("site-name").textContent = t("siteName");
-        document.getElementById("page-title").textContent = t("pageTitle");
-        document.getElementById("footer-site-name").textContent = t("siteName");
-        document.getElementById("copyright").textContent = t("copyright");
-        if (checkoutBtn) checkoutBtn.textContent = t("checkout");
-      }
-
-      // ✅ Optimistic update — UI updates immediately
-      function updateLocalCart(bookId, quantityChange) {
-        const item = cartData.items.find((x) => x.bookId === bookId);
-        if (!item) return;
-
-        if (typeof quantityChange === "number") {
-          item.quantity = Math.max(1, (item.quantity || 1) + quantityChange);
-        } else {
-          item.quantity = Math.max(1, parseInt(quantityChange) || 1);
-        }
-
-        // Recalculate totals
-        cartData.total = cartData.items.reduce(
-          (sum, i) => sum + i.price * (i.quantity || 1),
-          0,
-        );
-        cartData.count = cartData.items.reduce(
-          (sum, i) => sum + (i.quantity || 1),
-          0,
-        );
-
-        renderCart();
-        updateCartCountUI();
-      }
-
-      // ✅ Remove item locally
-      function removeItemLocally(bookId) {
-        cartData.items = cartData.items.filter((x) => x.bookId !== bookId);
-        cartData.total = cartData.items.reduce(
-          (sum, i) => sum + i.price * (i.quantity || 1),
-          0,
-        );
-        cartData.count = cartData.items.reduce(
-          (sum, i) => sum + (i.quantity || 1),
-          0,
-        );
-        renderCart();
-        updateCartCountUI();
-      }
-
-      // ✅ Fetch cart from API
-      async function fetchCart() {
-        try {
-          loadingEl.textContent = t("loading");
-          const token = localStorage.getItem("token");
-
-          const res = await fetch("/api/cart", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: token ? JSON.stringify({ token }) : undefined,
-          });
-
-          if (!res.ok) throw new Error(`HTTP ${res.status}`);
-          const data = await res.json();
-          cartData = data.cart || { items: [], total: 0, count: 0 };
-          renderCart();
-        } catch (err) {
-          console.error("❌ Fetch cart error:", err);
-          // Fallback to localStorage
-          const localCart = JSON.parse(localStorage.getItem("cart")) || [];
-          cartData = {
-            items: localCart,
-            total: localCart.reduce(
-              (sum, item) => sum + item.price * (item.quantity || 1),
-              0,
-            ),
-            count: localCart.reduce(
-              (sum, item) => sum + (item.quantity || 1),
-              0,
-            ),
-          };
-          renderCart();
-        }
-      }
-
-      // ✅ Update quantity (optimistic)
-      async function updateQuantity(bookId, quantity) {
-        // 1. Update UI immediately
-        updateLocalCart(bookId, quantity);
-
-        try {
-          // 2. Sync with backend
-          const res = await fetch(`/api/cart/${bookId}`, {
-            method: "PUT",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ quantity }),
-          });
-
-          if (!res.ok) {
-            // 3. Revert on error
-            fetchCart();
-            alert("فشل التحديث. تم استعادة القيمة السابقة.");
-          }
-        } catch (err) {
-          console.error("❌ Update quantity error:", err);
-          fetchCart(); // Revert
-        }
-      }
-
-      // ✅ Remove item (optimistic)
-      async function removeItem(bookId) {
-        // 1. Remove from UI immediately
-        removeItemLocally(bookId);
-
-        try {
-          // 2. Sync with backend
-          const res = await fetch(`/api/cart/${bookId}`, { method: "DELETE" });
-
-          if (!res.ok) {
-            // 3. Revert on error
-            fetchCart();
-            alert("فشل الحذف. تم استعادة العنصر.");
-          }
-        } catch (err) {
-          console.error("❌ Remove item error:", err);
-          fetchCart(); // Revert
-        }
-      }
-
-      // Render cart
-      function renderCart() {
-        const { items, total, count } = cartData;
-
-        if (items.length === 0) {
-          cartItemsEl.innerHTML = `<div class="empty-cart">${t("emptyCart")}</div>`;
-          itemsCountEl.textContent = `0 ${t("items")}`;
-          subtotalEl.textContent = `0 ج.م`;
-          totalEl.textContent = `0 ج.م`;
-          updateCartCountUI();
-          return;
-        }
-
-        cartItemsEl.innerHTML = items
-          .map((item) => {
-            const cover =
-              item.cover || item.image_url || "../image/placeholder-book.webp";
-            return `
-            <div class="cart-item">
-              <img src="${cover}" alt="${item.title}" class="cart-cover" 
-                   onerror="this.src='../image/placeholder-book.webp'">
-              <div class="cart-info">
-                <div class="cart-title">${item.title}</div>
-                <div class="cart-price">${item.price} ج.م</div>
-                <div class="cart-quantity">
-                  <button class="qty-btn" onclick="window.updateQty('${item.bookId}', -1)">-</button>
-                  <input type="number" class="qty-input" value="${item.quantity || 1}" 
-                         min="1" onchange="window.updateQty('${item.bookId}', this.value)">
-                  <button class="qty-btn" onclick="window.updateQty('${item.bookId}', 1)">+</button>
-                  <button class="remove-btn" onclick="if(confirm('هل أنت متأكد؟')) window.removeItem('${item.bookId}')">${t("remove")}</button>
-                </div>
-              </div>
+            <div class="summary-total">
+                <span data-key="subtotal">الإجمالي الفرعي:</span>
+                <span id="subtotal-price" class="total-price">$0.00</span> 
             </div>
-          `;
-          })
-          .join("");
 
-        const itemCountText = count === 1 ? t("items") : t("itemsPlural");
-        itemsCountEl.textContent = `${count} ${itemCountText}`;
-        subtotalEl.textContent = `${total.toFixed(2)} ج.م`;
-        totalEl.textContent = `${total.toFixed(2)} ج.م`;
-        updateCartCountUI();
-      }
+            <div class="summary-row shipping-area">
+                <label for="governorate-select" data-key="deliveryArea">منطقة التوصيل:</label>
+                <select id="governorate-select" aria-label="اختر المحافظة" class="form-control"></select>
+            </div>
 
-      // Expose to global
-      window.updateQty = updateQuantity;
-      window.removeItem = removeItem;
+            <div class="summary-row">
+                <span data-key="shippingCost">تكلفة التوصيل:</span>
+                <span id="shipping-price">$0.00</span>
+            </div>
 
-      function updateCartCountUI() {
-        if (cartCountEl) cartCountEl.textContent = cartData.count;
-      }
+            <div class="summary-total final-total-row">
+                <span data-key="finalTotal">الإجمالي النهائي:</span>
+                <span id="final-total" class="total-price">$0.00</span>
+            </div>
 
-      // Checkout button
-      function checkout() {
-        if (cartData.count === 0) {
-          alert("سلة التسوق فارغة");
-          return;
-        }
-        alert("سيتم إضافة صفحة الدفع لاحقًا. الآن: محاكاة الطلب...");
-        // TODO: Redirect to /checkout/payment
-      }
+            <button id="proceed-to-delivery" class="btn final-purchase-btn" style="margin-top: 25px;" data-key="continueBtn">
+                متابعة لإدخال بيانات التوصيل
+            </button>
 
-      // Init
-      document.addEventListener("DOMContentLoaded", () => {
-        applyTranslations();
-        fetchCart();
+        </div>
+            
+        <div id="delivery-form-container" class="delivery-form-container">
+            <h3 class="box-header" data-key="deliveryDetails">إدخال تفاصيل التوصيل</h3>
 
-        // Checkout button
-        if (checkoutBtn) checkoutBtn.addEventListener("click", checkout);
-
-        // Theme
-        if (localStorage.getItem("theme") === "dark") {
-          document.body.classList.add("dark-mode");
-          document.getElementById("sun-icon").style.display = "none";
-          document.getElementById("moon-icon").style.display = "inline";
-        }
-
-        // Language
-        const langToggle = document.getElementById("language-toggle-btn");
-        if (langToggle) {
-          langToggle.addEventListener("click", () => {
-            currentLang = currentLang === "ar" ? "en" : "ar";
-            localStorage.setItem("language", currentLang);
-            document.documentElement.lang = currentLang;
-            document.documentElement.dir = currentLang === "ar" ? "rtl" : "ltr";
-            langToggle.textContent = currentLang.toUpperCase();
-            applyTranslations();
-            renderCart();
-          });
-        }
-      });
-    </script>
-  </body>
+            <form class="contact-form" id="delivery-form">
+                <input type="text" placeholder="الاسم الكامل" data-placeholder-ar="الاسم الكامل" data-placeholder-en="Full Name" required>
+                <input type="email" placeholder="البريد الإلكتروني" data-placeholder-ar="البريد الإلكتروني" data-placeholder-en="Email" required>
+                <input type="tel" placeholder="رقم الهاتف" data-placeholder-ar="رقم الهاتف" data-placeholder-en="Phone Number" required>
+                <textarea placeholder="العنوان بالكامل (المدينة، الحي، الشارع)" 
+                    data-placeholder-ar="العنوان بالكامل (المدينة، الحي، الشارع)"
+                    data-placeholder-en="Full Address (City, Area, Street)"
+                    rows="3" required></textarea>
+                
+                <button type="submit" class="btn final-purchase-btn" data-key="confirmBtn">
+                    تأكيد الطلب والدفع 
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="../Books/booksData.js"></script>
+    <script src="checkout.js"></script>
+</body>
 </html>

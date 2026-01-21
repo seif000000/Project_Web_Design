@@ -58,10 +58,6 @@ body {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
   transition: background-color 0.5s;
   flex-wrap: wrap;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
 }
 
 /* --- Logo/Branding Styles --- */

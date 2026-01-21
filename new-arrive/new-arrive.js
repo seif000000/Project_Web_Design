@@ -171,22 +171,15 @@ function homepage() {
 }
 
 
-document.addEventListener('DOMContentLoaded', async () => {
+document.addEventListener('DOMContentLoaded', () => {
     
     // إعداد الثيم واللغة عند تحميل الصفحة
     setupThemeToggle();
     setupLanguageToggle(); 
 
-    // Check if API service is available
-    if (typeof window.booksAPI === 'undefined') {
-        console.error("Books API service not loaded. Make sure js/apiService.js is included before this script.");
-        const noBooksMessage = document.getElementById('no-books-message');
-        if (noBooksMessage) {
-            noBooksMessage.textContent = currentLang === 'ar' 
-                ? 'خطأ: لم يتم تحميل خدمة API للكتب'
-                : 'Error: Books API service not loaded';
-            noBooksMessage.style.display = 'block';
-        }
+    // التأكد من وجود البيانات (يفترض أنها من ملف booksData.js)
+    if (typeof booksData === 'undefined' || !Array.isArray(booksData)) {
+        console.error("booksData is not defined or is not an array. Please check if booksData.js is loaded correctly.");
         return;
     }
 
@@ -194,8 +187,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const booksContainer = document.getElementById('books-container');
     const noBooksMessage = document.getElementById('no-books-message');
     
-    // Load new arrival books from API
-    const newBooks = await window.booksAPI.getNewArrivalBooks(); 
+    // تصفية الكتب الجديدة (التي تحمل isNewArrival: true)
+    const newBooks = booksData.filter(book => book.isNewArrival === true); 
     
     function openBookDetails(id) {
         window.location.href = `../Project_Web_Design-raneem-branch/index.html?id=${id}`; 

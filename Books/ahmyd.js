@@ -1,7 +1,5 @@
 // === Ahmyd Search Integration (with dorking) ===
-// Now uses centralized API service instead of static booksData
-
-document.addEventListener("DOMContentLoaded", async () => {
+document.addEventListener("DOMContentLoaded", () => {
   const input = document.getElementById("get-books");
   const searchBtn = document.getElementById("search-button"); // Get the search button element
   const cardsContainer = document.getElementById("cards-container");
@@ -14,23 +12,9 @@ document.addEventListener("DOMContentLoaded", async () => {
   let currentPage = 1;
   let filtered = [];
 
-  // Load books from API using centralized service
-  // Wait for API service to be loaded
-  if (typeof window.booksAPI === 'undefined') {
-    console.error('Books API service not loaded. Make sure js/apiService.js is included before this script.');
-    return;
-  }
-
-  const mergedBooksData = await window.booksAPI.loadBooks();
-  
-  if (mergedBooksData.length === 0) {
-    cardsContainer.innerHTML = '<p style="text-align:center;color:#777;padding:2rem;">No books available. Please check your database connection.</p>';
-    console.warn('⚠️ No books loaded from API');
-  }
-
-  // Get unique categories from the merged book list - Still needed for dorking
+  // Get unique categories from the big book list (booksData) - Still needed for dorking
   const categories = [];
-  mergedBooksData.forEach(book => {
+  booksData.forEach(book => {
     const en = book.category.en;
     const ar = book.category.ar;
     // Only add if it's not already in the list
@@ -142,7 +126,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const generalQuery = parsedQuery.replace(commandRegex, '').trim().toLowerCase();
 
     // --- NEW: Apply Filters based on commands and general query only ---
-    filtered = mergedBooksData.filter(b => {
+    filtered = booksData.filter(b => {
       const title = b.title[currentLang].toLowerCase();
       const author = b.author[currentLang].toLowerCase();
       const categoryEn = b.category.en.toLowerCase(); // Use English name for category matching

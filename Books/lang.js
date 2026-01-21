@@ -218,20 +218,8 @@ function searchBooks(query) {
 
 let filteredSearchResults = null;
 
-(async function(){
-    // Wait for API service to load
-    if (typeof window.booksAPI === 'undefined') {
-        console.error('Books API service not loaded. Make sure js/apiService.js is included before this script.');
-        return;
-    }
-
-    // Load books from API
-    const booksData = await window.booksAPI.loadBooks();
-    
-    if (!booksData || booksData.length === 0) {
-        console.warn('No books loaded from API');
-        return;
-    }
+(function(){
+    if (typeof booksData === 'undefined') return;
 
     const perPage = 10;
     const params = new URLSearchParams(location.search);
@@ -245,13 +233,7 @@ let filteredSearchResults = null;
 
     let currentCategory = "all";
 
-    // Extract categories from books
-    const categorySet = new Set();
-    booksData.forEach(b => {
-        const cat = typeof b.category === 'object' ? b.category.en : (b.category || b.genre || '');
-        if (cat) categorySet.add(cat);
-    });
-    const categories = ["all", ...Array.from(categorySet)];
+    const categories = ["all", ...new Set(booksData.map(b => b.category.en))];
 
     function openDetails(id) {
         window.location.href = `../Project_Web_Design-raneem-branch/index.html?id=${id}`; 
@@ -275,7 +257,7 @@ let filteredSearchResults = null;
 
                 const cartIds = JSON.parse(localStorage.getItem('shoppingCart') || '[]');
                 
-                const bookIdStr = (book.id || book._id)?.toString(); 
+                const bookIdStr = book.id.toString(); 
 
                 if (!cartIds.includes(bookIdStr)) {
                     cartIds.push(bookIdStr);
@@ -598,17 +580,13 @@ let filteredSearchResults = null;
 
 })(); // end IIFE
 
-async function initBooksPage() {
-    // Wait for API service and language data
-    if (typeof window.booksAPI === "undefined" || !window.langData || !window.langData[currentLang]) {
+function initBooksPage() {
+    if (typeof booksData === "undefined" || !window.langData[currentLang]) {
         setTimeout(initBooksPage, 100);
         return;
     }
 
     const t = window.langData[currentLang] || fallbackTranslation;
-
-    // Ensure books are loaded
-    await window.booksAPI.loadBooks();
 
     if (typeof renderCategories === "function") renderCategories();
     if (typeof renderPage === "function") renderPage(1);

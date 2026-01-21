@@ -4,34 +4,34 @@ const booksData = [
     category: { en: "Novels & Stories", ar: "الروايات والقصص" },
     title: { en: "Pride and Prejudice", ar: "كبرياء وهوى" },
     author: { en: "Jane Austen", ar: "جين أوستن" },
-    cover: "../image/Pride and Prejudice.webp",
-    price: 0,
+    cover: "../image/Pride and Prejudice.webp" ,
+    price: 0 
   },
   {
     id: 2,
     category: { en: "Novels & Stories", ar: "الروايات والقصص" },
     title: { en: "To Kill a Mockingbird", ar: "لقتل طائر بريء" },
     author: { en: "Harper Lee", ar: "هاربر لي" },
-    cover: "../image/To-Kill-a-Mockingbird.jpg",
-    isNewArrival: true,
-    price: 0,
+    cover: "../image/To-Kill-a-Mockingbird.jpg" ,
+    isNewArrival: true  ,
+    price: 0 
   },
   {
     id: 3,
     category: { en: "Novels & Stories", ar: "الروايات والقصص" },
     title: { en: "The Great Gatsby", ar: "غاتسبي العظيم" },
     author: { en: "F. Scott Fitzgerald", ar: "فرانسيس سكوت فيتزجيرالد" },
-    cover: "../image/The Great Gatsby.webp",
-    price: 0,
+    cover: "../image/The Great Gatsby.webp"  ,
+    price: 0 
   },
   {
     id: 4,
     category: { en: "Novels & Stories", ar: "الروايات والقصص" },
     title: { en: "The Alchemist", ar: "الخيميائي" },
     author: { en: "Paulo Coelho", ar: "باولو كويلو" },
-    cover: "../image/The Alchemist.jpeg",
+    cover: "../image/The Alchemist.jpeg"  ,
     isNewArrival: true,
-    price: 100.0,
+    price: 100.00 
   },
   {
     id: 5,
@@ -39,7 +39,7 @@ const booksData = [
     title: { en: "The Kite Runner", ar: "عداء الطائرة الورقية" },
     author: { en: "Khaled Hosseini", ar: "خالد الحسيني" },
     cover: "../image/The Kite Runner.jpg",
-    price: 150.0,
+    price: 150.00   
   },
   {
     id: 6,
@@ -47,95 +47,75 @@ const booksData = [
     title: { en: "Little Women", ar: "نساء صغيرات" },
     author: { en: "Louisa May Alcott", ar: "لويزا ماي ألكوت" },
     cover: "../image/Little Women.webp",
-    price: 130.0,
+    price: 130.00   
   },
   {
     id: 7,
     category: { en: "Novels & Stories", ar: "الروايات والقصص" },
     title: { en: "The Catcher in the Rye", ar: "الحارس في حقل الشوفان" },
     author: { en: "J.D. Salinger", ar: "ج. د. سالينجر" },
-    cover: "../image/The Catcher in the Rye.webp",
-    isNewArrival: true,
-    price: 140.0,
+    cover: "../image/The Catcher in the Rye.webp" ,
+    isNewArrival: true ,
+    price: 140.00 
   },
+
 
   {
     id: 8,
     category: { en: "Fantasy & Sci-Fi", ar: "الخيال والعلوم الغامضة" },
-    title: {
-      en: "Harry Potter and the Sorcerer's Stone",
-      ar: "هاري بوتر وحجر الفيلسوف",
-    },
+    title: { en: "Harry Potter and the Sorcerer's Stone", ar: "هاري بوتر وحجر الفيلسوف" },
     author: { en: "J.K. Rowling", ar: "ج. ك. رولينغ" },
     cover: "../image/Harry Potter and the Sorcerer’s Stone.png",
-    price: 200.0,
+    price: 200.00 
   },
   {
     id: 9,
     category: { en: "Fantasy & Sci-Fi", ar: "الخيال والعلوم الغامضة" },
-    title: {
-      en: "Harry Potter and the Chamber of Secrets",
-      ar: "هاري بوتر وحجرة الأسرار",
-    },
+    title: { en: "Harry Potter and the Chamber of Secrets", ar: "هاري بوتر وحجرة الأسرار" },
     author: { en: "J.K. Rowling", ar: "ج. ك. رولينغ" },
     cover: "../image/Harry Potter and the Chamber of Secrets.png",
-    price: 140.0,
+    price: 140.00 
   },
   {
     id: 10,
     category: { en: "Fantasy & Sci-Fi", ar: "الخيال والعلوم الغامضة" },
-    title: {
-      en: "Harry Potter and the Prisoner of Azkaban",
-      ar: "هاري بوتر وسجين أزكابان",
-    },
+    title: { en: "Harry Potter and the Prisoner of Azkaban", ar: "هاري بوتر وسجين أزكابان" },
     author: { en: "J.K. Rowling", ar: "ج. ك. رولينغ" },
     cover: "../image/Harry Potter and the Prisoner of Azkaban.jpeg",
-    price: 145.0,
+    price: 145.00 
   },
   {
     id: 11,
     category: { en: "Fantasy & Sci-Fi", ar: "الخيال والعلوم الغامضة" },
-    title: {
-      en: "Harry Potter and the Goblet of Fire",
-      ar: "هاري بوتر وكأس النار",
-    },
+    title: { en: "Harry Potter and the Goblet of Fire", ar: "هاري بوتر وكأس النار" },
     author: { en: "J.K. Rowling", ar: "ج. ك. رولينغ" },
     cover: "../image/Harry Potter and the Goblet of Fire.webp",
-    price: 100.0,
+    price: 100.00 
   },
   {
     id: 12,
     category: { en: "Fantasy & Sci-Fi", ar: "الخيال والعلوم الغامضة" },
-    title: {
-      en: "Harry Potter and the Order of the Phoenix",
-      ar: "هاري بوتر وجماعة العنقاء",
-    },
+    title: { en: "Harry Potter and the Order of the Phoenix", ar: "هاري بوتر وجماعة العنقاء" },
     author: { en: "J.K. Rowling", ar: "ج. ك. رولينغ" },
     cover: "../image/Harry Potter and the Order of the Phoenix.png",
     isNewArrival: true,
-    price: 0.0,
+    price: 0.00 
   },
   {
     id: 13,
     category: { en: "Fantasy & Sci-Fi", ar: "الخيال والعلوم الغامضة" },
-    title: {
-      en: "Harry Potter and the Half-Blood Prince",
-      ar: "هاري بوتر والأمير الهجين",
-    },
+    title: { en: "Harry Potter and the Half-Blood Prince", ar: "هاري بوتر والأمير الهجين" },
     author: { en: "J.K. Rowling", ar: "ج. ك. رولينغ" },
     cover: "../image/Harry Potter and the Half-Blood Prince.png",
-    price: 100.0,
+    price: 100.00 
   },
   {
     id: 14,
     category: { en: "Fantasy & Sci-Fi", ar: "الخيال والعلوم الغامضة" },
-    title: {
-      en: "Harry Potter and the Deathly Hallows",
-      ar: "هاري بوتر ومقدسات الموت",
-    },
+    title: { en: "Harry Potter and the Deathly Hallows", ar: "هاري بوتر ومقدسات الموت" },
     author: { en: "J.K. Rowling", ar: "ج. ك. رولينغ" },
     cover: "../image/Harry Potter and the Deathly Hallows.png",
-    price: 140.0,
+    price: 140.00 
   },
   {
     id: 15,
@@ -144,7 +124,7 @@ const booksData = [
     author: { en: "J.R.R. Tolkien", ar: "ج. ر. ر. تولكين" },
     cover: "../image/The Hobbit.png",
     isNewArrival: true,
-    price: 105.0,
+    price: 105.00 
   },
   {
     id: 16,
@@ -152,7 +132,7 @@ const booksData = [
     title: { en: "The Lord of the Rings", ar: "سيد الخواتم" },
     author: { en: "J.R.R. Tolkien", ar: "ج. ر. ر. تولكين" },
     cover: "../image/The Lord of the Rings.png",
-    price: 140.0,
+    price: 140.00 
   },
   {
     id: 17,
@@ -160,7 +140,7 @@ const booksData = [
     title: { en: "Dune", ar: "كثيب" },
     author: { en: "Frank Herbert", ar: "فرانك هيربرت" },
     cover: "../image/Dune.png",
-    price: 150.0,
+    price: 150.00 
   },
 
   // 🎬 قسم 3: Movies & Art
@@ -170,7 +150,7 @@ const booksData = [
     title: { en: "The Art of Pixar", ar: "فن بيكسار" },
     author: { en: "Amid Amidi", ar: "أميد أميدي" },
     cover: "../image/The Art of Pixar.webp",
-    price: 160.0,
+    price: 160.00 
   },
   {
     id: 19,
@@ -179,7 +159,7 @@ const booksData = [
     author: { en: "Jennifer Van Sijll", ar: "جينيفر فان سيجل" },
     cover: "../image/Cinematic Storytelling.webp",
     isNewArrival: true,
-    price: 160.0,
+    price: 160.00 
   },
   {
     id: 20,
@@ -187,7 +167,7 @@ const booksData = [
     title: { en: "The Art of Star Wars", ar: "فن حرب النجوم" },
     author: { en: "Phil Szostak", ar: "فيل سزوستاك" },
     cover: "../image/The Art of Star Wars.png",
-    price: 0,
+    price: 0 
   },
   {
     id: 21,
@@ -195,7 +175,7 @@ const booksData = [
     title: { en: "The Story of Film", ar: "قصة السينما" },
     author: { en: "Mark Cousins", ar: "مارك كوزينز" },
     cover: "../image/The Story of Film.png",
-    price: 100.0,
+    price: 100.00 
   },
   {
     id: 22,
@@ -204,7 +184,7 @@ const booksData = [
     author: { en: "John Rhett Thomas", ar: "جون ريت توماس" },
     cover: "../image/Art of iron man.webp",
     isNewArrival: true,
-    price: 200.0,
+    price: 200.00 
   },
   {
     id: 23,
@@ -212,7 +192,7 @@ const booksData = [
     title: { en: "The Art of Captain America", ar: "فن كابتن أمريكا" },
     author: { en: "Matthew K. Manning", ar: "ماثيو كيه. مانينغ" },
     cover: "../image/The Art of Captain America.webp",
-    price: 0.0,
+    price: 0.00 
   },
   {
     id: 24,
@@ -220,7 +200,7 @@ const booksData = [
     title: { en: "The Art of Thor", ar: "فن ثور" },
     author: { en: "Matthew K. Manning", ar: "ماثيو كيه. مانينغ" },
     cover: "../image/The Art of Thor.webp",
-    price: 100.0,
+    price: 100.00 
   },
   {
     id: 25,
@@ -229,6 +209,8 @@ const booksData = [
     author: { en: "John Rhett Thomas", ar: "جون ريت توماس" },
     cover: "../image/The Art of The Avengers.webp",
     isNewArrival: true,
-    price: 100.0,
-  },
+    price: 100.00 
+  }
 ];
+
+

@@ -1,83 +1,78 @@
-// admin/add-book-script.js — Uses /api/books with admin auth
-document.addEventListener("DOMContentLoaded", function () {
-  // File name display
-  document.getElementById("bookCover").addEventListener("change", function (e) {
-    document.getElementById("coverFileName").textContent =
-      e.target.files[0]?.name || "لم يتم اختيار ملف";
-  });
-  document.getElementById("bookPDF").addEventListener("change", function (e) {
-    document.getElementById("pdfFileName").textContent =
-      e.target.files[0]?.name || "لم يتم اختيار ملف";
-  });
+// Display selected file names
+document.getElementById('bookCover').addEventListener('change', function(e) {
+    const fileName = e.target.files[0]?.name || 'لم يتم اختيار ملف';
+    document.getElementById('coverFileName').textContent = fileName;
+});
 
-  // Form submission
-  document
-    .getElementById("addBookForm")
-    .addEventListener("submit", async function (e) {
-      e.preventDefault();
+document.getElementById('bookPDF').addEventListener('change', function(e) {
+    const fileName = e.target.files[0]?.name || 'لم يتم اختيار ملف';
+    document.getElementById('pdfFileName').textContent = fileName;
+});
 
-      const token = localStorage.getItem("token"); // ← Critical: 'token', not 'adminToken'
-      if (!token) {
-        alert("يجب تسجيل الدخول أولاً");
-        window.location.href = "login.html";
+// Handle form submission
+document.getElementById('addBookForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Get form values
+    const bookData = {
+        title: document.getElementById('bookTitle').value,
+        author: document.getElementById('bookAuthor').value,
+        category: document.getElementById('bookCategory').value,
+        description: document.getElementById('bookDescription').value,
+        price: document.getElementById('bookPrice').value,
+        coverFile: document.getElementById('bookCover').files[0],
+        pdfFile: document.getElementById('bookPDF').files[0]
+    };
+    
+    // Validate files
+    if (!bookData.coverFile || !bookData.pdfFile) {
+        alert('الرجاء اختيار صورة الغلاف وملف PDF');
         return;
-      }
+    }
+    
+    // In a real application, you would send this data to a server
+    // For now, we'll just simulate the upload
+    console.log('Book data to be uploaded:', bookData);
+    
+    // Show success modal
+    showSuccessModal();
+    
+    // Reset form
+    document.getElementById('addBookForm').reset();
+    document.getElementById('coverFileName').textContent = 'لم يتم اختيار ملف';
+    document.getElementById('pdfFileName').textContent = 'لم يتم اختيار ملف';
+});
 
-      // Get form data
-      const formData = {
-        title: {
-          ar: document.getElementById("bookTitle").value,
-          en: document.getElementById("bookTitle").value,
-        },
-        author: {
-          ar: document.getElementById("bookAuthor").value,
-          en: document.getElementById("bookAuthor").value,
-        },
-        category: {
-          ar: document.getElementById("bookCategory").value,
-          en: document.getElementById("bookCategory").value,
-        },
-        description: document.getElementById("bookDescription").value,
-        price: parseFloat(document.getElementById("bookPrice").value),
-        image_url: "../image/placeholder-book.webp", // Use existing placeholder
-        cover: "../image/placeholder-book.webp",
-        stock: 10,
-        rating: 4.5,
-        genre: document.getElementById("bookCategory").value,
-        isbn: "",
-        numberOfPages: 300,
-        isAvailable: true,
-      };
+// Function to show success modal
+function showSuccessModal() {
+    const modal = document.getElementById('successModal');
+    modal.classList.add('active');
+    
+    // Redirect to admin page after 3 seconds
+    setTimeout(() => {
+        window.location.href = 'admin-page.html';
+    }, 3000);
+}
 
-      try {
-        const response = await fetch("/api/books", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`, // ← Send JWT
-          },
-          body: JSON.stringify(formData),
-        });
+// Function to go back to admin page
+function goToAdmin() {
+    window.location.href = 'admin-page.html';
+}
 
-        const result = await response.json();
+// Function to go to home page
+function goToHome() {
+    window.location.href = 'index.html'; // or whatever your main page is called
+}
 
-        if (response.ok) {
-          alert(" تم إضافة الكتاب بنجاح!");
-          document.getElementById("addBookForm").reset();
-          document.getElementById("coverFileName").textContent =
-            "لم يتم اختيار ملف";
-          document.getElementById("pdfFileName").textContent =
-            "لم يتم اختيار ملف";
-        } else {
-          throw new Error(result.error || "فشل الإضافة");
-        }
-      } catch (error) {
-        console.error("Error:", error);
-        alert(" خطأ: " + error.message);
-      }
-    });
-
-  // Navigation
-  window.goToAdmin = () => (window.location.href = "admin-page.html");
-  window.goToHome = () => (window.location.href = "../index.html");
+// Add smooth animation on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const formContainer = document.querySelector('.form-container');
+    formContainer.style.opacity = '0';
+    formContainer.style.transform = 'translateY(30px)';
+    
+    setTimeout(() => {
+        formContainer.style.transition = 'all 0.6s ease';
+        formContainer.style.opacity = '1';
+        formContainer.style.transform = 'translateY(0)';
+    }, 200);
 });
