@@ -50,7 +50,7 @@ function showSuccessModal() {
     
     // Redirect to admin page after 3 seconds
     setTimeout(() => {
-        window.location.href = 'admin-page.html';
+        window.location.href = 'admin.html';
     }, 3000);
 }
 
